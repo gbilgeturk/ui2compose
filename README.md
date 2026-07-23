@@ -11,7 +11,7 @@ stage:
 Screenshot ──► 1. Component detection (YOLO) ──► 2. UI graph construction ──► 3. Compose code generation
 ```
 
-1. **Component detection** — a YOLOv8s model (trained on the [ReDraw](http://sagelab.io/ReDraw/) dataset,
+1. **Component detection** — a YOLOv8s model (trained on the [ReDraw](https://zenodo.org/records/2530277) dataset,
    13 Android UI component classes) locates components such as `Button`, `EditText`, `ImageView` on the input image.
 2. **UI graph construction** — detections are organized into a hierarchy (rows, columns, containment)
    based on their spatial relations.
@@ -63,7 +63,8 @@ Detection stage on one of the bundled example screens (class label + confidence 
 <img src="docs/example_detections.png" alt="Detected UI components on an example screen" width="360">
 
 The screenshots in `examples/` are taken from the test split of the
-[ReDraw dataset](http://sagelab.io/ReDraw/) (Moran et al., *IEEE TSE* 2020) and are
+[ReDraw dataset](https://zenodo.org/records/2530277) (Moran et al., *IEEE TSE* 2020;
+DOI: [10.5281/zenodo.2530277](https://doi.org/10.5281/zenodo.2530277), CC BY 4.0) and are
 included solely as illustrative inputs for research purposes; all app screens remain
 the property of their respective owners.
 
@@ -78,7 +79,7 @@ the UI graph, and copy the generated Compose code.
 
 ## Preparing the dataset (optional — for training/evaluation)
 
-The detector was trained on the [ReDraw dataset](http://sagelab.io/ReDraw/)
+The detector was trained on the [ReDraw dataset](https://zenodo.org/records/2530277)
 (Moran et al., *IEEE TSE* 2020). The dataset itself is **not redistributed** in this
 repository (only the ten illustrative screenshots under `examples/`); download it
 from its authors, then:
