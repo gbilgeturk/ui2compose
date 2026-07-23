@@ -1,5 +1,5 @@
 """
-Kullanım:
+Usage:
     python oversample_dataset.py --yolo-root data/yolo --target-min 2000
 """
 
@@ -9,24 +9,24 @@ from pathlib import Path
 from collections import Counter, defaultdict
 import random
 
-# ReDraw sınıf isimleri (13 class — remapped, CardView & Toolbar removed)
+# ReDraw class names (13 class — remapped, CardView & Toolbar removed)
 CLASS_NAMES = [
     'Button', 'CheckBox', 'EditText', 'ImageView', 'ListView',
     'ProgressBar', 'RadioButton', 'RecyclerView', 'SeekBar',
     'Spinner', 'Switch', 'TextView', 'WebView'
 ]
 
-# Nadir sınıflar (oversampling hedefleri — 13-class remapped indices)
+# Rare classes (oversampling targets — 13-class remapped indices)
 # CheckBox(1), ProgressBar(5), RadioButton(6), RecyclerView(7),
 # SeekBar(8), Spinner(9), Switch(10), WebView(12)
 RARE_CLASSES = {1, 5, 6, 7, 8, 9, 10, 12}
 
 
 def count_class_instances(labels_dir: Path) -> Counter:
-    """Label dosyalarını tarayıp her sınıfın toplam instance sayısını hesaplar.
+    """Scans the label files and computes the total instance count for each class.
 
-    Girdi:  labels_dir — YOLO .txt label dosyalarını içeren dizin
-    Çıktı:  Counter — sınıf id -> toplam instance sayısı eşlemesi
+    Input:  labels_dir — directory containing the YOLO .txt label files
+    Output: Counter — class id -> total instance count mapping
     """
     class_counts = Counter()
     for label_file in labels_dir.glob("*.txt"):
@@ -43,10 +43,10 @@ def count_class_instances(labels_dir: Path) -> Counter:
 
 
 def get_images_by_rare_class(labels_dir: Path) -> dict:
-    """Her nadir sınıf (RARE_CLASSES) için o sınıfı içeren görüntüleri bulur.
+    """Finds, for each rare class (RARE_CLASSES), the images that contain that class.
 
-    Girdi:  labels_dir — YOLO .txt label dosyalarını içeren dizin
-    Çıktı:  dict — nadir sınıf id -> o sınıfı içeren görüntü stem'leri listesi
+    Input:  labels_dir — directory containing the YOLO .txt label files
+    Output: dict — rare class id -> list of image stems containing that class
     """
     class_to_images = defaultdict(list)
 
@@ -71,10 +71,10 @@ def get_images_by_rare_class(labels_dir: Path) -> dict:
 
 
 def find_image_file(images_dir: Path, stem: str) -> Path:
-    """Verilen köke karşılık gelen görüntü dosyasını uzantıları deneyerek arar.
+    """Searches for the image file matching the given stem by trying extensions.
 
-    Girdi:  images_dir — görüntülerin bulunduğu dizin; stem — dosya kökü (uzantısız ad)
-    Çıktı:  bulunan görüntünün Path'i (.png/.jpg/.jpeg); yoksa None
+    Input:  images_dir — directory containing the images; stem — file stem (name without extension)
+    Output: Path of the found image (.png/.jpg/.jpeg); None if absent
     """
     for ext in [".png", ".jpg", ".jpeg"]:
         img_path = images_dir / f"{stem}{ext}"
@@ -84,13 +84,13 @@ def find_image_file(images_dir: Path, stem: str) -> Path:
 
 
 def oversample(yolo_root: Path, target_min: int, seed: int = 42):
-    """Nadir sınıfları içeren train görüntülerini kopyalayarak hedef sayıya kadar oversample eder.
+    """Oversamples up to the target count by copying train images that contain rare classes.
 
-    Girdi:  yolo_root — YOLO dataset kök dizini;
-            target_min — her nadir sınıf için minimum hedef instance sayısı;
-            seed — random seed (reproducibility için)
-    Çıktı:  yok (labels/train ve images/train altına "_osN" ekli kopyalar
-            oluşturma ve öncesi/sonrası dağılım raporu basma yan etkisi)
+    Input:  yolo_root — YOLO dataset root directory;
+            target_min — minimum target instance count per rare class;
+            seed — random seed (for reproducibility)
+    Output: none (side effects of creating "_osN"-suffixed copies under
+            labels/train and images/train and printing a before/after distribution report)
     """
     random.seed(seed)
 
@@ -98,12 +98,12 @@ def oversample(yolo_root: Path, target_min: int, seed: int = 42):
     train_images = yolo_root / "images" / "train"
 
     if not train_labels.exists():
-        print(f"[ERROR] Labels dizini bulunamadı: {train_labels}")
+        print(f"[ERROR] Labels directory not found: {train_labels}")
         return
 
-    # Mevcut dağılımı hesapla
+    # Compute the current distribution
     print("=" * 60)
-    print("MEVCUT SINIF DAĞILIMI (Oversampling öncesi)")
+    print("CURRENT CLASS DISTRIBUTION (before oversampling)")
     print("=" * 60)
 
     class_counts = count_class_instances(train_labels)
@@ -112,11 +112,11 @@ def oversample(yolo_root: Path, target_min: int, seed: int = 42):
         marker = " <-- RARE" if i in RARE_CLASSES else ""
         print(f"{i:2d} {name:15s}: {count:6d}{marker}")
 
-    # Her nadir sınıf için görüntüleri bul
+    # Find the images for each rare class
     class_to_images = get_images_by_rare_class(train_labels)
 
     print("\n" + "=" * 60)
-    print("OVERSAMPLING İŞLEMİ")
+    print("OVERSAMPLING PROCESS")
     print("=" * 60)
 
     total_copies = 0
@@ -125,33 +125,33 @@ def oversample(yolo_root: Path, target_min: int, seed: int = 42):
         current_count = class_counts.get(cls_id, 0)
 
         if current_count == 0:
-            print(f"\n[SKIP] {CLASS_NAMES[cls_id]}: Hiç örnek yok, atlanıyor.")
+            print(f"\n[SKIP] {CLASS_NAMES[cls_id]}: No samples at all, skipping.")
             continue
 
         if current_count >= target_min:
-            print(f"\n[SKIP] {CLASS_NAMES[cls_id]}: Zaten yeterli ({current_count} >= {target_min})")
+            print(f"\n[SKIP] {CLASS_NAMES[cls_id]}: Already sufficient ({current_count} >= {target_min})")
             continue
 
         images_with_class = class_to_images.get(cls_id, [])
         if not images_with_class:
-            print(f"\n[SKIP] {CLASS_NAMES[cls_id]}: Görüntü bulunamadı.")
+            print(f"\n[SKIP] {CLASS_NAMES[cls_id]}: No images found.")
             continue
 
-        # Kaç instance eklememiz gerekiyor?
+        # How many instances do we need to add?
         needed_instances = target_min - current_count
 
-        # Her görüntüde ortalama kaç instance var?
+        # How many instances per image on average?
         avg_instances_per_image = current_count / len(images_with_class)
 
-        # Kaç kopya gerekiyor?
+        # How many copies are needed?
         needed_copies = int(needed_instances / avg_instances_per_image) + 1
 
         print(f"\n[PROCESS] {CLASS_NAMES[cls_id]}:")
-        print(f"  - Mevcut: {current_count} instance, {len(images_with_class)} görüntü")
-        print(f"  - Hedef: {target_min} instance")
-        print(f"  - Gerekli kopya: ~{needed_copies} görüntü")
+        print(f"  - Current: {current_count} instances, {len(images_with_class)} images")
+        print(f"  - Target: {target_min} instances")
+        print(f"  - Copies needed: ~{needed_copies} images")
 
-        # Görüntüleri rastgele seç ve kopyala
+        # Pick images randomly and copy them
         copy_count = 0
         copy_idx = 0
 
@@ -162,7 +162,7 @@ def oversample(yolo_root: Path, target_min: int, seed: int = 42):
 
                 new_stem = f"{img_stem}_os{copy_idx}"
 
-                # Label kopyala
+                # Copy the label
                 src_label = train_labels / f"{img_stem}.txt"
                 dst_label = train_labels / f"{new_stem}.txt"
 
@@ -170,7 +170,7 @@ def oversample(yolo_root: Path, target_min: int, seed: int = 42):
                     copy_idx += 1
                     continue
 
-                # Image kopyala
+                # Copy the image
                 src_img = find_image_file(train_images, img_stem)
                 if src_img is None:
                     continue
@@ -185,15 +185,15 @@ def oversample(yolo_root: Path, target_min: int, seed: int = 42):
 
             copy_idx += 1
 
-            # Sonsuz döngüyü önle
+            # Prevent an infinite loop
             if copy_idx > 100:
                 break
 
-        print(f"  - Kopyalanan: {copy_count} görüntü")
+        print(f"  - Copied: {copy_count} images")
 
-    # Yeni dağılımı hesapla
+    # Compute the new distribution
     print("\n" + "=" * 60)
-    print("YENİ SINIF DAĞILIMI (Oversampling sonrası)")
+    print("NEW CLASS DISTRIBUTION (after oversampling)")
     print("=" * 60)
 
     new_counts = count_class_instances(train_labels)
@@ -206,21 +206,21 @@ def oversample(yolo_root: Path, target_min: int, seed: int = 42):
         print(f"{i:2d} {name:15s}: {new_count:6d}{diff_str}{marker}")
 
     print("\n" + "=" * 60)
-    print(f"TOPLAM: {total_copies} görüntü kopyalandı")
+    print(f"TOTAL: {total_copies} images copied")
     print("=" * 60)
 
 
 def main():
-    """Komut satırı argümanlarını okuyup oversample fonksiyonunu çalıştırır.
+    """Reads the command-line arguments and runs the oversample function.
 
-    Girdi:  yok (--yolo-root, --target-min, --seed değerlerini komut satırından alır)
-    Çıktı:  yok (oversample çağrısının dataset kopyalama yan etkisi)
+    Input:  none (takes --yolo-root, --target-min, --seed from the command line)
+    Output: none (dataset-copying side effect of the oversample call)
     """
     parser = argparse.ArgumentParser(description="Oversampling for class imbalance")
     parser.add_argument("--yolo-root", type=str, default="data/yolo",
-                        help="YOLO dataset kök dizini")
+                        help="YOLO dataset root directory")
     parser.add_argument("--target-min", type=int, default=2000,
-                        help="Her nadir sınıf için minimum hedef instance sayısı")
+                        help="Minimum target instance count per rare class")
     parser.add_argument("--seed", type=int, default=42,
                         help="Random seed")
 

@@ -31,22 +31,22 @@ class UIGraphBuilder:
                  iou_threshold: float = 0.8,
                  vertical_threshold: float = 20,
                  horizontal_threshold: float = 20):
-        """Graf kurucusunu içerme (containment) ve hizalama eşikleriyle başlatır.
+        """Initializes the graph builder with containment and alignment thresholds.
 
-        Girdi:  iou_threshold — içerme (ebeveyn-çocuk) kararı için IoU eşiği;
-                vertical_threshold — dikey hizalama için piksel eşiği;
-                horizontal_threshold — yatay hizalama için piksel eşiği
-        Çıktı:  yok (eşikler nesne alanlarına atanır yan etkisi)
+        Input:  iou_threshold — IoU threshold for the containment (parent-child) decision;
+                vertical_threshold — pixel threshold for vertical alignment;
+                horizontal_threshold — pixel threshold for horizontal alignment
+        Output: none (side effect of assigning thresholds to object fields)
         """
         self.iou_threshold = iou_threshold
         self.v_thresh = vertical_threshold
         self.h_thresh = horizontal_threshold
 
     def build_graph(self, detections: List[Dict]) -> Dict:
-        """Tespit edilen bileşenlerden tam UI grafını kurar: içerme, hiyerarşi, yerleşim grupları ve uzamsal ilişkiler.
+        """Builds the full UI graph from detected components: containment, hierarchy, layout groups and spatial relations.
 
-        Girdi:  detections — YOLO tespitlerinden gelen bileşen sözlükleri listesi
-        Çıktı:  {'nodes': bileşenler, 'edges': ilişkiler, 'hierarchy': ebeveyn-çocuk ağacı} sözlüğü
+        Input:  detections — list of component dictionaries from YOLO detections
+        Output: dictionary {'nodes': components, 'edges': relations, 'hierarchy': parent-child tree}
         """
         nodes = detections.copy()
         edges = []
@@ -74,10 +74,10 @@ class UIGraphBuilder:
     # ── Layout Inference ───────────────────────────────────────
 
     def _infer_layout_groups(self, hierarchy: Dict) -> Dict:
-        """Kök düzeyindeki düğümleri y/x hizalamasına göre kümeleyip sentetik SyntheticRow/SyntheticColumn kapsayıcılarında gruplar.
+        """Clusters root-level nodes by y/x alignment and groups them in synthetic SyntheticRow/SyntheticColumn containers.
 
-        Girdi:  hierarchy — 'roots' listesini içeren hiyerarşi sözlüğü
-        Çıktı:  kökleri sentetik kapsayıcılarla sarılmış güncellenmiş hiyerarşi sözlüğü
+        Input:  hierarchy — hierarchy dictionary containing the 'roots' list
+        Output: updated hierarchy dictionary with roots wrapped in synthetic containers
         """
         roots = hierarchy['roots']
         if len(roots) < 2:
@@ -170,14 +170,14 @@ class UIGraphBuilder:
 
     def _merge_vertically_aligned_rows(self, rows: List[List[Dict]],
                                          avg_height: float) -> List[List[Dict]]:
-        """Öğeleri dikeyde hizalanan (x-merkezleri eşleşen) ardışık satırları dikey gruplar (_vgroup) hâlinde birleştirir.
+        """Merges consecutive rows whose items align vertically (matching x-centers) into vertical groups (_vgroup).
 
-        Örnek: ["Reward Points", "Travel Trips", "Bucket List"] (satır A) ile
-               ["360", "238", "473"] (satır B) hizalıysa tek satıra birleşir:
+        Example: if ["Reward Points", "Travel Trips", "Bucket List"] (row A) and
+               ["360", "238", "473"] (row B) are aligned, they merge into a single row:
                [("Reward Points","360"), ("Travel Trips","238"), ("Bucket List","473")]
 
-        Girdi:  rows — kök düğüm satırları (liste listesi); avg_height — x hizalama toleransı için ortalama yükseklik
-        Çıktı:  birleştirilmiş satır listesi (_vgroup işaretli temsilci düğümlerle)
+        Input:  rows — rows of root nodes (list of lists); avg_height — average height used for x-alignment tolerance
+        Output: merged row list (with representative nodes marked with _vgroup)
         """
         if len(rows) < 2:
             return rows
@@ -221,10 +221,10 @@ class UIGraphBuilder:
         return merged
 
     def _cluster_by_x(self, nodes: List[Dict], threshold: float) -> List[List[Dict]]:
-        """Düğümleri x-merkez konumlarına göre kümeler (grup ortalamasıyla karşılaştırarak).
+        """Clusters nodes by their x-center positions (comparing against the group average).
 
-        Girdi:  nodes — _cx alanı hesaplanmış düğüm listesi; threshold — kümeleme toleransı (piksel)
-        Çıktı:  x eksenine göre gruplanmış düğüm listelerinin listesi
+        Input:  nodes — node list with _cx field computed; threshold — clustering tolerance (pixels)
+        Output: list of node lists grouped along the x axis
         """
         if not nodes:
             return []
@@ -241,18 +241,18 @@ class UIGraphBuilder:
 
     def _make_synthetic_node(self, node_id: int, class_name: str,
                               children: List[Dict]) -> Dict:
-        """Çocukların kutularını saran bbox ile sentetik kapsayıcı düğüm (SyntheticRow/SyntheticColumn) üretir.
+        """Creates a synthetic container node (SyntheticRow/SyntheticColumn) with a bbox enclosing the children's boxes.
 
-        Girdi:  node_id — negatif sentetik kimlik; class_name — 'SyntheticRow' veya 'SyntheticColumn';
-                children — kapsayıcıya girecek çocuk düğümler
-        Çıktı:  id, class, bbox ve children alanlı kapsayıcı düğüm sözlüğü
+        Input:  node_id — negative synthetic id; class_name — 'SyntheticRow' or 'SyntheticColumn';
+                children — child nodes to place in the container
+        Output: container node dictionary with id, class, bbox and children fields
         """
         all_bboxes = []
         def collect(n):
-            """Düğümün ve tüm alt ağacının bbox'larını all_bboxes listesinde toplar.
+            """Collects the bboxes of the node and its whole subtree into the all_bboxes list.
 
-            Girdi:  n — bbox ve children alanları olabilen düğüm sözlüğü
-            Çıktı:  yok (all_bboxes listesine ekleme yan etkisi)
+            Input:  n — node dictionary that may have bbox and children fields
+            Output: none (side effect of appending to the all_bboxes list)
             """
             if 'bbox' in n:
                 all_bboxes.append(n['bbox'])
@@ -280,20 +280,20 @@ class UIGraphBuilder:
         }
 
     def _clean_temp_fields(self, node: Dict):
-        """Yerleşim çıkarımı sırasında kullanılan geçici alanları (_cy, _cx, _h) düğümden siler.
+        """Removes the temporary fields (_cy, _cx, _h) used during layout inference from the node.
 
-        Girdi:  node — temizlenecek düğüm sözlüğü
-        Çıktı:  yok (düğüm yerinde güncellenir yan etkisi)
+        Input:  node — node dictionary to clean
+        Output: none (side effect of updating the node in place)
         """
         node.pop('_cy', None)
         node.pop('_cx', None)
         node.pop('_h', None)
 
     def _find_containment_relations(self, nodes: List[Dict]) -> List[Edge]:
-        """Sınırlayıcı kutu içermesine (containment) dayanarak ebeveyn-çocuk kenarlarını bulur.
+        """Finds parent-child edges based on bounding-box containment.
 
-        Girdi:  nodes — bbox alanlı bileşen düğümleri listesi
-        Çıktı:  geçişli olanları elenmiş PARENT_CHILD türünde Edge listesi
+        Input:  nodes — list of component nodes with bbox fields
+        Output: list of Edges of type PARENT_CHILD with transitive ones filtered out
         """
         edges = []
 
@@ -318,10 +318,10 @@ class UIGraphBuilder:
         return edges
 
     def _is_contained(self, inner_box: List[float], outer_box: List[float]) -> bool:
-        """İç kutunun dış kutunun tamamen içinde olup olmadığını denetler (içerme testi).
+        """Checks whether the inner box is completely inside the outer box (containment test).
 
-        Girdi:  inner_box, outer_box — (x1, y1, x2, y2) biçiminde iki kutu
-        Çıktı:  True/False — iç kutu dış kutunun içindeyse True
+        Input:  inner_box, outer_box — two boxes in (x1, y1, x2, y2) format
+        Output: True/False — True if the inner box is inside the outer box
         """
         ix1, iy1, ix2, iy2 = inner_box
         ox1, oy1, ox2, oy2 = outer_box
@@ -331,10 +331,10 @@ class UIGraphBuilder:
                 ix2 <= ox2 and iy2 <= oy2)
 
     def _remove_transitive_containment(self, edges: List[Edge], nodes: List[Dict]) -> List[Edge]:
-        """Dolaylı (geçişli) ebeveyn-çocuk kenarlarını eleyip yalnızca doğrudan ebeveynleri bırakır.
+        """Filters out indirect (transitive) parent-child edges, keeping only direct parents.
 
-        Girdi:  edges — PARENT_CHILD kenar listesi; nodes — bileşen düğümleri listesi
-        Çıktı:  yalnızca doğrudan ebeveyn-çocuk ilişkilerini içeren Edge listesi
+        Input:  edges — list of PARENT_CHILD edges; nodes — list of component nodes
+        Output: list of Edges containing only direct parent-child relations
         """
         # Build adjacency list
         children = {}  # parent_id -> [child_ids]
@@ -364,10 +364,10 @@ class UIGraphBuilder:
         return direct_edges
 
     def _build_hierarchy_tree(self, nodes: List[Dict], containment_edges: List[Edge]) -> Dict:
-        """İçerme kenarlarından kök düğümleri bulup özyinelemeli ebeveyn-çocuk ağacını kurar.
+        """Finds root nodes from the containment edges and builds the parent-child tree recursively.
 
-        Girdi:  nodes — bileşen düğümleri; containment_edges — PARENT_CHILD kenarları
-        Çıktı:  {'roots': [ağaç düğümleri]} biçiminde hiyerarşi sözlüğü
+        Input:  nodes — component nodes; containment_edges — PARENT_CHILD edges
+        Output: hierarchy dictionary in the form {'roots': [tree nodes]}
         """
         # Create parent mapping
         parent_map = {}  # child_id -> parent_id
@@ -382,10 +382,10 @@ class UIGraphBuilder:
 
         # Build tree recursively
         def build_subtree(node_id):
-            """Verilen düğümden başlayarak alt ağacı özyinelemeli kurar.
+            """Builds the subtree recursively starting from the given node.
 
-            Girdi:  node_id — alt ağacın kökü olacak düğümün kimliği
-            Çıktı:  id, class, bbox ve children alanlı ağaç düğümü sözlüğü
+            Input:  node_id — id of the node that will be the root of the subtree
+            Output: tree node dictionary with id, class, bbox and children fields
             """
             node = next(n for n in nodes if n['id'] == node_id)
             children_ids = [e.target_id for e in containment_edges if e.source_id == node_id]
@@ -402,10 +402,10 @@ class UIGraphBuilder:
         }
 
     def _find_spatial_relations(self, nodes: List[Dict], hierarchy: Dict) -> List[Edge]:
-        """Aynı ebeveyni paylaşan kardeş bileşenler arasında uzamsal (üst/alt/sol/sağ) kenarları bulur.
+        """Finds spatial (above/below/left/right) edges between sibling components sharing the same parent.
 
-        Girdi:  nodes — bileşen düğümleri; hierarchy — ebeveyn eşlemesi çıkarılacak hiyerarşi ağacı
-        Çıktı:  ABOVE/BELOW/LEFT_OF/RIGHT_OF türünde Edge listesi
+        Input:  nodes — component nodes; hierarchy — hierarchy tree from which the parent mapping is extracted
+        Output: list of Edges of type ABOVE/BELOW/LEFT_OF/RIGHT_OF
         """
         edges = []
 
@@ -442,10 +442,10 @@ class UIGraphBuilder:
         return edges
 
     def _determine_spatial_relation(self, node1: Dict, node2: Dict) -> RelationType:
-        """İki bileşenin merkez konumlarına ve hizalama eşiklerine göre uzamsal ilişkiyi belirler.
+        """Determines the spatial relation between two components based on their center positions and alignment thresholds.
 
-        Girdi:  node1, node2 — 'center' alanlı iki bileşen düğümü
-        Çıktı:  RelationType (ABOVE/BELOW/LEFT_OF/RIGHT_OF) ya da hizalama yoksa None
+        Input:  node1, node2 — two component nodes with 'center' fields
+        Output: RelationType (ABOVE/BELOW/LEFT_OF/RIGHT_OF) or None if there is no alignment
         """
         x1c, y1c = node1['center']
         x2c, y2c = node2['center']
@@ -470,18 +470,18 @@ class UIGraphBuilder:
         return None
 
     def _get_parent_mapping(self, hierarchy: Dict) -> Dict[int, int]:
-        """Hiyerarşi ağacını gezerek çocuk→ebeveyn kimlik eşlemesini çıkarır.
+        """Traverses the hierarchy tree and extracts the child→parent id mapping.
 
-        Girdi:  hierarchy — 'roots' listesini içeren hiyerarşi sözlüğü
-        Çıktı:  {çocuk_id: ebeveyn_id} biçiminde eşleme sözlüğü
+        Input:  hierarchy — hierarchy dictionary containing the 'roots' list
+        Output: mapping dictionary in the form {child_id: parent_id}
         """
         parent_map = {}
 
         def traverse(node, parent_id=None):
-            """Alt ağacı gezerek her çocuğu ebeveyniyle parent_map'e kaydeder.
+            """Traverses the subtree and records each child with its parent in parent_map.
 
-            Girdi:  node — gezilecek düğüm; parent_id — düğümün ebeveyn kimliği (kökte None)
-            Çıktı:  yok (parent_map sözlüğüne yazma yan etkisi)
+            Input:  node — node to traverse; parent_id — parent id of the node (None at the root)
+            Output: none (side effect of writing to the parent_map dictionary)
             """
             if parent_id is not None:
                 parent_map[node['id']] = parent_id
@@ -494,10 +494,10 @@ class UIGraphBuilder:
         return parent_map
 
     def _edge_to_dict(self, edge: Edge) -> Dict:
-        """Edge nesnesini JSON'a yazılabilir sözlüğe dönüştürür.
+        """Converts an Edge object into a JSON-serializable dictionary.
 
-        Girdi:  edge — kaynak, hedef, ilişki türü ve güven değeri taşıyan Edge
-        Çıktı:  source, target, relation, confidence anahtarlı sözlük
+        Input:  edge — Edge carrying source, target, relation type and confidence
+        Output: dictionary with source, target, relation, confidence keys
         """
         return {
             'source': edge.source_id,
@@ -507,10 +507,10 @@ class UIGraphBuilder:
         }
 
     def visualize_graph(self, graph: Dict, output_path: str = "graph.json"):
-        """Grafı görselleştirme için JSON dosyası olarak kaydeder.
+        """Saves the graph as a JSON file for visualization.
 
-        Girdi:  graph — build_graph çıktısı sözlük; output_path — hedef JSON dosya yolu
-        Çıktı:  yok (diske JSON yazma ve konsol bildirimi yan etkisi)
+        Input:  graph — dictionary output by build_graph; output_path — target JSON file path
+        Output: none (side effect of writing JSON to disk and printing a console notice)
         """
         with open(output_path, 'w') as f:
             json.dump(graph, f, indent=2)
@@ -518,10 +518,10 @@ class UIGraphBuilder:
 
 
 def main():
-    """Graf kurucusunu kayıtlı tespit çıktısı üzerinde uçtan uca dener ve hiyerarşiyi yazdırır.
+    """Tries the graph builder end to end on saved detection output and prints the hierarchy.
 
-    Girdi:  yok (output/detections.json dosyasından okur)
-    Çıktı:  yok (output/ui_graph.json kaydetme ve konsola özet yazdırma yan etkisi)
+    Input:  none (reads from the output/detections.json file)
+    Output: none (side effect of saving output/ui_graph.json and printing a summary to the console)
     """
     # Load detections from previous step
     with open("output/detections.json", 'r') as f:
@@ -543,10 +543,10 @@ def main():
     print(f"\n📊 Hierarchy:")
 
     def print_tree(node, indent=0):
-        """Hiyerarşi ağacını girintili biçimde konsola yazdırır.
+        """Prints the hierarchy tree to the console in indented form.
 
-        Girdi:  node — yazdırılacak ağaç düğümü; indent — girinti düzeyi
-        Çıktı:  yok (konsola yazdırma yan etkisi)
+        Input:  node — tree node to print; indent — indentation level
+        Output: none (side effect of printing to the console)
         """
         print("  " * indent + f"└─ {node['class']} (id={node['id']})")
         for child in node.get('children', []):

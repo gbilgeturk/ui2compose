@@ -5,32 +5,32 @@ from datetime import datetime
 import yaml
 
 # ============================================================================
-# IMPORT PATH AYARI
+# IMPORT PATH SETUP
 # ============================================================================
 
 current_file = Path(__file__).resolve()
-project_root = current_file.parent.parent.parent  # 3 seviye yukarı
+project_root = current_file.parent.parent.parent  # 3 levels up
 
-# Proje kökünü sys.path'in EN BAŞINA ekle
+# Add the project root to the VERY BEGINNING of sys.path
 if str(project_root) in sys.path:
     sys.path.remove(str(project_root))
 sys.path.insert(0, str(project_root))
 
-# Çalışma dizinini proje köküne ayarla
+# Set the working directory to the project root
 os.chdir(project_root)
 
-print(f"📂 Proje kök dizini: {project_root}")
-print(f"📂 Çalışma dizini: {Path.cwd()}")
+print(f"📂 Project root directory: {project_root}")
+print(f"📂 Working directory: {Path.cwd()}")
 
 # ============================================================================
-# CONFIG DOSYASINI OKU
+# READ THE CONFIG FILE
 # ============================================================================
 
 CONFIG_PATH = project_root / "configs" / "pipeline_config.yaml"
 
-print(f"\n📋 Config dosyası yükleniyor: {CONFIG_PATH.relative_to(project_root)}")
+print(f"\n📋 Loading config file: {CONFIG_PATH.relative_to(project_root)}")
 
-# Default değerler (config dosyası yoksa)
+# Default values (if the config file does not exist)
 DEFAULT_CONFIG = {
     'input': {
         'image': 'examples/sign_in.png',
@@ -48,52 +48,52 @@ DEFAULT_CONFIG = {
     }
 }
 
-# Config dosyasını oku
+# Read the config file
 try:
     if CONFIG_PATH.exists():
         with open(CONFIG_PATH, 'r', encoding='utf-8') as f:
             config = yaml.safe_load(f)
-        print(f"✅ Config yüklendi")
+        print(f"✅ Config loaded")
     else:
-        print(f"⚠️  Config dosyası bulunamadı, default değerler kullanılıyor")
-        print(f"💡 Şu konuma oluşturun: {CONFIG_PATH}")
+        print(f"⚠️  Config file not found, using default values")
+        print(f"💡 Create it at: {CONFIG_PATH}")
         config = DEFAULT_CONFIG
 except Exception as e:
-    print(f"⚠️  Config okuma hatası: {e}")
-    print(f"⚠️  Default değerler kullanılıyor")
+    print(f"⚠️  Config read error: {e}")
+    print(f"⚠️  Using default values")
     config = DEFAULT_CONFIG
 
-# Config'den değerleri al
+# Get values from the config
 IMAGE_PATH = config['input']['image']
 MODEL_PATH = config['input']['model']
 DATASET_YAML = config['input']['dataset_yaml']
 CONFIDENCE_THRESHOLD = config['detection']['confidence_threshold']
 ENABLE_VISUALIZATION = config['features']['visualization']
 
-# Otomatik tarih-saat klasörü oluştur
+# Create an automatic date-time folder
 TIMESTAMP = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 OUTPUT_DIR = f"{config['output']['directory']}/{TIMESTAMP}"
 
 # ============================================================================
-# PIPELINE MODÜLÜNÜ IMPORT ET
+# IMPORT THE PIPELINE MODULE
 # ============================================================================
 
-print("\n📦 Pipeline modülü yükleniyor...")
+print("\n📦 Loading pipeline module...")
 try:
     from src.infer.pipeline_end_to_end import run_pipeline
 
-    print(f"✅ pipeline_end_to_end modülü yüklendi")
+    print(f"✅ pipeline_end_to_end module loaded")
 except ImportError as e:
-    print(f"\n❌ Import hatası: {e}")
+    print(f"\n❌ Import error: {e}")
     print(f"\n🔍 Debug:")
     print(f"   sys.path[0]: {sys.path[0]}")
-    print(f"   Pipeline dosyası: {project_root / 'src/infer/pipeline_end_to_end.py'}")
-    print(f"   Dosya var mı?: {(project_root / 'src/infer/pipeline_end_to_end.py').exists()}")
+    print(f"   Pipeline file: {project_root / 'src/infer/pipeline_end_to_end.py'}")
+    print(f"   Does the file exist?: {(project_root / 'src/infer/pipeline_end_to_end.py').exists()}")
 
-    # src/infer/ içeriğini göster
+    # Show the contents of src/infer/
     infer_dir = project_root / 'src/infer'
     if infer_dir.exists():
-        print(f"\n📂 {infer_dir} içeriği:")
+        print(f"\n📂 Contents of {infer_dir}:")
         for item in sorted(infer_dir.iterdir()):
             if item.suffix == '.py':
                 print(f"   ✅ {item.name}")
@@ -105,68 +105,68 @@ except ImportError as e:
 
 
 # ============================================================================
-# SCRIPT BAŞLANGICI
+# SCRIPT START
 # ============================================================================
 
 def main():
-    """Config'deki ayarlarla uçtan uca pipeline'ı doğrulayıp onay alarak çalıştırır.
+    """Validates and runs the end-to-end pipeline with the settings from the config, after confirmation.
 
-    Girdi:  yok (görsel/model/eşik ayarlarını pipeline_config.yaml'dan
-            okunan modül sabitlerinden alır)
-    Çıktı:  yok (run_pipeline'ı çağırma, OUTPUT_DIR altına sonuç dosyaları
-            üretme ve özet basma yan etkisi; hata durumunda sys.exit)
+    Input:  none (takes image/model/threshold settings from module constants
+            read from pipeline_config.yaml)
+    Output: none (side effects of calling run_pipeline, producing result files
+            under OUTPUT_DIR, and printing a summary; sys.exit on error)
     """
 
-    # Dosya kontrolleri
+    # File checks
     if not Path(IMAGE_PATH).exists():
-        print(f"\n❌ Hata: Görsel bulunamadı: {IMAGE_PATH}")
-        print(f"💡 İpucu: configs/pipeline_config.yaml dosyasında 'input.image' yolunu kontrol edin")
+        print(f"\n❌ Error: Image not found: {IMAGE_PATH}")
+        print(f"💡 Hint: Check the 'input.image' path in configs/pipeline_config.yaml")
         sys.exit(1)
 
     if not Path(MODEL_PATH).exists():
-        print(f"\n❌ Hata: Model bulunamadı: {MODEL_PATH}")
-        print(f"💡 İpucu: configs/pipeline_config.yaml dosyasında 'input.model' yolunu kontrol edin")
+        print(f"\n❌ Error: Model not found: {MODEL_PATH}")
+        print(f"💡 Hint: Check the 'input.model' path in configs/pipeline_config.yaml")
 
-        # Mevcut modelleri ara
+        # Search for available models
         runs_dir = Path("runs")
         if runs_dir.exists():
             found_models = list(runs_dir.rglob("best.pt"))
             if found_models:
-                print(f"\n📁 Bulunan modeller:")
+                print(f"\n📁 Models found:")
                 for i, model in enumerate(found_models[:5], 1):
                     print(f"   {i}. {model}")
-                print(f"\n💡 Config dosyasında 'input.model' değerini yukarıdaki modellerden biriyle değiştirin")
+                print(f"\n💡 Change the 'input.model' value in the config file to one of the models above")
         sys.exit(1)
 
     if not Path(DATASET_YAML).exists():
-        print(f"\n❌ Hata: Dataset YAML bulunamadı: {DATASET_YAML}")
+        print(f"\n❌ Error: Dataset YAML not found: {DATASET_YAML}")
         sys.exit(1)
 
-    # Ayarları yazdır
+    # Print the settings
     print("\n" + "=" * 70)
-    print("🚀 PIPELINE AYARLARI (configs/pipeline_config.yaml)")
+    print("🚀 PIPELINE SETTINGS (configs/pipeline_config.yaml)")
     print("=" * 70)
-    print(f"📷 Görsel:           {IMAGE_PATH}")
+    print(f"📷 Image:            {IMAGE_PATH}")
     print(f"🤖 Model:            {Path(MODEL_PATH).name}")
     print(f"📊 Dataset YAML:     {DATASET_YAML}")
-    print(f"📁 Çıktı dizini:     {OUTPUT_DIR}")
+    print(f"📁 Output directory: {OUTPUT_DIR}")
     print(f"🕐 Timestamp:        {TIMESTAMP}")
     print(f"🎯 Confidence:       {CONFIDENCE_THRESHOLD}")
-    print(f"🖼️  Visualization:    {'✅ Açık' if ENABLE_VISUALIZATION else '❌ Kapalı'}")
+    print(f"🖼️  Visualization:    {'✅ On' if ENABLE_VISUALIZATION else '❌ Off'}")
     print("=" * 70 + "\n")
 
-    # Onay iste (etkileşimsiz ortamda — ör. CI — onay atlanır)
+    # Ask for confirmation (skipped in non-interactive environments — e.g. CI)
     try:
-        response = input("Devam etmek için ENTER'a basın (iptal için 'q'): ")
+        response = input("Press ENTER to continue (or 'q' to cancel): ")
         if response.lower() == 'q':
-            print("İptal edildi.")
+            print("Cancelled.")
             sys.exit(0)
     except EOFError:
         pass
 
-    # Pipeline'ı çalıştır
+    # Run the pipeline
     try:
-        print("\n🚀 Pipeline başlatılıyor...\n")
+        print("\n🚀 Starting pipeline...\n")
 
         results = run_pipeline(
             image_path=IMAGE_PATH,
@@ -178,28 +178,28 @@ def main():
         )
 
         print("\n" + "=" * 70)
-        print("✅ BAŞARILI!")
+        print("✅ SUCCESS!")
         print("=" * 70)
-        print(f"📁 Sonuçlar: {results['output_dir']}")
-        print(f"🔢 Detection sayısı: {len(results['detections'])}")
-        print(f"📄 Kod satırı: {len(results['code'].split(chr(10)))}")
+        print(f"📁 Results: {results['output_dir']}")
+        print(f"🔢 Detection count: {len(results['detections'])}")
+        print(f"📄 Lines of code: {len(results['code'].split(chr(10)))}")
         print("=" * 70)
 
-        # Dosya listesi
+        # File list
         output_path = Path(results['output_dir'])
         if output_path.exists():
             files = sorted(output_path.iterdir())
             if files:
-                print(f"\n📄 Oluşturulan dosyalar:")
+                print(f"\n📄 Generated files:")
                 for f in files:
                     size = f.stat().st_size / 1024
                     print(f"   • {f.name:<35s} ({size:>6.1f} KB)")
 
     except KeyboardInterrupt:
-        print(f"\n\n⚠️  Kullanıcı tarafından durduruldu")
+        print(f"\n\n⚠️  Interrupted by user")
         sys.exit(1)
     except Exception as e:
-        print(f"\n❌ Hata oluştu: {e}")
+        print(f"\n❌ An error occurred: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

@@ -7,39 +7,39 @@ import matplotlib.pyplot as plt
 import os
 import sys
 
-# Script'in bulunduğu dizini al
+# Get the directory containing this script
 SCRIPT_DIR = Path(__file__).parent.absolute()
 
-# src/evaluation/ içindeyse, iki üst dizine (proje root'una) git
+# If inside src/evaluation/, go two levels up (to the project root)
 if SCRIPT_DIR.name == 'evaluation':
     PROJECT_ROOT = SCRIPT_DIR.parent.parent
 else:
     PROJECT_ROOT = SCRIPT_DIR
 
-# Proje root'unu sys.path'e ekle
+# Add the project root to sys.path
 sys.path.insert(0, str(PROJECT_ROOT))
 
-# Working directory'yi proje root yap
+# Set the working directory to the project root
 os.chdir(PROJECT_ROOT)
 
 
 class MetricsCalculator:
     def __init__(self, model_path="runs/oversample_5k/weights/best.pt"):
-        """Değerlendirilecek YOLO modelini yükler.
+        """Loads the YOLO model to be evaluated.
 
-        Girdi:  model_path — eğitilmiş YOLO ağırlık dosyası yolu
-        Çıktı:  yok (self.model atama yan etkisi)
+        Input:  model_path — path to the trained YOLO weights file
+        Output: none (side effect of assigning self.model)
         """
         self.model = YOLO(model_path)
-        print(f"✅ Model yüklendi: {model_path}")
+        print(f"✅ Model loaded: {model_path}")
 
     def parse_yolo_label(self, label_path, img_width, img_height):
-        """YOLO etiket dosyasını ayrıştırıp kutuları mutlak piksel koordinatlarına çevirir.
+        """Parses a YOLO label file and converts boxes to absolute pixel coordinates.
 
-        Girdi:  label_path — YOLO formatlı .txt etiket dosyası yolu
-                img_width — görüntü genişliği (piksel)
-                img_height — görüntü yüksekliği (piksel)
-        Çıktı:  {'class_id', 'bbox' [x1,y1,x2,y2], 'matched': False} sözlüklerinin listesi; dosya yoksa boş liste
+        Input:  label_path — path to the YOLO-format .txt label file
+                img_width — image width (pixels)
+                img_height — image height (pixels)
+        Output: list of {'class_id', 'bbox' [x1,y1,x2,y2], 'matched': False} dicts; empty list if the file does not exist
         """
         boxes = []
 
@@ -70,11 +70,11 @@ class MetricsCalculator:
         return boxes
 
     def calculate_iou(self, box1, box2):
-        """İki kutu arasındaki IoU (kesişim/birleşim) oranını hesaplar.
+        """Calculates the IoU (intersection over union) ratio between two boxes.
 
-        Girdi:  box1 — [x1, y1, x2, y2] kutu koordinatları
-                box2 — [x1, y1, x2, y2] kutu koordinatları
-        Çıktı:  0-1 aralığında IoU değeri; birleşim alanı 0 ise 0
+        Input:  box1 — [x1, y1, x2, y2] box coordinates
+                box2 — [x1, y1, x2, y2] box coordinates
+        Output: IoU value in the 0-1 range; 0 if the union area is 0
         """
         x1_1, y1_1, x2_1, y2_1 = box1
         x1_2, y1_2, x2_2, y2_2 = box2
@@ -92,13 +92,13 @@ class MetricsCalculator:
         return inter / union if union > 0 else 0
 
     def match_predictions_to_ground_truth(self, predictions, ground_truth, iou_threshold=0.5):
-        """Tahminleri aynı sınıftaki ground truth kutularıyla IoU'ya göre eşleştirir.
+        """Matches predictions to same-class ground truth boxes based on IoU.
 
-        Girdi:  predictions — tahmin kutuları listesi
-                ground_truth — gerçek (etiket) kutuları listesi
-                iou_threshold — eşleşme için gereken en düşük IoU (varsayılan 0.5)
-        Çıktı:  {'pred', 'gt', 'iou'} sözlüklerinden oluşan eşleşme listesi;
-                eşleşen ground truth kutularının 'matched' alanı True yapılır
+        Input:  predictions — list of prediction boxes
+                ground_truth — list of ground truth (label) boxes
+                iou_threshold — minimum IoU required for a match (default 0.5)
+        Output: list of matches consisting of {'pred', 'gt', 'iou'} dicts;
+                the 'matched' field of matched ground truth boxes is set to True
         """
         matches = []
 
@@ -130,13 +130,13 @@ class MetricsCalculator:
         return matches
 
     def calculate_metrics_for_dataset(self, data_dir, conf_threshold=0.15, iou_threshold=0.5):
-        """Test kümesindeki tüm görüntüler için sınıf bazında TP/FP/FN istatistiklerini hesaplar.
+        """Calculates per-class TP/FP/FN statistics for all images in the test set.
 
-        Girdi:  data_dir — YOLO veri kümesi kök dizini (images/test ve labels/test içerir)
-                conf_threshold — tahmin güven eşiği (varsayılan 0.15)
-                iou_threshold — eşleşme IoU eşiği (varsayılan 0.5)
-        Çıktı:  (class_stats, görüntü sayısı) — sınıf id başına
-                {'tp','fp','fn','total_gt','total_pred','ious'} sözlüğü
+        Input:  data_dir — YOLO dataset root directory (contains images/test and labels/test)
+                conf_threshold — prediction confidence threshold (default 0.15)
+                iou_threshold — matching IoU threshold (default 0.5)
+        Output: (class_stats, number of images) — per class id a
+                {'tp','fp','fn','total_gt','total_pred','ious'} dict
         """
 
         images_dir = Path(data_dir) / "images/test"
@@ -222,11 +222,11 @@ class MetricsCalculator:
         return class_stats, len(image_files)
 
     def calculate_precision_recall_f1(self, stats):
-        """Sınıf istatistiklerinden precision, recall ve F1 değerlerini hesaplar.
+        """Calculates precision, recall, and F1 values from class statistics.
 
-        Girdi:  stats — calculate_metrics_for_dataset çıktısı sınıf istatistikleri
-        Çıktı:  sınıf id başına {'precision','recall','f1','tp','fp','fn',
-                'total_gt','total_pred','avg_iou'} sözlüğü
+        Input:  stats — class statistics output by calculate_metrics_for_dataset
+        Output: per class id a {'precision','recall','f1','tp','fp','fn',
+                'total_gt','total_pred','avg_iou'} dict
         """
         metrics = {}
 
@@ -256,12 +256,12 @@ class MetricsCalculator:
         return metrics
 
     def visualize_metrics(self, metrics, class_names, output_dir):
-        """Metrikleri dört panelli bir grafik olarak çizer ve PNG dosyasına kaydeder.
+        """Plots the metrics as a four-panel chart and saves it to a PNG file.
 
-        Girdi:  metrics — calculate_precision_recall_f1 çıktısı metrik sözlüğü
-                class_names — sınıf id → sınıf adı eşlemesi
-                output_dir — grafiğin kaydedileceği klasör
-        Çıktı:  yok (performance_metrics.png dosya yan etkisi)
+        Input:  metrics — metrics dict output by calculate_precision_recall_f1
+                class_names — class id → class name mapping
+                output_dir — folder where the chart will be saved
+        Output: none (performance_metrics.png file side effect)
         """
         output_path = Path(output_dir)
         output_path.mkdir(parents=True, exist_ok=True)
@@ -357,12 +357,12 @@ class MetricsCalculator:
         print(f"✅ Performance metrics saved: {output_file}")
 
     def generate_metrics_table(self, metrics, class_names, output_dir):
-        """Metrik tablosunu LaTeX ve Markdown formatlarında üretip kaydeder.
+        """Generates and saves the metrics table in LaTeX and Markdown formats.
 
-        Girdi:  metrics — sınıf bazında metrik sözlüğü
-                class_names — sınıf id → sınıf adı eşlemesi
-                output_dir — tabloların kaydedileceği klasör
-        Çıktı:  yok (table_performance_metrics.tex ve .md dosya yan etkisi)
+        Input:  metrics — per-class metrics dict
+                class_names — class id → class name mapping
+                output_dir — folder where the tables will be saved
+        Output: none (table_performance_metrics.tex and .md file side effects)
         """
         output_path = Path(output_dir)
 
@@ -416,11 +416,11 @@ class MetricsCalculator:
         print(f"✅ Markdown table saved: {md_file}")
 
     def run_full_evaluation(self, data_dir="data/yolo", output_dir="thesis_figures"):
-        """Tam değerlendirmeyi çalıştırır: metrik hesaplama, görselleştirme, tablo ve JSON üretimi.
+        """Runs the full evaluation: metric calculation, visualization, table and JSON generation.
 
-        Girdi:  data_dir — YOLO veri kümesi kök dizini (varsayılan "data/yolo")
-                output_dir — çıktı klasörü (varsayılan "thesis_figures")
-        Çıktı:  yok (grafik, tablo ve quantitative_metrics.json dosya yan etkileri)
+        Input:  data_dir — YOLO dataset root directory (default "data/yolo")
+                output_dir — output folder (default "thesis_figures")
+        Output: none (chart, table, and quantitative_metrics.json file side effects)
         """
         print("\n" + "=" * 70)
         print("QUANTITATIVE METRICS CALCULATION")

@@ -2,7 +2,7 @@
 """
 Streamlit Demo — UI Screenshot → Jetpack Compose Code
 =====================================================
-Kullanım:
+Usage:
      .venv/bin/python -m streamlit run app/demo.py
 """
 
@@ -46,10 +46,10 @@ EDGE_COLORS = {
 
 # ── Helpers ─────────────────────────────────────────────────
 def find_models() -> list[Path]:
-    """runs/ altındaki eğitilmiş model ağırlıklarını (best.pt) listeler.
+    """Lists the trained model weights (best.pt) under runs/.
 
-    Girdi:  yok
-    Çıktı:  sıralı best.pt Path listesi; runs/ klasörü yoksa boş liste
+    Input:  none
+    Output: sorted list of best.pt Paths; empty list if the runs/ folder does not exist
     """
     runs_dir = PROJECT_ROOT / "runs"
     if not runs_dir.exists():
@@ -66,11 +66,11 @@ LAYOUT_COLORS = {
 
 
 def _get_layout_type(node: dict, children: list) -> str:
-    """Düğümün sınıfına ve çocuklarının konum dağılımına göre yerleşim tipini belirler.
+    """Determines the layout type based on the node's class and the position distribution of its children.
 
-    Girdi:  node — hiyerarşi düğümü sözlüğü
-            children — düğümün çocuk düğümlerinin listesi
-    Çıktı:  "Row", "Column" veya "Card" yerleşim tipi dizgesi
+    Input:  node — hierarchy node dictionary
+            children — list of the node's child nodes
+    Output: layout type string "Row", "Column" or "Card"
     """
     cls = node.get("class", "")
     if cls == "SyntheticRow":
@@ -90,21 +90,21 @@ def _get_layout_type(node: dict, children: list) -> str:
 
 
 def draw_layout_overlay(image: Image.Image, graph: dict) -> Image.Image:
-    """Yerleşim gruplarını (Row, Column, Card) görüntü üzerine yarı saydam çerçevelerle çizer.
+    """Draws layout groups (Row, Column, Card) on the image with semi-transparent frames.
 
-    Girdi:  image — PIL görüntüsü
-            graph — hierarchy bilgisi içeren UI grafı sözlüğü
-    Çıktı:  yerleşim çerçeveleri ve etiketleri eklenmiş yeni PIL görüntüsü
+    Input:  image — PIL image
+            graph — UI graph dictionary containing hierarchy information
+    Output: new PIL image with layout frames and labels added
     """
     img_cv = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
     overlay = img_cv.copy()
 
     def draw_node(node, depth=0):
-        """Bir düğümün çocuklarını kapsayan yerleşim çerçevesini özyinelemeli olarak çizer.
+        """Recursively draws the layout frame that encloses a node's children.
 
-        Girdi:  node — hiyerarşi düğümü sözlüğü
-                depth — özyineleme derinliği (çerçeve ofsetini büyütmek için)
-        Çıktı:  yok (img_cv ve overlay üzerine çizim yan etkisi)
+        Input:  node — hierarchy node dictionary
+                depth — recursion depth (used to grow the frame offset)
+        Output: none (side effect of drawing on img_cv and overlay)
         """
         children = node.get("children", [])
         if not children:
@@ -115,10 +115,10 @@ def draw_layout_overlay(image: Image.Image, graph: dict) -> Image.Image:
         # Compute bounding box that covers all children
         all_bboxes = []
         def collect_bboxes(n):
-            """Düğümün ve tüm alt düğümlerinin bbox'larını all_bboxes listesine toplar.
+            """Collects the bboxes of the node and all its descendants into the all_bboxes list.
 
-            Girdi:  n — hiyerarşi düğümü sözlüğü
-            Çıktı:  yok (all_bboxes listesine ekleme yan etkisi)
+            Input:  n — hierarchy node dictionary
+            Output: none (side effect of appending to the all_bboxes list)
             """
             if "bbox" in n:
                 all_bboxes.append(n["bbox"])
@@ -154,11 +154,11 @@ def draw_layout_overlay(image: Image.Image, graph: dict) -> Image.Image:
 
 
 def draw_detections(image: Image.Image, detections: list) -> Image.Image:
-    """Tespit kutularını sınıf renkleri ve güven etiketleriyle görüntü üzerine çizer.
+    """Draws detection boxes on the image with class colors and confidence labels.
 
-    Girdi:  image — PIL görüntüsü
-            detections — tespit sözlüklerinin listesi
-    Çıktı:  kutular ve etiketler eklenmiş yeni PIL görüntüsü
+    Input:  image — PIL image
+            detections — list of detection dictionaries
+    Output: new PIL image with boxes and labels added
     """
     img_cv = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
     for det in detections:
@@ -173,13 +173,13 @@ def draw_detections(image: Image.Image, detections: list) -> Image.Image:
 
 
 def plot_graph(graph: dict, detections: list, img_w: int, img_h: int) -> plt.Figure:
-    """UI grafını düğüm daireleri ve ilişki oklarıyla matplotlib figürü olarak çizer.
+    """Draws the UI graph as a matplotlib figure with node circles and relation arrows.
 
-    Girdi:  graph — edges listesi içeren UI grafı sözlüğü
-            detections — düğüm merkezleri için tespit listesi
-            img_w — görüntü genişliği (piksel)
-            img_h — görüntü yüksekliği (piksel)
-    Çıktı:  matplotlib Figure nesnesi
+    Input:  graph — UI graph dictionary containing an edges list
+            detections — detection list for node centers
+            img_w — image width (pixels)
+            img_h — image height (pixels)
+    Output: matplotlib Figure object
     """
     fig, ax = plt.subplots(figsize=(8, 8))
     ax.set_xlim(0, img_w)
@@ -222,11 +222,11 @@ def plot_graph(graph: dict, detections: list, img_w: int, img_h: int) -> plt.Fig
 
 
 def plot_adjacency(graph: dict, detections: list) -> plt.Figure:
-    """Graf kenarlarından ilişki tipine göre renklendirilmiş komşuluk matrisi figürü oluşturur.
+    """Builds an adjacency matrix figure from graph edges, colored by relation type.
 
-    Girdi:  graph — edges listesi içeren UI grafı sözlüğü
-            detections — matris boyutu ve eksen etiketleri için tespit listesi
-    Çıktı:  matplotlib Figure nesnesi; tespit yoksa "No detections" mesajlı figür
+    Input:  graph — UI graph dictionary containing an edges list
+            detections — detection list for matrix size and axis labels
+    Output: matplotlib Figure object; a figure with a "No detections" message if there are no detections
     """
     n = len(detections)
     if n == 0:
@@ -261,11 +261,11 @@ def plot_adjacency(graph: dict, detections: list) -> plt.Figure:
 
 
 def format_hierarchy(node: dict, indent: int = 0) -> str:
-    """Hiyerarşi ağacını girintili çok satırlı metin gösterimine dönüştürür.
+    """Converts the hierarchy tree into an indented multi-line text representation.
 
-    Girdi:  node — hiyerarşi düğümü sözlüğü ('class', 'id', 'children' içerir)
-            indent — mevcut girinti seviyesi
-    Çıktı:  ağacın girintili metin gösterimi (dizge)
+    Input:  node — hierarchy node dictionary (contains 'class', 'id', 'children')
+            indent — current indentation level
+    Output: indented text representation of the tree (string)
     """
     prefix = "  " * indent + ("└─ " if indent > 0 else "")
     line = f"{prefix}{node['class']} (id={node['id']})\n"
@@ -301,9 +301,9 @@ _PREVIEW_TEMPLATE = """<!DOCTYPE html><html><head><meta charset="utf-8"><style>
 </style></head><body>
 <div class="legend" id="legend"></div>
 <div class="row">
-  <div class="col"><h3>Derlenmiş Compose — Koda Sadık</h3><div class="note">Üretilen .kt kodunun Compose'da derlenince oluşturacağı dikey akış.</div>
+  <div class="col"><h3>Compiled Compose — Faithful to the Code</h3><div class="note">The vertical flow the generated .kt code would produce when compiled in Compose.</div>
     <div class="phone" id="p_stack"><div class="screen" id="s_stack"></div></div></div>
-  <div class="col"><h3>Konum-temelli Rekonstrüksiyon</h3><div class="note">Tespit edilen bbox konumlarına göre ekranın yeniden inşası (hedeflenen yerleşim).</div>
+  <div class="col"><h3>Position-based Reconstruction</h3><div class="note">Reconstruction of the screen from the detected bbox positions (target layout).</div>
     <div class="phone" id="p_bbox"><div class="screen" id="s_bbox"></div></div></div>
 </div>
 <script>
@@ -341,13 +341,13 @@ document.getElementById("legend").innerHTML=Object.keys(cnt).map(function(c){
 
 
 def build_preview_html(roots: list, detections: list, img_w: int, img_h: int) -> str:
-    """Derlenmiş Compose akışı ile bbox rekonstrüksiyonunu yan yana gösteren HTML üretir.
+    """Generates HTML showing the compiled Compose flow and the bbox reconstruction side by side.
 
-    Girdi:  roots — hiyerarşi kök düğümlerinin listesi
-            detections — tespit sözlüklerinin listesi
-            img_w — görüntü genişliği (piksel)
-            img_h — görüntü yüksekliği (piksel)
-    Çıktı:  şablona veriler gömülmüş önizleme HTML dizgesi
+    Input:  roots — list of hierarchy root nodes
+            detections — list of detection dictionaries
+            img_w — image width (pixels)
+            img_h — image height (pixels)
+    Output: preview HTML string with data embedded into the template
     """
     boxes = []
     for d in detections:
@@ -408,12 +408,12 @@ document.getElementById("screen").innerHTML='<div class="stack">'+DATA.roots.map
 
 
 def build_compiled_html(roots: list, img_w: int, img_h: int) -> str:
-    """Tek telefon çerçeveli derlenmiş Compose görünümü HTML'i üretir.
+    """Generates the compiled Compose view HTML with a single phone frame.
 
-    Girdi:  roots — hiyerarşi kök düğümlerinin listesi
-            img_w — görüntü genişliği (piksel)
-            img_h — görüntü yüksekliği (piksel)
-    Çıktı:  şablona veriler gömülmüş HTML dizgesi
+    Input:  roots — list of hierarchy root nodes
+            img_w — image width (pixels)
+            img_h — image height (pixels)
+    Output: HTML string with data embedded into the template
     """
     data = {"roots": roots, "aspect": round(img_w / img_h, 4)}
     return _COMPILED_TEMPLATE.replace("__DATA__", json.dumps(data))
@@ -472,12 +472,12 @@ document.getElementById("screen").innerHTML='<div class="screenwrap">'+render(DA
 
 
 def build_synth_html(roots: list, img_w: int, img_h: int) -> str:
-    """Kod üreticinin ürettiği XY-cut iç içe Row/Column ağacını HTML olarak çizer.
+    """Renders the XY-cut nested Row/Column tree produced by the code generator as HTML.
 
-    Girdi:  roots — hiyerarşi kök düğümlerinin listesi
-            img_w — görüntü genişliği (piksel)
-            img_h — görüntü yüksekliği (piksel)
-    Çıktı:  şablona ağaç verisi gömülmüş HTML dizgesi
+    Input:  roots — list of hierarchy root nodes
+            img_w — image width (pixels)
+            img_h — image height (pixels)
+    Output: HTML string with the tree data embedded into the template
     """
     gen = ComposeCodeGenerator()
     leaves = gen._collect_leaves(roots)
@@ -508,12 +508,12 @@ document.getElementById("screen").innerHTML=DATA.boxes.map(function(b){
 
 
 def build_bbox_html(detections: list, img_w: int, img_h: int) -> str:
-    """YOLO tespit koordinatlarından ekranın bbox rekonstrüksiyonu HTML'ini üretir.
+    """Generates the bbox reconstruction HTML of the screen from YOLO detection coordinates.
 
-    Girdi:  detections — tespit sözlüklerinin listesi
-            img_w — görüntü genişliği (piksel)
-            img_h — görüntü yüksekliği (piksel)
-    Çıktı:  şablona kutu verileri gömülmüş HTML dizgesi
+    Input:  detections — list of detection dictionaries
+            img_w — image width (pixels)
+            img_h — image height (pixels)
+    Output: HTML string with box data embedded into the template
     """
     boxes = []
     for d in detections:
@@ -539,15 +539,15 @@ st.set_page_config(
 )
 
 st.title("📱 UI Screenshot → Jetpack Compose")
-st.caption("Android ekran görüntüsünden otomatik Compose kodu üretimi")
+st.caption("Automatic Compose code generation from an Android screenshot")
 
 # ── Sidebar ─────────────────────────────────────────────────
 with st.sidebar:
-    st.header("Ayarlar")
+    st.header("Settings")
 
     models = find_models()
     if not models:
-        st.error("Model bulunamadı! `runs/*/weights/best.pt` kontrol edin.")
+        st.error("No model found! Check `runs/*/weights/best.pt`.")
         st.stop()
 
     model_labels = [str(m.relative_to(PROJECT_ROOT)) for m in models]
@@ -560,25 +560,25 @@ with st.sidebar:
     conf = st.slider("Confidence Threshold", 0.1, 0.9, 0.3, 0.05)
 
     st.divider()
-    st.markdown("**Pipeline akışı:**")
+    st.markdown("**Pipeline flow:**")
     st.markdown("1. YOLO Detection\n2. Graph Building\n3. Code Generation")
 
 # ── Main area ───────────────────────────────────────────────
-uploaded = st.file_uploader("Screenshot yükle", type=["png", "jpg", "jpeg"])
+uploaded = st.file_uploader("Upload a screenshot", type=["png", "jpg", "jpeg"])
 
 # Also allow picking test images
 test_dir = PROJECT_ROOT / "examples"
 test_images = sorted(test_dir.glob("*.png")) if test_dir.exists() else []
 
 if not uploaded and test_images:
-    st.markdown("**veya test görsellerinden birini seç:**")
+    st.markdown("**or pick one of the test images:**")
     cols = st.columns(len(test_images))
     for i, img_path in enumerate(test_images):
         with cols[i]:
             thumb = Image.open(img_path)
             thumb.thumbnail((150, 300))
             st.image(thumb, caption=img_path.name)
-            if st.button(f"Seç", key=f"test_{i}"):
+            if st.button(f"Select", key=f"test_{i}"):
                 st.session_state["test_image"] = str(img_path)
 
 # Resolve which image to use
@@ -592,14 +592,14 @@ elif "test_image" in st.session_state:
     image_path = st.session_state["test_image"]
 
 if not image_path or not Path(image_path).exists():
-    st.info("Başlamak için bir screenshot yükleyin veya test görsellerinden birini seçin.")
+    st.info("Upload a screenshot or pick one of the test images to get started.")
     st.stop()
 
 # ── Run pipeline ────────────────────────────────────────────
 img = Image.open(image_path)
 img_w, img_h = img.size
 
-run_btn = st.button("Pipeline Çalıştır", type="primary", use_container_width=True)
+run_btn = st.button("Run Pipeline", type="primary", use_container_width=True)
 
 if run_btn or st.session_state.get("ran"):
     st.session_state["ran"] = True
@@ -610,10 +610,10 @@ if run_btn or st.session_state.get("ran"):
         detector = ComponentDetector(model_path, dataset_yaml)
         detections = detector.detect(image_path, conf)
 
-        status.update(label=f"Stage 1: {len(detections)} component bulundu", state="complete")
+        status.update(label=f"Stage 1: {len(detections)} components found", state="complete")
 
     # ── Stage 2: Graph ──────────────────────────────────────
-    with st.status("Stage 2/3: Graph oluşturuluyor...", expanded=True) as status:
+    with st.status("Stage 2/3: Building graph...", expanded=True) as status:
         builder = UIGraphBuilder()
         graph = builder.build_graph(detections)
         n_edges = len(graph["edges"])
@@ -621,11 +621,11 @@ if run_btn or st.session_state.get("ran"):
         status.update(label=f"Stage 3: {n_edges} edge, {n_roots} root", state="complete")
 
     # ── Stage 3: Code generation ────────────────────────────
-    with st.status("Stage 3/3: Kod üretiliyor...", expanded=True) as status:
+    with st.status("Stage 3/3: Generating code...", expanded=True) as status:
         generator = ComposeCodeGenerator()
         code = generator.generate(graph)
         n_lines = len(code.split("\n"))
-        status.update(label=f"Stage 3: {n_lines} satır kod üretildi", state="complete")
+        status.update(label=f"Stage 3: {n_lines} lines of code generated", state="complete")
 
     # ── Results ─────────────────────────────────────────────
     st.divider()
@@ -645,7 +645,7 @@ if run_btn or st.session_state.get("ran"):
     with tab1:
         col_orig, col_det, col_layout = st.columns(3)
         with col_orig:
-            st.subheader("Orijinal")
+            st.subheader("Original")
             st.image(img, use_container_width=True)
         with col_det:
             st.subheader("Detections")
@@ -657,7 +657,7 @@ if run_btn or st.session_state.get("ran"):
             st.image(layout_img, use_container_width=True)
             st.caption("🟠 Column  🟢 Row  🔵 Card")
 
-        st.subheader("Class Dağılımı")
+        st.subheader("Class Distribution")
         class_dist = Counter(d["class_name"] for d in detections)
         chart_data = {k: v for k, v in sorted(class_dist.items(), key=lambda x: -x[1])}
         st.bar_chart(chart_data)
@@ -679,7 +679,7 @@ if run_btn or st.session_state.get("ran"):
             st.pyplot(fig_adj)
             plt.close(fig_adj)
 
-        st.subheader("Edge Dağılımı")
+        st.subheader("Edge Distribution")
         edge_dist = Counter(e["relation"] for e in graph["edges"])
         st.bar_chart({k: v for k, v in sorted(edge_dist.items(), key=lambda x: -x[1])})
 
@@ -699,7 +699,7 @@ if run_btn or st.session_state.get("ran"):
         st.code(code, language="kotlin")
 
         st.download_button(
-            "GeneratedScreen.kt indir",
+            "Download GeneratedScreen.kt",
             data=code,
             file_name="GeneratedScreen.kt",
             mime="text/plain",
@@ -709,35 +709,36 @@ if run_btn or st.session_state.get("ran"):
     with tab5:
         st.subheader("Compose Preview")
         st.caption(
-            "Soldan sağa: seçilen ekran görüntüsü, üretilen Jetpack Compose kodunun "
-            "derlenince oluşturacağı iç içe Row/Column yerleşimi ve kodun kendisi. "
-            "Yerleşim, tespit edilen bileşenlerin uzamsal ilişkilerinden (XY-cut) "
-            "sentezlenir; mor kesikli çerçeve Column, mavi kesikli çerçeve Row'dur."
+            "From left to right: the selected screenshot, the nested Row/Column layout "
+            "the generated Jetpack Compose code would produce when compiled, and the code itself. "
+            "The layout is synthesized from the spatial relations of the detected components "
+            "(XY-cut); the purple dashed frame is a Column, the blue dashed frame is a Row."
         )
         roots = graph["hierarchy"]["roots"]
         ph_h = max(560, int(260 / (img_w / img_h)) + 60)
         col_orig, col_layout, col_code = st.columns([1, 1, 1.2])
         with col_orig:
-            st.markdown("**Seçilen ekran görüntüsü**")
+            st.markdown("**Selected screenshot**")
             st.image(img, use_container_width=True)
         with col_layout:
-            st.markdown("**Derlenmiş yerleşim (Row/Column)**")
+            st.markdown("**Compiled layout (Row/Column)**")
             components.html(build_synth_html(roots, img_w, img_h), height=ph_h)
         with col_code:
-            st.markdown("**Üretilen kod — GeneratedScreen.kt**")
+            st.markdown("**Generated code — GeneratedScreen.kt**")
             st.code(code, language="kotlin")
             st.download_button(
-                "GeneratedScreen.kt indir",
+                "Download GeneratedScreen.kt",
                 data=code,
                 file_name="GeneratedScreen.kt",
                 mime="text/plain",
                 key="dl_preview",
             )
 
-        with st.expander("Tespit overlay'i (bbox — bileşenler nerede bulundu)"):
+        with st.expander("Detection overlay (bbox — where components were found)"):
             st.caption(
-                "Bu görünüm üretilen koddan DEĞİL, doğrudan YOLO tespit koordinatlarından "
-                "çizilir; modelin bileşenleri ekranda nerede bulduğunu gösterir. "
-                "Soldaki 'Derlenmiş yerleşim' ise üretilen kodun yapısını yansıtır."
+                "This view is drawn NOT from the generated code but directly from the "
+                "YOLO detection coordinates; it shows where the model found the components "
+                "on the screen. The 'Compiled layout' on the left reflects the structure "
+                "of the generated code."
             )
             components.html(build_bbox_html(detections, img_w, img_h), height=ph_h)

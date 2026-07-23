@@ -5,36 +5,36 @@ import yaml
 import xml.etree.ElementTree as ET
 from PIL import Image
 
-# ------------ Argümanlar ------------
+# ------------ Arguments ------------
 def parse_args():
-    """Komut satırı argümanlarını tanımlar ve okur.
+    """Defines and reads the command-line arguments.
 
-    Girdi:  yok (değerleri komut satırından alır)
-    Çıktı:  args nesnesi — args.raw_root, args.min_area gibi ayarlar
+    Input:  none (takes values from the command line)
+    Output: args object — settings such as args.raw_root, args.min_area
     """
     ap = argparse.ArgumentParser(description="ReDraw XML + IMG -> YOLO labels")
-    ap.add_argument("--raw-root", default="data/raw", type=str, help="Ham veri setinin (XML+PNG) nereden okunacağı")
-    ap.add_argument("--out-root", default="data/interim/labels", type=str, help="Çıktı olarak oluşturulan .txt'lerin nereye yazılacağı")
-    ap.add_argument("--dataset-yaml", default="configs/dataset.yaml", type=str, help="13 sınıflık listenin okunacağı config dosyası, id ve sınıf eşleşmesi")
-    ap.add_argument("--drop-container", default=True, type=lambda x: str(x).lower() in {"1","true","yes"}, help ="Adında container geçen yapısal düğümleri atlatan kısım, Tablo 3.2 Container Removal")
-    ap.add_argument("--min-area", default=0.00005, type=float, help="Ekran alanına oran (w*h), Tablo 3.2'de bulunan alan filtresi")
-    ap.add_argument("--dedup-iou", default=0.85, type=float, help="Aynı sınıftan iki kutu %%85 oranında çakışıyorsa duplicate kabul ederek silmeye yarar")
-    ap.add_argument("--limit", default=0, type=int, help="Sadece ilk N ekran çiftini denemek için, geliştirmeyi hızlandırmak için hepsi = 0")
-    ap.add_argument("--verbose", default=False, type=lambda x: str(x).lower() in {"1","true","yes"}, help = "işlemler sırasında ayrıntılı log basmak için")
+    ap.add_argument("--raw-root", default="data/raw", type=str, help="Where the raw dataset (XML+PNG) is read from")
+    ap.add_argument("--out-root", default="data/interim/labels", type=str, help="Where the generated output .txt files are written")
+    ap.add_argument("--dataset-yaml", default="configs/dataset.yaml", type=str, help="Config file the 13-class list is read from, id and class mapping")
+    ap.add_argument("--drop-container", default=True, type=lambda x: str(x).lower() in {"1","true","yes"}, help ="Skips structural nodes whose name contains 'container', Table 3.2 Container Removal")
+    ap.add_argument("--min-area", default=0.00005, type=float, help="Ratio to screen area (w*h), the area filter from Table 3.2")
+    ap.add_argument("--dedup-iou", default=0.85, type=float, help="If two boxes of the same class overlap by %%85, treats them as duplicates and removes one")
+    ap.add_argument("--limit", default=0, type=int, help="To try only the first N screen pairs and speed up development, 0 = all")
+    ap.add_argument("--verbose", default=False, type=lambda x: str(x).lower() in {"1","true","yes"}, help = "to print detailed logs during processing")
     return ap.parse_args()
 
-# ------------ Yardımcılar ------------
-IMG_EXTS = (".png", ".jpg", ".jpeg") #dosya uzantıları
-BOUNDS_RE = re.compile(r"\[(\d+),\s*(\d+)\]\[(\d+),\s*(\d+)\]") #XML içinden bounds bilgilerini çeken regex
+# ------------ Helpers ------------
+IMG_EXTS = (".png", ".jpg", ".jpeg") #file extensions
+BOUNDS_RE = re.compile(r"\[(\d+),\s*(\d+)\]\[(\d+),\s*(\d+)\]") #regex that extracts bounds info from the XML
 
 ALIASES = {
-    # Text ailesi
+    # Text family
     "AppCompatTextView": "TextView",
     "MaterialTextView": "TextView",
     "CheckedTextView": "TextView",
     "TextInputEditText": "EditText",
     "AutoCompleteTextView": "EditText",
-    # Görsel & buton
+    # Image & button
     "AppCompatImageView": "ImageView",
     "AppCompatButton": "Button",
     "MaterialButton": "Button",
@@ -44,35 +44,35 @@ ALIASES = {
 }
 
 def load_names(yaml_path: Path):
-    """dataset.yaml'dan 13 sınıflık listeyi okur; whitelist ve id eşlemesinin kaynağı.
+    """Reads the 13-class list from dataset.yaml; the source of the whitelist and id mapping.
 
-    Girdi:  yaml_path — 'names' listesini içeren YAML dosyasının yolu
-    Çıktı:  (names, name2id) — sıralı sınıf listesi ve isim->numara sözlüğü
-            örn. {"Button": 0, "CheckBox": 1, ...}
+    Input:  yaml_path — path to the YAML file containing the 'names' list
+    Output: (names, name2id) — ordered class list and name->number dictionary
+            e.g. {"Button": 0, "CheckBox": 1, ...}
     """
     if not yaml_path.exists():
-        raise FileNotFoundError(f"dataset.yaml bulunamadı: {yaml_path}")
+        raise FileNotFoundError(f"dataset.yaml not found: {yaml_path}")
     data = yaml.safe_load(open(yaml_path, "r"))
     names = data.get("names", [])
     if not names:
-        raise ValueError(f"dataset.yaml içinde 'names' yok veya boş: {yaml_path}")
+        raise ValueError(f"'names' missing or empty in dataset.yaml: {yaml_path}")
     return names, {n: i for i, n in enumerate(names)}
 
 def short_class_name(full: str) -> str:
-    """Tam sınıf adını kısaltıp ALIASES ile normalize eder (Tablo 3.3).
+    """Shortens the full class name and normalizes it via ALIASES (Table 3.3).
 
-    Girdi:  full — XML'deki tam ad, örn. "android.widget.AppCompatTextView"
-    Çıktı:  normalize kısa ad, örn. "TextView" (eşleşme yoksa kısa ad aynen döner)
+    Input:  full — full name from the XML, e.g. "android.widget.AppCompatTextView"
+    Output: normalized short name, e.g. "TextView" (if no match, the short name is returned as-is)
     """
     s = (full or "").split(".")[-1]
     return ALIASES.get(s, s)
 
 def parse_bounds(s: str):
-    """bounds metnini dört piksel koordinatına çevirir.
+    """Converts the bounds string into four pixel coordinates.
 
-    Girdi:  s — "[x1,y1][x2,y2]" biçiminde metin, örn. "[0,63][1080,231]"
-    Çıktı:  (x1, y1, x2, y2) tamsayı dörtlüsü; biçim bozuksa veya
-            kutu ters/sıfır boyutluysa None
+    Input:  s — text in the form "[x1,y1][x2,y2]", e.g. "[0,63][1080,231]"
+    Output: (x1, y1, x2, y2) integer quadruple; None if the format is malformed
+            or the box is inverted/zero-sized
     """
     if not s:
         return None
@@ -85,10 +85,10 @@ def parse_bounds(s: str):
     return x1, y1, x2, y2
 
 def to_xywhn(box, W, H):
-    """Köşe koordinatlarını YOLO biçimine çevirir: merkez + boyut, 0-1 normalize.
+    """Converts corner coordinates to YOLO format: center + size, normalized to 0-1.
 
-    Girdi:  box — (x1, y1, x2, y2) piksel koordinatları; W, H — görüntü boyutu
-    Çıktı:  (xc, yc, w, h) — ekran oranına normalize edilmiş merkez ve boyut
+    Input:  box — (x1, y1, x2, y2) pixel coordinates; W, H — image size
+    Output: (xc, yc, w, h) — center and size normalized to the screen dimensions
     """
     x1, y1, x2, y2 = box
     xc = (x1 + x2) / 2.0 / W
@@ -103,10 +103,10 @@ def to_xywhn(box, W, H):
     return (xc, yc, w, h)
 
 def iou_xywh(a, b):
-    """İki kutunun IoU'sunu (kesişim/birleşim oranını) hesaplar; dedup için kullanılır.
+    """Computes the IoU (intersection-over-union ratio) of two boxes; used for dedup.
 
-    Girdi:  a, b — (xc, yc, w, h) biçiminde iki normalize kutu
-    Çıktı:  0.0-1.0 arası oran (0 = hiç çakışmıyor, 1 = birebir aynı)
+    Input:  a, b — two normalized boxes in (xc, yc, w, h) form
+    Output: ratio between 0.0-1.0 (0 = no overlap, 1 = identical)
     """
     ax1, ay1 = a[0] - a[2]/2, a[1] - a[3]/2
     ax2, ay2 = a[0] + a[2]/2, a[1] + a[3]/2
@@ -119,10 +119,10 @@ def iou_xywh(a, b):
     return inter/union if union > 0 else 0.0
 
 def match_image_for(xml_path: Path):
-    """XML dosyasına karşılık gelen ekran görüntüsünü bulur.
+    """Finds the screenshot corresponding to the XML file.
 
-    Girdi:  xml_path — hierarchy_N.xml dosya yolu
-    Çıktı:  aynı klasördeki screenshot_N.png/jpg/jpeg yolu; yoksa None
+    Input:  xml_path — path to the hierarchy_N.xml file
+    Output: path to screenshot_N.png/jpg/jpeg in the same folder; None if absent
     """
     m = re.search(r"hierarchy_(\d+)\.xml$", xml_path.name)
     if not m:
@@ -136,38 +136,38 @@ def match_image_for(xml_path: Path):
     return None
 
 def walk_nodes(elem):
-    """XML ağacındaki tüm düğümleri (kendisi + tüm torunları) sırayla gezer.
+    """Traverses all nodes in the XML tree (itself + all descendants) in order.
 
-    Girdi:  elem — başlangıç XML düğümü (genelde kök)
-    Çıktı:  her düğümü tek tek veren generator
+    Input:  elem — starting XML node (usually the root)
+    Output: generator yielding each node one by one
     """
     yield elem
     for ch in list(elem):
         yield from walk_nodes(ch)
 
-# ------------ Ana işlevler ------------
+# ------------ Main functions ------------
 def extract_labels(xml_path: Path, W: int, H: int, name2id: dict,
                    drop_container=True,
                    min_area=0.00010, dedup_iou=0.95, verbose=False):
-    """Tek bir XML'i işleyip o ekranın tüm YOLO etiketlerini üretir (script'in kalbi).
+    """Processes a single XML and produces all YOLO labels for that screen (the heart of the script).
 
-    Ağacı gezer; her düğüm için sırayla: container atma -> kutu çıkarma ->
-    alan filtresi -> isim normalize -> whitelist -> IoU dedup uygular.
+    Traverses the tree; for each node applies, in order: container removal ->
+    box extraction -> area filter -> name normalization -> whitelist -> IoU dedup.
 
-    Girdi:  xml_path — hierarchy XML'i; W, H — eş görüntünün boyutu;
-            name2id — sınıf whitelist/id sözlüğü; diğerleri — filtre ayarları
-    Çıktı:  [(cid, (xc, yc, w, h)), ...] — filtrelerden geçen etiket listesi
+    Input:  xml_path — the hierarchy XML; W, H — size of the paired image;
+            name2id — class whitelist/id dictionary; others — filter settings
+    Output: [(cid, (xc, yc, w, h)), ...] — list of labels that passed the filters
     """
     labels = []  # [(cid, (xc,yc,w,h))]
     root = ET.parse(xml_path).getroot()
 
     for n in walk_nodes(root):
         cls_full = n.attrib.get("class") or n.attrib.get("className") or ""
-        # Container'ı direkt ele
+        # Drop containers outright
         if drop_container and "container" in cls_full.lower():
             continue
 
-        # kutu çıkar
+        # extract the box
         b = None
         if "bounds" in n.attrib:
             b = parse_bounds(n.attrib.get("bounds"))
@@ -184,19 +184,19 @@ def extract_labels(xml_path: Path, W: int, H: int, name2id: dict,
             continue
 
         box = to_xywhn(b, W, H)
-        # min alan filtresi
+        # min area filter
         if box[2] * box[3] < min_area:
             continue
 
         cname = short_class_name(cls_full)
 
-        # sınıf id
+        # class id
         if cname not in name2id:
-            # bu sınıf dataset.yaml'da yoksa geç
+            # skip if this class is not in dataset.yaml
             continue
         cid = name2id[cname]
 
-        # sınıf içi dedup
+        # intra-class dedup
         keep = True
         for cid2, box2 in labels:
             if cid2 == cid and iou_xywh(box, box2) >= dedup_iou:
@@ -217,11 +217,11 @@ def extract_labels(xml_path: Path, W: int, H: int, name2id: dict,
     return labels
 
 def main():
-    """Akışı yönetir: tüm uygulama klasörlerini gezer, XML-görüntü çiftlerini
-    eşler, extract_labels ile etiketleri çıkarır ve .txt dosyalarına yazar.
+    """Orchestrates the flow: walks all app folders, matches XML-image pairs,
+    extracts labels with extract_labels, and writes them to .txt files.
 
-    Girdi:  yok (ayarları parse_args'tan alır)
-    Çıktı:  data/interim/labels/<app>/screenshot_N.txt dosyaları + özet çıktı
+    Input:  none (takes settings from parse_args)
+    Output: data/interim/labels/<app>/screenshot_N.txt files + summary output
     """
     args = parse_args()
     raw_root = Path(args.raw_root)
@@ -292,8 +292,8 @@ def main():
             if args.verbose:
                 print(f"    wrote: {out_txt}")
 
-    print(f"✅ Bitti. Toplam çift: {total_pairs}, yazılan label dosyası: {total_written}")
-    print(f"Çıktılar: {out_root.resolve()}")
+    print(f"✅ Done. Total pairs: {total_pairs}, label files written: {total_written}")
+    print(f"Outputs: {out_root.resolve()}")
 
 if __name__ == "__main__":
     main()

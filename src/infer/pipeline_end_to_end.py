@@ -29,11 +29,11 @@ except ImportError as e:
 
 
 def print_detection_statistics(detections: list, title: str = "Detection Statistics"):
-    """Tespit istatistiklerini (sınıf dağılımı, güven aralığı) konsola yazdırır.
+    """Prints detection statistics (class distribution, confidence range) to the console.
 
-    Girdi:  detections — tespit sözlüklerinin listesi
-            title — çıktıda gösterilecek başlık metni
-    Çıktı:  yok (konsola yazdırma yan etkisi)
+    Input:  detections — list of detection dictionaries
+            title — heading text to show in the output
+    Output: none (side effect of printing to the console)
     """
     print(f"\n{'=' * 60}")
     print(f"📊 {title}")
@@ -68,15 +68,15 @@ def run_pipeline(
         conf_threshold: float = 0.3,
         visualize: bool = True
 ):
-    """Tam boru hattını çalıştırır: tespit -> graf kurma -> Compose kodu üretimi.
+    """Runs the full pipeline: detection -> graph building -> Compose code generation.
 
-    Girdi:  image_path — girdi ekran görüntüsü yolu
-            model_path — YOLO model ağırlık dosyası yolu
-            dataset_yaml — veri kümesi yapılandırma dosyası yolu
-            output_dir — çıktı klasörü (varsayılan "output")
-            conf_threshold — tespit güven eşiği (varsayılan 0.3)
-            visualize — True ise tespit görselleştirmesi de kaydedilir
-    Çıktı:  {'detections', 'graph', 'code', 'output_dir'} anahtarlı sonuç sözlüğü
+    Input:  image_path — input screenshot path
+            model_path — YOLO model weights file path
+            dataset_yaml — dataset configuration file path
+            output_dir — output folder (default "output")
+            conf_threshold — detection confidence threshold (default 0.3)
+            visualize — if True, the detection visualization is also saved
+    Output: result dictionary with keys {'detections', 'graph', 'code', 'output_dir'}
     """
 
     output_path = Path(output_dir)
@@ -136,12 +136,12 @@ def run_pipeline(
     print(f"\n      Hierarchy preview:")
 
     def print_tree(node, indent=0, max_depth=2):
-        """Hiyerarşi ağacını girintili biçimde konsola yazdırır.
+        """Prints the hierarchy tree to the console in indented form.
 
-        Girdi:  node — hiyerarşi düğümü sözlüğü ('class' ve 'children' içerir)
-                indent — mevcut girinti seviyesi
-                max_depth — yazdırılacak en fazla derinlik
-        Çıktı:  yok (konsola yazdırma yan etkisi)
+        Input:  node — hierarchy node dictionary (contains 'class' and 'children')
+                indent — current indentation level
+                max_depth — maximum depth to print
+        Output: none (side effect of printing to the console)
         """
         if indent > max_depth:
             return
@@ -224,10 +224,10 @@ def run_pipeline(
 
 
 def main():
-    """Komut satırı argümanlarını okur, girdileri doğrular ve boru hattını çalıştırır.
+    """Reads command-line arguments, validates the inputs and runs the pipeline.
 
-    Girdi:  yok (argümanlar komut satırından okunur)
-    Çıktı:  yok (boru hattı çıktıları output klasörüne yazılır; hata durumunda sys.exit)
+    Input:  none (arguments are read from the command line)
+    Output: none (pipeline outputs are written to the output folder; sys.exit on error)
     """
     parser = argparse.ArgumentParser(
         description="UI Screenshot to Jetpack Compose Pipeline",

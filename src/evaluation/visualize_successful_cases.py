@@ -9,33 +9,33 @@ import matplotlib.patches as patches
 import os
 import sys
 
-# Script'in bulunduğu dizini al
+# Get the directory containing this script
 SCRIPT_DIR = Path(__file__).parent.absolute()
 
-# src/evaluation/ içindeyse, iki üst dizine (proje root'una) git
+# If inside src/evaluation/, go two levels up (to the project root)
 if SCRIPT_DIR.name == 'evaluation':
     PROJECT_ROOT = SCRIPT_DIR.parent.parent
 else:
     PROJECT_ROOT = SCRIPT_DIR
 
-# Proje root'unu sys.path'e ekle
+# Add the project root to sys.path
 sys.path.insert(0, str(PROJECT_ROOT))
 
-# Working directory'yi proje root yap
+# Set the working directory to the project root
 os.chdir(PROJECT_ROOT)
 
 
 class SuccessfulCaseVisualizer:
     def __init__(self, model_path="runs/oversample_5k/weights/best.pt"):
-        """YOLO modelini yükler, başarılı case listesini ve renk haritasını tanımlar.
+        """Loads the YOLO model and defines the successful case list and color map.
 
-        Girdi:  model_path — eğitilmiş YOLO ağırlık dosyası yolu
-        Çıktı:  yok (self.model, self.successful_cases ve self.colors atama yan etkisi)
+        Input:  model_path — path to the trained YOLO weights file
+        Output: none (side effect of assigning self.model, self.successful_cases, and self.colors)
         """
         self.model = YOLO(model_path)
-        print(f"✅ Model yüklendi: {model_path}")
+        print(f"✅ Model loaded: {model_path}")
 
-        # Başarılı case'ler (manuel seçim)
+        # Successful cases (manual selection)
         self.successful_cases = [
             "com.microsoft.office.outlook-screens_screenshot_3",
             "com.securus.videoclient-screens_screenshot_1",
@@ -54,10 +54,10 @@ class SuccessfulCaseVisualizer:
         }
 
     def find_test_image(self, stem):
-        """Test klasöründe verilen isme karşılık gelen görüntüyü bulur.
+        """Finds the image matching the given name in the test folder.
 
-        Girdi:  stem — uzantısız görüntü dosya adı
-        Çıktı:  data/yolo/images/test altındaki .png/.jpg/.jpeg yolu; yoksa None
+        Input:  stem — image file name without extension
+        Output: .png/.jpg/.jpeg path under data/yolo/images/test; None if not found
         """
         test_dir = Path("data/yolo/images/test")
 
@@ -69,11 +69,11 @@ class SuccessfulCaseVisualizer:
         return None
 
     def detect_with_metrics(self, image_path):
-        """Görüntü üzerinde tespit yapar ve özet metrikleri hesaplar.
+        """Runs detection on the image and calculates summary metrics.
 
-        Girdi:  image_path — ekran görüntüsü dosya yolu
-        Çıktı:  (result, metrics) — YOLO sonuç nesnesi ve {'total_detections',
-                'avg_confidence', 'class_distribution', 'confidence_distribution'} sözlüğü
+        Input:  image_path — screenshot file path
+        Output: (result, metrics) — YOLO result object and a {'total_detections',
+                'avg_confidence', 'class_distribution', 'confidence_distribution'} dict
         """
         results = self.model.predict(
             source=str(image_path),
@@ -122,11 +122,11 @@ class SuccessfulCaseVisualizer:
         return result, metrics
 
     def visualize_single_case(self, image_path, output_dir):
-        """Tek case için orijinal ve tespitli görüntüyü yan yana çizip tez formatında kaydeder.
+        """Plots the original and detected images side by side for a single case and saves in thesis format.
 
-        Girdi:  image_path — ekran görüntüsü dosya yolu
-                output_dir — çıktı klasörü
-        Çıktı:  case'e ait metrik sözlüğü; ayrıca <isim>_visualized.png dosyası kaydedilir
+        Input:  image_path — screenshot file path
+                output_dir — output folder
+        Output: metrics dict for the case; a <name>_visualized.png file is also saved
         """
         output_path = Path(output_dir)
         output_path.mkdir(parents=True, exist_ok=True)
@@ -136,7 +136,7 @@ class SuccessfulCaseVisualizer:
         img = cv2.imread(str(image_path))
         img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-        # Figure oluştur - side by side
+        # Create figure - side by side
         fig, axes = plt.subplots(1, 2, figsize=(16, 10))
         fig.suptitle(f'{image_path.stem}', fontsize=16, fontweight='bold')
 
@@ -202,10 +202,10 @@ class SuccessfulCaseVisualizer:
         return metrics
 
     def create_comparison_grid(self, output_dir):
-        """Tüm başarılı case'leri orijinal/tespitli satırlar hâlinde grid düzeninde çizer.
+        """Plots all successful cases in a grid layout with original/detected rows.
 
-        Girdi:  output_dir — çıktı klasörü
-        Çıktı:  tüm case'lerin metrik listesi; ayrıca comparison_grid.png kaydedilir
+        Input:  output_dir — output folder
+        Output: list of metrics for all cases; comparison_grid.png is also saved
         """
         output_path = Path(output_dir)
 
@@ -269,11 +269,11 @@ class SuccessfulCaseVisualizer:
         return all_metrics
 
     def create_metrics_summary(self, all_metrics, output_dir):
-        """Ortalama güven ve toplam sınıf dağılımı özet grafiklerini çizip kaydeder.
+        """Plots and saves summary charts of average confidence and total class distribution.
 
-        Girdi:  all_metrics — case metriklerinin listesi
-                output_dir — çıktı klasörü
-        Çıktı:  yok (metrics_summary.png dosya yan etkisi)
+        Input:  all_metrics — list of case metrics
+                output_dir — output folder
+        Output: none (metrics_summary.png file side effect)
         """
         output_path = Path(output_dir)
 
@@ -319,11 +319,11 @@ class SuccessfulCaseVisualizer:
         print(f"✅ Metrics summary saved: {output_file}")
 
     def generate_latex_table(self, all_metrics, output_dir):
-        """Başarılı case metriklerinden tez için LaTeX ve Markdown tabloları üretip kaydeder.
+        """Generates and saves LaTeX and Markdown tables for the thesis from successful case metrics.
 
-        Girdi:  all_metrics — case metriklerinin listesi
-                output_dir — çıktı klasörü
-        Çıktı:  yok (table_successful_cases.tex ve .md dosya yan etkisi)
+        Input:  all_metrics — list of case metrics
+                output_dir — output folder
+        Output: none (table_successful_cases.tex and .md file side effects)
         """
         output_path = Path(output_dir)
 
@@ -392,13 +392,13 @@ class SuccessfulCaseVisualizer:
         print(f"✅ Markdown table saved: {md_file}")
 
     def run_full_analysis(self, output_dir="thesis_figures"):
-        """Tam analizi çalıştırır: tekil görselleştirmeler, grid, özet grafik, tablo ve JSON üretir.
+        """Runs the full analysis: produces individual visualizations, grid, summary chart, table, and JSON.
 
-        Girdi:  output_dir — tüm figürlerin kaydedileceği klasör (varsayılan "thesis_figures")
-        Çıktı:  yok (figür, tablo ve metrics_summary.json dosya yan etkileri)
+        Input:  output_dir — folder where all figures will be saved (default "thesis_figures")
+        Output: none (figure, table, and metrics_summary.json file side effects)
         """
         print("\n" + "=" * 70)
-        print("BAŞARILI CASE'LER ANALİZİ")
+        print("SUCCESSFUL CASES ANALYSIS")
         print("=" * 70 + "\n")
 
         output_path = Path(output_dir)
@@ -406,7 +406,7 @@ class SuccessfulCaseVisualizer:
 
         all_metrics = []
 
-        # 1. Her case için detaylı visualizasyon
+        # 1. Detailed visualization for each case
         print("1️⃣  Individual case visualizations...")
         for case_stem in self.successful_cases:
             img_path = self.find_test_image(case_stem)
@@ -437,17 +437,17 @@ class SuccessfulCaseVisualizer:
         print(f"✅ JSON saved: {json_file}")
 
         print("\n" + "=" * 70)
-        print(f"✅ TÜM FİGÜRLER HAZIR: {output_path}")
+        print(f"✅ ALL FIGURES READY: {output_path}")
         print("=" * 70)
-        print("\nÜretilen dosyalar:")
-        print("  📊 comparison_grid.png - Tüm case'ler yan yana")
+        print("\nGenerated files:")
+        print("  📊 comparison_grid.png - All cases side by side")
         print("  📊 metrics_summary.png - Performance charts")
         print("  📄 table_successful_cases.tex - LaTeX table")
         print("  📄 table_successful_cases.md - Markdown table")
         print("  💾 metrics_summary.json - Raw data")
         for case in self.successful_cases:
             print(f"  🖼️  {case}_visualized.png")
-        print("\n✅ Thesis'e eklemeye hazır!")
+        print("\n✅ Ready to add to the thesis!")
 
 
 if __name__ == '__main__':

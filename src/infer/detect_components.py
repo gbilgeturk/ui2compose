@@ -10,11 +10,11 @@ class ComponentDetector:
     """YOLO-based UI component detector"""
 
     def __init__(self, model_path: str, dataset_yaml: str):
-        """Eğitilmiş YOLO modelini yükler ve sınıf isimlerini modelden alır.
+        """Loads the trained YOLO model and takes the class names from the model.
 
-        Girdi:  model_path — eğitilmiş YOLO ağırlık dosyası yolu (örn. 'runs/train/exp/weights/best.pt')
-                dataset_yaml — sınıf isimlerini içeren veri kümesi yapılandırma dosyası
-        Çıktı:  yok (self.model ve self.class_names atama yan etkisi)
+        Input:  model_path — path to trained YOLO weights file (e.g. 'runs/train/exp/weights/best.pt')
+                dataset_yaml — dataset configuration file containing class names
+        Output: none (side effect of assigning self.model and self.class_names)
         """
         self.model = YOLO(model_path)
 
@@ -25,13 +25,13 @@ class ComponentDetector:
         print(f"✓ Classes ({len(self.class_names)}): {self.class_names}")
 
     def detect(self, image_path: str, conf_threshold: float = 0.3) -> List[Dict]:
-        """Görüntüdeki UI bileşenlerini tespit eder ve yukarıdan aşağıya sıralı döndürür.
+        """Detects UI components in the image and returns them sorted top to bottom.
 
-        Girdi:  image_path — ekran görüntüsü dosya yolu
-                conf_threshold — tespit güven eşiği (varsayılan 0.3)
-        Çıktı:  tespit sözlüklerinin listesi: {'id', 'class_name', 'class_id',
-                'confidence', 'bbox' [x1,y1,x2,y2 piksel], 'bbox_norm' [xc,yc,w,h 0-1],
-                'center' [xc,yc piksel], 'width', 'height'}
+        Input:  image_path — screenshot file path
+                conf_threshold — detection confidence threshold (default 0.3)
+        Output: list of detection dictionaries: {'id', 'class_name', 'class_id',
+                'confidence', 'bbox' [x1,y1,x2,y2 pixels], 'bbox_norm' [xc,yc,w,h 0-1],
+                'center' [xc,yc pixels], 'width', 'height'}
         """
         # Run inference
         results = self.model.predict(
@@ -90,12 +90,12 @@ class ComponentDetector:
         return detections
 
     def visualize(self, image_path: str, detections: List[Dict], output_path: str = None):
-        """Tespit kutularını ve etiketlerini görüntü üzerine çizer.
+        """Draws detection boxes and labels onto the image.
 
-        Girdi:  image_path — ekran görüntüsü dosya yolu
-                detections — detect() çıktısı tespit listesi
-                output_path — kaydedilecek dosya yolu (opsiyonel)
-        Çıktı:  kutular çizilmiş görüntü (numpy dizisi); output_path verildiyse dosyaya da kaydeder
+        Input:  image_path — screenshot file path
+                detections — detection list output by detect()
+                output_path — file path to save to (optional)
+        Output: image with boxes drawn (numpy array); also saves to file if output_path is given
         """
         img = cv2.imread(image_path)
 
@@ -120,10 +120,10 @@ class ComponentDetector:
 
 
 def main():
-    """Dedektörü örnek bir test görüntüsü üzerinde çalıştırır.
+    """Runs the detector on a sample test image.
 
-    Girdi:  yok
-    Çıktı:  yok (output/detections.png ve output/detections.json dosya yan etkisi)
+    Input:  none
+    Output: none (side effect of writing output/detections.png and output/detections.json)
     """
     # Paths (ADJUST THESE!)
     model_path = "runs/oversample_5k/weights/best.pt"

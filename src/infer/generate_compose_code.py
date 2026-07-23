@@ -37,22 +37,22 @@ class ComposeCodeGenerator:
     }
 
     def __init__(self, indent_size: int = 4):
-        """Kod üreticisini girinti genişliğiyle başlatır.
+        """Initializes the code generator with the indentation width.
 
-        Girdi:  indent_size — bir girinti düzeyindeki boşluk sayısı
-        Çıktı:  yok (girinti dizesi ve kod satırı listesi hazırlanır yan etkisi)
+        Input:  indent_size — number of spaces per indentation level
+        Output: none (side effect of preparing the indent string and the code line list)
         """
         self.indent = " " * indent_size
         self.code_lines = []
 
     def generate(self, graph: Dict, use_xy_cut: bool = True) -> str:
-        """UI grafından eksiksiz Jetpack Compose ekran kodunu üretir.
+        """Generates the complete Jetpack Compose screen code from the UI graph.
 
-        Girdi:  graph — build_ui_graph.py'den gelen UI grafı;
-                use_xy_cut — True ise (varsayılan) tespit edilen bileşen kutularından
-                özyinelemeli XY-cut (izdüşüm) ile iç içe Row/Column/Box yerleşimi
-                kurulur; False ise kökler düz sırayla yazılır
-        Çıktı:  tam Kotlin kodu (tek string)
+        Input:  graph — UI graph from build_ui_graph.py;
+                use_xy_cut — if True (default), a nested Row/Column/Box layout is
+                built from the detected component boxes via recursive XY-cut
+                (projection); if False, the roots are written in flat order
+        Output: full Kotlin code (single string)
         """
         self.code_lines = []
         self._state_counter = 0  # ensures unique local var names for stateful widgets
@@ -91,18 +91,18 @@ class ComposeCodeGenerator:
     # sibling components (not only contained children) are grouped.
     # ------------------------------------------------------------------
     def _collect_leaves(self, roots: List[Dict]) -> List[Dict]:
-        """Hiyerarşiyi düzleştirip atomik (yaprak) bileşen kutularını toplar; XY-cut'ın girdisini hazırlar.
+        """Flattens the hierarchy and collects the atomic (leaf) component boxes; prepares the input for XY-cut.
 
-        Girdi:  roots — hiyerarşinin kök düğümleri listesi
-        Çıktı:  id, class ve bbox alanlı yaprak sözlükleri listesi
+        Input:  roots — list of the hierarchy's root nodes
+        Output: list of leaf dictionaries with id, class and bbox fields
         """
         leaves: List[Dict] = []
 
         def walk(node: Dict):
-            """Alt ağacı gezerek çocuğu olmayan düğümleri leaves listesine ekler.
+            """Traverses the subtree and appends nodes without children to the leaves list.
 
-            Girdi:  node — gezilecek hiyerarşi düğümü
-            Çıktı:  yok (leaves listesine ekleme yan etkisi)
+            Input:  node — hierarchy node to traverse
+            Output: none (side effect of appending to the leaves list)
             """
             children = node.get('children', [])
             if children:
@@ -121,13 +121,13 @@ class ComposeCodeGenerator:
 
     @staticmethod
     def _split_on_gap(boxes: List[Dict], axis: str) -> Optional[List[List[Dict]]]:
-        """Kutular arasında temiz bir boşluk varsa verilen eksende >=2 gruba böler (XY-cut'ın tek kesim adımı).
+        """Splits into >=2 groups along the given axis if there is a clean gap between boxes (single cut step of XY-cut).
 
-        axis='y' → yatay kesim (gruplar alt alta → Column)
-        axis='x' → dikey kesim (gruplar yan yana → Row)
+        axis='y' → horizontal cut (groups stacked vertically → Column)
+        axis='x' → vertical cut (groups side by side → Row)
 
-        Girdi:  boxes — bbox alanlı kutu sözlükleri; axis — 'y' veya 'x'
-        Çıktı:  grup listelerinin listesi (>=2 grup) ya da temiz kesim yoksa None
+        Input:  boxes — box dictionaries with bbox fields; axis — 'y' or 'x'
+        Output: list of group lists (>=2 groups) or None if there is no clean cut
         """
         lo, hi = (1, 3) if axis == 'y' else (0, 2)
         ordered = sorted(boxes, key=lambda b: b['bbox'][lo])
@@ -146,10 +146,10 @@ class ComposeCodeGenerator:
         return groups if len(groups) >= 2 else None
 
     def _xy_cut(self, boxes: List[Dict], prefer: str = 'y') -> Dict:
-        """Bileşen kutularından özyinelemeli XY-cut ile Row/Column yerleşim ağacı kurar.
+        """Builds a Row/Column layout tree from the component boxes via recursive XY-cut.
 
-        Girdi:  boxes — yaprak kutu sözlükleri; prefer — önce denenecek kesim ekseni ('y' veya 'x')
-        Çıktı:  {'type': 'leaf'/'Row'/'Column', ...} biçiminde yerleşim ağacı sözlüğü
+        Input:  boxes — leaf box dictionaries; prefer — cut axis to try first ('y' or 'x')
+        Output: layout tree dictionary in the form {'type': 'leaf'/'Row'/'Column', ...}
         """
         if len(boxes) == 1:
             return {'type': 'leaf', 'node': boxes[0]}
@@ -170,11 +170,11 @@ class ComposeCodeGenerator:
                 'children': [{'type': 'leaf', 'node': b} for b in ordered]}
 
     def _generate_tree(self, tree: Dict, level: int, in_row: bool = False):
-        """XY-cut ile kurulan yerleşim ağacını Kotlin'e döker; yapraklarda leaf bileşen üretimini yeniden kullanır.
+        """Emits the layout tree built by XY-cut as Kotlin; reuses leaf component generation at the leaves.
 
-        Girdi:  tree — _xy_cut çıktısı yerleşim ağacı; level — girinti düzeyi;
-                in_row — düğüm bir Row çocuğuysa True (weight(1f) uygulanır)
-        Çıktı:  yok (code_lines listesine Kotlin satırları eklenir yan etkisi)
+        Input:  tree — layout tree output by _xy_cut; level — indentation level;
+                in_row — True if the node is a child of a Row (weight(1f) is applied)
+        Output: none (side effect of appending Kotlin lines to the code_lines list)
         """
         if tree['type'] == 'leaf':
             node = tree['node']
@@ -206,10 +206,10 @@ class ComposeCodeGenerator:
         self._add_blank_line()
 
     def _add_imports(self):
-        """Gerekli Compose import satırlarını kod listesine ekler.
+        """Adds the required Compose import lines to the code list.
 
-        Girdi:  yok
-        Çıktı:  yok (code_lines listesine import satırları eklenir yan etkisi)
+        Input:  none
+        Output: none (side effect of appending import lines to the code_lines list)
         """
         imports = [
             "import androidx.compose.foundation.Image",
@@ -226,10 +226,10 @@ class ComposeCodeGenerator:
             self._add_line(imp)
 
     def _is_horizontal_layout(self, children: List[Dict]) -> bool:
-        """Çocukların bbox merkez dağılımına bakarak yatay mı dizildiklerini belirler (Row/Column kararı).
+        """Determines whether the children are laid out horizontally by looking at their bbox center spread (Row/Column decision).
 
-        Girdi:  children — bbox alanlı çocuk düğümleri listesi
-        Çıktı:  True/False — x yayılımı y yayılımından büyükse True (yatay → Row)
+        Input:  children — list of child nodes with bbox fields
+        Output: True/False — True if the x spread is larger than the y spread (horizontal → Row)
         """
         if len(children) < 2:
             return False
@@ -242,10 +242,10 @@ class ComposeCodeGenerator:
         return x_spread > y_spread
 
     def _generate_component(self, node: Dict, level: int = 0):
-        """Tek bir bileşen ve çocukları için Compose kodunu üretir (kapsayıcı/yaprak ayrımını yaparak).
+        """Generates the Compose code for a single component and its children (distinguishing container/leaf).
 
-        Girdi:  node — hiyerarşi düğümü; level — girinti düzeyi
-        Çıktı:  yok (code_lines listesine Kotlin satırları eklenir yan etkisi)
+        Input:  node — hierarchy node; level — indentation level
+        Output: none (side effect of appending Kotlin lines to the code_lines list)
         """
         class_name = node['class']
         component_id = node['id']
@@ -268,10 +268,10 @@ class ComposeCodeGenerator:
             self._generate_leaf_component(node, compose_name, level)
 
     def _generate_card(self, node: Dict, children: List[Dict], level: int):
-        """CardView için Card composable'ını ve içindeki Row/Column yerleşimini üretir.
+        """Generates the Card composable for CardView and the Row/Column layout inside it.
 
-        Girdi:  node — CardView düğümü; children — çocuk düğümler; level — girinti düzeyi
-        Çıktı:  yok (code_lines listesine Kotlin satırları eklenir yan etkisi)
+        Input:  node — CardView node; children — child nodes; level — indentation level
+        Output: none (side effect of appending Kotlin lines to the code_lines list)
         """
         indent = self.indent * level
         is_horizontal = self._is_horizontal_layout(children)
@@ -303,11 +303,11 @@ class ComposeCodeGenerator:
         self._add_blank_line()
 
     def _generate_container(self, node: Dict, compose_name: str, children: List[Dict], level: int):
-        """Kapsayıcı bileşenin (Column, Row, Box) kodunu üretip çocuklarını özyinelemeli işler.
+        """Generates the code for a container component (Column, Row, Box) and processes its children recursively.
 
-        Girdi:  node — kapsayıcı düğüm; compose_name — eşlenen Compose adı;
-                children — çocuk düğümler; level — girinti düzeyi
-        Çıktı:  yok (code_lines listesine Kotlin satırları eklenir yan etkisi)
+        Input:  node — container node; compose_name — mapped Compose name;
+                children — child nodes; level — indentation level
+        Output: none (side effect of appending Kotlin lines to the code_lines list)
         """
         indent = self.indent * level
 
@@ -350,10 +350,10 @@ class ComposeCodeGenerator:
         self._add_blank_line()
 
     def _generate_leaf_component(self, node: Dict, compose_name: str, level: int):
-        """Yaprak bileşen (Button, Text, TextField vb.) için placeholder içerikli Compose kodunu üretir.
+        """Generates Compose code with placeholder content for a leaf component (Button, Text, TextField, etc.).
 
-        Girdi:  node — yaprak düğüm; compose_name — eşlenen Compose adı; level — girinti düzeyi
-        Çıktı:  yok (code_lines listesine Kotlin satırları eklenir yan etkisi)
+        Input:  node — leaf node; compose_name — mapped Compose name; level — indentation level
+        Output: none (side effect of appending Kotlin lines to the code_lines list)
         """
         indent = self.indent * level
         class_name = node['class']
@@ -427,26 +427,26 @@ class ComposeCodeGenerator:
         self._add_blank_line()
 
     def _add_line(self, line: str):
-        """Kod listesine tek satır ekler.
+        """Adds a single line to the code list.
 
-        Girdi:  line — eklenecek Kotlin satırı
-        Çıktı:  yok (code_lines listesine ekleme yan etkisi)
+        Input:  line — Kotlin line to add
+        Output: none (side effect of appending to the code_lines list)
         """
         self.code_lines.append(line)
 
     def _add_blank_line(self):
-        """Kod listesine boş satır ekler.
+        """Adds a blank line to the code list.
 
-        Girdi:  yok
-        Çıktı:  yok (code_lines listesine boş satır ekleme yan etkisi)
+        Input:  none
+        Output: none (side effect of appending a blank line to the code_lines list)
         """
         self.code_lines.append("")
 
     def save_to_file(self, code: str, output_path: str):
-        """Üretilen Compose kodunu UTF-8 olarak dosyaya kaydeder.
+        """Saves the generated Compose code to a file as UTF-8.
 
-        Girdi:  code — Kotlin kodu (string); output_path — hedef .kt dosya yolu
-        Çıktı:  yok (diske yazma ve konsol bildirimi yan etkisi)
+        Input:  code — Kotlin code (string); output_path — target .kt file path
+        Output: none (side effect of writing to disk and printing a console notice)
         """
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(code)
@@ -454,10 +454,10 @@ class ComposeCodeGenerator:
 
 
 def main():
-    """Kod üreticisini kayıtlı UI grafı üzerinde uçtan uca dener.
+    """Tries the code generator end to end on a saved UI graph.
 
-    Girdi:  yok (output/ui_graph.json dosyasından okur)
-    Çıktı:  yok (output/GeneratedScreen.kt kaydetme ve konsola yazdırma yan etkisi)
+    Input:  none (reads from the output/ui_graph.json file)
+    Output: none (side effect of saving output/GeneratedScreen.kt and printing to the console)
     """
     # Load graph from previous step
     with open("output/ui_graph.json", 'r') as f:
