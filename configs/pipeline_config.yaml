@@ -24,7 +24,7 @@ features:
   visualization: true      # Produce visual output
 
 # NOTES:
-# - model: oversample_5k is the model that gives the best result (mAP@50=51.82%)
+# - model: oversample_5k is the model that gives the best result (test mAP@50=48.70%, validation mAP@50=51.82%)
 # - confidence_threshold: 0.3 is used for the pipeline (practical use, fewer false positives)
 #   Evaluation scripts use 0.15 (standard for computing the precision-recall curve)
 # - imgsz: 640 was used in training, it must be the same at inference

@@ -144,9 +144,9 @@ numbers can be inspected without downloading any weights.
 
 The released model is a YOLOv8s detector fine-tuned on ReDraw with class-balanced
 oversampling (minority classes oversampled to 5k instances), which gave the best
-overall results in our experiments (mAP@50 ≈ 51.8% on the held-out test split across
-13 classes). Training and ablation notebooks (model size, input resolution,
-oversampling level) are part of the accompanying thesis work.
+overall results in our experiments: mAP@50 = 48.70% on the held-out test split across
+13 classes (validation mAP@50: 51.8%). Training and ablation notebooks (model size,
+input resolution, oversampling level) are part of the accompanying thesis work.
 
 ## Citation
 
