@@ -103,6 +103,30 @@ python src/evaluation/calculate_metrics.py \
     --model runs/oversample_5k/weights/best.pt
 ```
 
+## Reproducing the experiments
+
+The repository ships only the final model (`runs/oversample_5k/weights/best.pt`). The
+weights of **all eight experiments** reported in the accompanying thesis — the
+YOLOv8s/YOLOv11s model comparison, the input-resolution ablation (320–640 px), and the
+oversampling ablation (2k/5k) — are published as assets of the
+[v1.0.0 GitHub release](https://github.com/gbilgeturk/ui2compose/releases/tag/v1.0.0).
+
+To evaluate any of them, download the weight file and place it in the layout the tools
+expect, e.g.:
+
+```bash
+mkdir -p runs/yolov11s/weights
+mv ~/Downloads/model_comparison_yolov11s.pt runs/yolov11s/weights/best.pt
+python src/evaluation/calculate_metrics.py --model runs/yolov11s/weights/best.pt
+```
+
+The Streamlit demo automatically lists every model found under `runs/*/weights/best.pt`,
+so downloaded weights become selectable in the UI without further configuration.
+
+The numerical results of all experiments (overall and per-class metrics as reported in
+the thesis) are included in [`results/`](results/) as JSON files, so the reported
+numbers can be inspected without downloading any weights.
+
 ## Repository layout
 
 | Path | Purpose |

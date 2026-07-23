@@ -1,0 +1,30 @@
+{
+  "experiment": "model_comparison_v8s_vs_v11s",
+  "dataset": "ReDraw original, 13 classes (remapped)",
+  "results": {
+    "yolov8s": {
+      "model": "YOLOv8s",
+      "epoch": 60,
+      "mAP50": 0.43959,
+      "mAP50_95": 0.34285,
+      "precision": 0.51521,
+      "recall": 0.43513,
+      "f1": 0.4717960457606793
+    },
+    "yolov11s": {
+      "model": "YOLOv11s",
+      "epoch": 59,
+      "mAP50": 0.4264,
+      "mAP50_95": 0.3244,
+      "precision": 0.50122,
+      "recall": 0.42477,
+      "f1": 0.459839132539402
+    }
+  },
+  "conclusion": {
+    "selected_model": "YOLOv8s",
+    "better_mAP50": "YOLOv8s",
+    "better_recall": "YOLOv8s",
+    "better_f1": "YOLOv8s"
+  }
+}

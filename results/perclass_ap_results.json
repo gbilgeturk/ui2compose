@@ -1,0 +1,152 @@
+{
+  "imgsz_320": {
+    "name": "imgsz_320",
+    "imgsz": 320,
+    "overall": {
+      "mAP50": 0.36917394839972945,
+      "mAP50_95": 0.27501397134291866,
+      "precision": 0.49437191346893267,
+      "recall": 0.35992979762786914
+    },
+    "per_class_ap50": {
+      "Button": 0.60249,
+      "CheckBox": 0.26026,
+      "EditText": 0.58232,
+      "ImageView": 0.52601,
+      "ListView": 0.61803,
+      "ProgressBar": 0.07051,
+      "RadioButton": 0.0836,
+      "RecyclerView": 0.51736,
+      "SeekBar": 0.13155,
+      "Spinner": 0.31693,
+      "Switch": 0.16658,
+      "TextView": 0.51705,
+      "WebView": 0.40657
+    }
+  },
+  "imgsz_416": {
+    "name": "imgsz_416",
+    "imgsz": 416,
+    "overall": {
+      "mAP50": 0.38178797155885713,
+      "mAP50_95": 0.2924962772174202,
+      "precision": 0.4818655094157501,
+      "recall": 0.36335873391508333
+    },
+    "per_class_ap50": {
+      "Button": 0.62366,
+      "CheckBox": 0.35113,
+      "EditText": 0.68333,
+      "ImageView": 0.51237,
+      "ListView": 0.6181,
+      "ProgressBar": 0.06058,
+      "RadioButton": 0.11064,
+      "RecyclerView": 0.47105,
+      "SeekBar": 0.11787,
+      "Spinner": 0.32033,
+      "Switch": 0.16895,
+      "TextView": 0.54475,
+      "WebView": 0.3805
+    }
+  },
+  "imgsz_512": {
+    "name": "imgsz_512",
+    "imgsz": 512,
+    "overall": {
+      "mAP50": 0.4011016703215979,
+      "mAP50_95": 0.3005598766438829,
+      "precision": 0.5025008150178896,
+      "recall": 0.39458591741873117
+    },
+    "per_class_ap50": {
+      "Button": 0.62906,
+      "CheckBox": 0.31736,
+      "EditText": 0.68945,
+      "ImageView": 0.53328,
+      "ListView": 0.62801,
+      "ProgressBar": 0.05351,
+      "RadioButton": 0.1428,
+      "RecyclerView": 0.4833,
+      "SeekBar": 0.24362,
+      "Spinner": 0.34256,
+      "Switch": 0.22353,
+      "TextView": 0.57247,
+      "WebView": 0.35536
+    }
+  },
+  "imgsz_640": {
+    "name": "imgsz_640",
+    "imgsz": 640,
+    "overall": {
+      "mAP50": 0.4388793165485946,
+      "mAP50_95": 0.34354025950637546,
+      "precision": 0.5490982955440689,
+      "recall": 0.4170541651994467
+    },
+    "per_class_ap50": {
+      "Button": 0.63165,
+      "CheckBox": 0.43351,
+      "EditText": 0.71463,
+      "ImageView": 0.5436,
+      "ListView": 0.6319,
+      "ProgressBar": 0.08215,
+      "RadioButton": 0.2651,
+      "RecyclerView": 0.5015,
+      "SeekBar": 0.23127,
+      "Spinner": 0.37378,
+      "Switch": 0.33544,
+      "TextView": 0.58975,
+      "WebView": 0.37114
+    }
+  },
+  "oversample_2k": {
+    "name": "oversample_2k",
+    "imgsz": 640,
+    "overall": {
+      "mAP50": 0.4564918739544182,
+      "mAP50_95": 0.36212455022783613,
+      "precision": 0.5524790023383751,
+      "recall": 0.4353514506462715
+    },
+    "per_class_ap50": {
+      "Button": 0.63306,
+      "CheckBox": 0.42136,
+      "EditText": 0.70187,
+      "ImageView": 0.54972,
+      "ListView": 0.62918,
+      "ProgressBar": 0.08124,
+      "RadioButton": 0.27387,
+      "RecyclerView": 0.47545,
+      "SeekBar": 0.37614,
+      "Spinner": 0.44302,
+      "Switch": 0.37166,
+      "TextView": 0.59166,
+      "WebView": 0.38614
+    }
+  },
+  "oversample_5k": {
+    "name": "oversample_5k",
+    "imgsz": 640,
+    "overall": {
+      "mAP50": 0.48698785109111803,
+      "mAP50_95": 0.3910942144840931,
+      "precision": 0.5521360469332395,
+      "recall": 0.49898429107569087
+    },
+    "per_class_ap50": {
+      "Button": 0.62362,
+      "CheckBox": 0.50735,
+      "EditText": 0.7005,
+      "ImageView": 0.55698,
+      "ListView": 0.60188,
+      "ProgressBar": 0.1098,
+      "RadioButton": 0.40331,
+      "RecyclerView": 0.48155,
+      "SeekBar": 0.38301,
+      "Spinner": 0.48844,
+      "Switch": 0.51328,
+      "TextView": 0.58908,
+      "WebView": 0.37204
+    }
+  }
+}

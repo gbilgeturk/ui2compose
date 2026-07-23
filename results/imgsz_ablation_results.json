@@ -1,0 +1,48 @@
+{
+  "experiment": "image_size_ablation",
+  "model": "YOLOv8s",
+  "dataset": "ReDraw original, 13 classes (remapped)",
+  "results": {
+    "320": {
+      "model": "YOLOv8s",
+      "imgsz": 320,
+      "epoch": 57,
+      "mAP50": 0.39601,
+      "mAP50_95": 0.29284,
+      "precision": 0.50658,
+      "recall": 0.38509,
+      "f1": 0.4375584958139688
+    },
+    "416": {
+      "model": "YOLOv8s",
+      "imgsz": 416,
+      "epoch": 57,
+      "mAP50": 0.40288,
+      "mAP50_95": 0.30544,
+      "precision": 0.51526,
+      "recall": 0.39458,
+      "f1": 0.4469165800064665
+    },
+    "512": {
+      "model": "YOLOv8s",
+      "imgsz": 512,
+      "epoch": 58,
+      "mAP50": 0.42757,
+      "mAP50_95": 0.32432,
+      "precision": 0.56072,
+      "recall": 0.38027,
+      "f1": 0.45319290146208474
+    },
+    "640": {
+      "model": "YOLOv8s",
+      "imgsz": 640,
+      "epoch": 60,
+      "mAP50": 0.43959,
+      "mAP50_95": 0.34285,
+      "precision": 0.51521,
+      "recall": 0.43513,
+      "f1": 0.4717960457606793
+    }
+  },
+  "best_imgsz": 640
+}

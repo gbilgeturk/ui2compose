@@ -1,0 +1,40 @@
+{
+  "experiment": "oversampling_ablation",
+  "model": "YOLOv8s",
+  "imgsz": 640,
+  "dataset": "ReDraw, 13 classes (remapped)",
+  "results": {
+    "baseline (no OS)": {
+      "model": "YOLOv8s",
+      "epoch": 60,
+      "mAP50": 0.43959,
+      "mAP50_95": 0.34285,
+      "precision": 0.51521,
+      "recall": 0.43513,
+      "f1": 0.4717960457606793
+    },
+    "oversample_2k": {
+      "model": "YOLOv8s",
+      "experiment": "oversample",
+      "target_min": 2000,
+      "epoch": 52,
+      "mAP50": 0.50265,
+      "mAP50_95": 0.39538,
+      "precision": 0.60932,
+      "recall": 0.46103,
+      "f1": 0.5249026941421939
+    },
+    "oversample_5k": {
+      "model": "YOLOv8s",
+      "experiment": "oversample",
+      "target_min": 5000,
+      "epoch": 60,
+      "mAP50": 0.51823,
+      "mAP50_95": 0.40173,
+      "precision": 0.62359,
+      "recall": 0.47431,
+      "f1": 0.5388012981703239
+    }
+  },
+  "best_config": "oversample_5k"
+}

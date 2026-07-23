@@ -1,0 +1,11 @@
+{
+  "model": "YOLOv8s",
+  "experiment": "oversample",
+  "target_min": 2000,
+  "epoch": 52,
+  "mAP50": 0.50265,
+  "mAP50_95": 0.39538,
+  "precision": 0.60932,
+  "recall": 0.46103,
+  "f1": 0.5249026941421939
+}
