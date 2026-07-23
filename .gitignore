@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Pipeline outputs
+output/
+
+# Dataset (prepared locally from ReDraw — not redistributed)
+data/
+
+# Experiment artifacts (keep only the released model weights)
+runs/*
+!runs/oversample_5k/
+runs/oversample_5k/*
+!runs/oversample_5k/weights/
+runs/oversample_5k/weights/*
+!runs/oversample_5k/weights/best.pt

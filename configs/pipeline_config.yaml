@@ -1,0 +1,31 @@
+# pipeline_config.yaml
+# =====================
+# Pipeline konfigürasyon dosyası
+# Bu dosyayı düzenleyerek pipeline ayarlarını değiştirebilirsiniz
+
+# INPUT AYARLARI
+input:
+  image: "examples/sign_in.png"
+  model: "runs/oversample_5k/weights/best.pt"
+  dataset_yaml: "configs/dataset.yaml"
+
+# OUTPUT AYARLARI
+output:
+  directory: "output"
+
+# DETECTION AYARLARI
+detection:
+  confidence_threshold: 0.3  # Pipeline/demo inference threshold
+  iou_threshold: 0.5         # NMS IoU threshold
+  imgsz: 640                 # Input resolution (egitimle ayni)
+
+# FEATURE FLAGS
+features:
+  visualization: true      # Görsel çıktı üret
+
+# NOTLAR:
+# - model: oversample_5k en iyi sonucu veren model (mAP@50=%51.82)
+# - confidence_threshold: Pipeline icin 0.3 kullanilir (pratik kullanim, az false positive)
+#   Evaluation scriptleri 0.15 kullanir (precision-recall egrisi hesaplama icin standart)
+# - imgsz: Egitimde 640 kullanildi, inference'da da ayni olmali
+# - visualization: false yaparsanız daha hızlı çalışır (görsel üretmez)

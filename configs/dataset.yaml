@@ -1,0 +1,22 @@
+# YOLO dataset configuration
+# `path` is relative to the repository root. Point it at your prepared
+# ReDraw-derived dataset (see README, "Preparing the dataset").
+path: data/yolo
+train: images/train
+val: images/val
+test: images/test
+nc: 13
+names:
+  - Button
+  - CheckBox
+  - EditText
+  - ImageView
+  - ListView
+  - ProgressBar
+  - RadioButton
+  - RecyclerView
+  - SeekBar
+  - Spinner
+  - Switch
+  - TextView
+  - WebView
