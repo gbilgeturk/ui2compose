@@ -26,7 +26,7 @@ so inference works out of the box — no training required.
 Requires Python ≥ 3.10.
 
 ```bash
-git clone https://github.com/GITHUB_USERNAME/ui2compose.git
+git clone https://github.com/gbilgeturk/ui2compose.git
 cd ui2compose
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt

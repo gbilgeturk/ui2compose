@@ -19,4 +19,4 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/GITHUB_USERNAME/ui2compose"
+Repository = "https://github.com/gbilgeturk/ui2compose"
