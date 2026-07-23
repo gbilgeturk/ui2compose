@@ -56,6 +56,12 @@ python src/infer/pipeline_end_to_end.py path/to/screenshot.png \
     --output output
 ```
 
+### Example output
+
+Detection stage on the bundled `examples/sign_in.png` (class label + confidence per component):
+
+<img src="docs/example_detections.png" alt="Detected UI components on the Sign In example screen" width="360">
+
 ## Interactive demo (Streamlit)
 
 ```bash
