@@ -33,7 +33,7 @@ print(f"\n📋 Loading config file: {CONFIG_PATH.relative_to(project_root)}")
 # Default values (if the config file does not exist)
 DEFAULT_CONFIG = {
     'input': {
-        'image': 'examples/sign_in.png',
+        'image': 'examples/com.shazam.android-screens_screenshot_3.png',
         'model': 'runs/oversample_5k/weights/best.pt',
         'dataset_yaml': 'configs/dataset.yaml'
     },

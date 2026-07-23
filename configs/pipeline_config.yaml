@@ -5,7 +5,7 @@
 
 # INPUT SETTINGS
 input:
-  image: "examples/sign_in.png"
+  image: "examples/com.shazam.android-screens_screenshot_3.png"
   model: "runs/oversample_5k/weights/best.pt"
   dataset_yaml: "configs/dataset.yaml"
 

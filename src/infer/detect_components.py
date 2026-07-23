@@ -128,7 +128,7 @@ def main():
     # Paths (ADJUST THESE!)
     model_path = "runs/oversample_5k/weights/best.pt"
     dataset_yaml = "configs/dataset.yaml"
-    test_image = "examples/sign_in.png"
+    test_image = "examples/com.shazam.android-screens_screenshot_3.png"
 
     # Initialize detector
     detector = ComponentDetector(model_path, dataset_yaml)

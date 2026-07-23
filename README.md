@@ -58,9 +58,14 @@ python src/infer/pipeline_end_to_end.py path/to/screenshot.png \
 
 ### Example output
 
-Detection stage on the bundled `examples/sign_in.png` (class label + confidence per component):
+Detection stage on one of the bundled example screens (class label + confidence per component):
 
-<img src="docs/example_detections.png" alt="Detected UI components on the Sign In example screen" width="360">
+<img src="docs/example_detections.png" alt="Detected UI components on an example screen" width="360">
+
+The screenshots in `examples/` are taken from the test split of the
+[ReDraw dataset](http://sagelab.io/ReDraw/) (Moran et al., *IEEE TSE* 2020) and are
+included solely as illustrative inputs for research purposes; all app screens remain
+the property of their respective owners.
 
 ## Interactive demo (Streamlit)
 
@@ -74,8 +79,9 @@ the UI graph, and copy the generated Compose code.
 ## Preparing the dataset (optional — for training/evaluation)
 
 The detector was trained on the [ReDraw dataset](http://sagelab.io/ReDraw/)
-(Moran et al., *IEEE TSE* 2020). ReDraw is **not redistributed** in this repository;
-download it from its authors, then:
+(Moran et al., *IEEE TSE* 2020). The dataset itself is **not redistributed** in this
+repository (only the ten illustrative screenshots under `examples/`); download it
+from its authors, then:
 
 ```bash
 # 1. Convert ReDraw hierarchies + screenshots to YOLO bounding-box labels
