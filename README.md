@@ -109,7 +109,7 @@ The repository ships only the final model (`runs/oversample_5k/weights/best.pt`)
 weights of **all eight experiments** reported in the accompanying thesis — the
 YOLOv8s/YOLOv11s model comparison, the input-resolution ablation (320–640 px), and the
 oversampling ablation (2k/5k) — are published as assets of the
-[v1.0.0 GitHub release](https://github.com/gbilgeturk/ui2compose/releases/tag/v1.0.0).
+[v1.0.1 GitHub release](https://github.com/gbilgeturk/ui2compose/releases/tag/v1.0.1).
 
 To evaluate any of them, download the weight file and place it in the layout the tools
 expect, e.g.:

@@ -1,6 +1,6 @@
 [project]
 name = "ui2compose"
-version = "1.0.0"
+version = "1.0.1"
 description = "Automatic generation of Jetpack Compose UI code from Android screen designs using YOLO-based component detection"
 readme = "README.md"
 license = { file = "LICENSE" }
