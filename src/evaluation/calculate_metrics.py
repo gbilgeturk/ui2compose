@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2026 Murat Saran <saran@cankaya.edu.tr>
+# SPDX-FileCopyrightText: 2026 Göktürk Bilgetürk <gbilgeturk@yahoo.com>
+#
+# SPDX-License-Identifier: MIT
+
 from ultralytics import YOLO
 from pathlib import Path
 import numpy as np
