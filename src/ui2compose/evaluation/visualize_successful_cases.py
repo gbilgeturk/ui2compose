@@ -11,23 +11,6 @@ import json
 from collections import Counter
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-import os
-import sys
-
-# Get the directory containing this script
-SCRIPT_DIR = Path(__file__).parent.absolute()
-
-# If inside src/evaluation/, go two levels up (to the project root)
-if SCRIPT_DIR.name == 'evaluation':
-    PROJECT_ROOT = SCRIPT_DIR.parent.parent
-else:
-    PROJECT_ROOT = SCRIPT_DIR
-
-# Add the project root to sys.path
-sys.path.insert(0, str(PROJECT_ROOT))
-
-# Set the working directory to the project root
-os.chdir(PROJECT_ROOT)
 
 
 class SuccessfulCaseVisualizer:
@@ -455,7 +438,8 @@ class SuccessfulCaseVisualizer:
         print("\n✅ Ready to add to the thesis!")
 
 
-if __name__ == '__main__':
+def main():
+    """Command-line entry point."""
     import argparse
 
     parser = argparse.ArgumentParser(description='Visualize successful detection cases')
@@ -469,3 +453,7 @@ if __name__ == '__main__':
 
     visualizer = SuccessfulCaseVisualizer(model_path=args.model)
     visualizer.run_full_analysis(output_dir=args.output)
+
+
+if __name__ == "__main__":
+    main()

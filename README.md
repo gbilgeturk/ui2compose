@@ -29,15 +29,19 @@ Requires Python ≥ 3.10.
 git clone https://github.com/gbilgeturk/ui2compose.git
 cd ui2compose
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+pip install -e .
 ```
+
+This installs the `ui2compose` package together with its command-line entry
+points. Use `pip install -r requirements.txt` instead if you only want the
+dependencies without installing the package.
 
 ## Quick start
 
 Run the end-to-end pipeline on a bundled example screenshot:
 
 ```bash
-python src/run/run_pipeline.py
+python app/run_pipeline.py
 ```
 
 This reads the settings in `configs/pipeline_config.yaml` (input image, model,
@@ -50,7 +54,7 @@ thresholds) and writes to `output/`:
 To run on your own screenshot:
 
 ```bash
-python src/infer/pipeline_end_to_end.py path/to/screenshot.png \
+ui2compose path/to/screenshot.png \
     --model runs/oversample_5k/weights/best.pt \
     --dataset-yaml configs/dataset.yaml \
     --output output
@@ -86,20 +90,20 @@ from its authors, then:
 
 ```bash
 # 1. Convert ReDraw hierarchies + screenshots to YOLO bounding-box labels
-python src/preprocess/parse_redraw.py \
+ui2compose-parse-redraw \
     --raw-root data/raw --out-root data/interim/labels \
     --dataset-yaml configs/dataset.yaml
 
 # 2. Build the train/val/test split (80/10/10)
-python src/preprocess/build_dataset.py \
+ui2compose-build-dataset \
     --labels-root data/interim/labels --images-root data/raw \
     --yolo-root data/yolo --clean --write-yaml --dataset-yaml configs/dataset.yaml
 
 # 3. (Optional) Oversample under-represented classes
-python src/preprocess/oversample_dataset.py
+ui2compose-oversample
 
 # 4. Evaluate a model on the test split
-python src/evaluation/calculate_metrics.py \
+ui2compose-evaluate \
     --model runs/oversample_5k/weights/best.pt
 ```
 
@@ -117,7 +121,7 @@ expect, e.g.:
 ```bash
 mkdir -p runs/yolov11s/weights
 mv ~/Downloads/model_comparison_yolov11s.pt runs/yolov11s/weights/best.pt
-python src/evaluation/calculate_metrics.py --model runs/yolov11s/weights/best.pt
+ui2compose-evaluate --model runs/yolov11s/weights/best.pt
 ```
 
 The Streamlit demo automatically lists every model found under `runs/*/weights/best.pt`,
@@ -129,13 +133,17 @@ numbers can be inspected without downloading any weights.
 
 ## Repository layout
 
+All implementation code lives under `src/ui2compose/`. The `app/` directory holds the
+two entry points you run directly; each is a thin wrapper over the package.
+
 | Path | Purpose |
 |---|---|
-| `src/preprocess/` | ReDraw → YOLO dataset conversion, split, oversampling |
-| `src/infer/` | Detection, UI-graph construction, Compose code generation |
-| `src/evaluation/` | mAP / per-class AP metrics, qualitative visualizations |
-| `src/run/run_pipeline.py` | Config-driven end-to-end runner |
-| `app/demo.py` | Streamlit demo UI |
+| `app/run_pipeline.py` | Entry point: config-driven end-to-end run |
+| `app/demo.py` | Entry point: starts the Streamlit demo |
+| `src/ui2compose/preprocess/` | ReDraw → YOLO dataset conversion, split, oversampling |
+| `src/ui2compose/infer/` | Detection, UI-graph construction, Compose code generation |
+| `src/ui2compose/evaluation/` | mAP / per-class AP metrics, qualitative visualizations |
+| `src/ui2compose/webapp/` | Streamlit user interface |
 | `configs/` | Dataset and pipeline configuration |
 | `runs/oversample_5k/weights/best.pt` | Released detector weights (YOLOv8s) |
 | `examples/` | Sample input screenshots |

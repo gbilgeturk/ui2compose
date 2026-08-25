@@ -7,30 +7,11 @@ import argparse
 from pathlib import Path
 import json
 import sys
-import os
 from collections import Counter
 
-# Add repository root to path so `src.*` imports work from anywhere
-current_dir = Path(__file__).parent
-repo_root = Path(__file__).resolve().parents[2]
-if str(repo_root) not in sys.path:
-    sys.path.insert(0, str(repo_root))
-
-# Import our modules with error handling
-try:
-    # Absolute imports - works from anywhere
-    from src.infer.detect_components import ComponentDetector
-    from src.infer.build_ui_graph import UIGraphBuilder
-    from src.infer.generate_compose_code import ComposeCodeGenerator
-except ImportError as e:
-    print(f"⚠️  Import error: {e}")
-    print(f"📂 Current directory: {os.getcwd()}")
-    print(f"📁 Looking in: {current_dir}")
-    print(f"\n💡 Make sure these files exist in {current_dir}:")
-    print(f"   • detect_components.py")
-    print(f"   • build_ui_graph.py")
-    print(f"   • generate_compose_code.py")
-    sys.exit(1)
+from ui2compose.infer.detect_components import ComponentDetector
+from ui2compose.infer.build_ui_graph import UIGraphBuilder
+from ui2compose.infer.generate_compose_code import ComposeCodeGenerator
 
 
 def print_detection_statistics(detections: list, title: str = "Detection Statistics"):

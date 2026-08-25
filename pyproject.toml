@@ -1,11 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "ui2compose"
-version = "1.0.2"
+version = "1.1.0"
 description = "Automatic generation of Jetpack Compose UI code from Android screen designs using YOLO-based component detection"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
     { name = "Göktürk Bilgetürk", email = "gbilgeturk@yahoo.com" },
+    { name = "Murat Saran", email = "saran@cankaya.edu.tr" },
 ]
 requires-python = ">=3.10"
 dependencies = [
@@ -20,3 +25,15 @@ dependencies = [
 
 [project.urls]
 Repository = "https://github.com/gbilgeturk/ui2compose"
+
+[project.scripts]
+ui2compose = "ui2compose.infer.pipeline:main"
+ui2compose-demo = "ui2compose.webapp:launch"
+ui2compose-parse-redraw = "ui2compose.preprocess.parse_redraw:main"
+ui2compose-build-dataset = "ui2compose.preprocess.build_dataset:main"
+ui2compose-oversample = "ui2compose.preprocess.oversample_dataset:main"
+ui2compose-evaluate = "ui2compose.evaluation.calculate_metrics:main"
+ui2compose-visualize = "ui2compose.evaluation.visualize_successful_cases:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -9,23 +9,6 @@ import numpy as np
 import json
 from collections import defaultdict
 import matplotlib.pyplot as plt
-import os
-import sys
-
-# Get the directory containing this script
-SCRIPT_DIR = Path(__file__).parent.absolute()
-
-# If inside src/evaluation/, go two levels up (to the project root)
-if SCRIPT_DIR.name == 'evaluation':
-    PROJECT_ROOT = SCRIPT_DIR.parent.parent
-else:
-    PROJECT_ROOT = SCRIPT_DIR
-
-# Add the project root to sys.path
-sys.path.insert(0, str(PROJECT_ROOT))
-
-# Set the working directory to the project root
-os.chdir(PROJECT_ROOT)
 
 
 class MetricsCalculator:
@@ -494,7 +477,8 @@ class MetricsCalculator:
         print("=" * 70)
 
 
-if __name__ == '__main__':
+def main():
+    """Command-line entry point."""
     import argparse
 
     parser = argparse.ArgumentParser(description='Calculate quantitative metrics')
@@ -510,3 +494,7 @@ if __name__ == '__main__':
 
     calculator = MetricsCalculator(model_path=args.model)
     calculator.run_full_evaluation(data_dir=args.data, output_dir=args.output)
+
+
+if __name__ == "__main__":
+    main()
