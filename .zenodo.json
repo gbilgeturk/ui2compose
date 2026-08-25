@@ -1,0 +1,25 @@
+{
+  "title": "ui2compose: An interpretable pipeline for generating Jetpack Compose code from Android UI screenshots",
+  "description": "ui2compose converts an Android UI screenshot into compilable Jetpack Compose code. A YOLOv8s detector fine-tuned on a rebalanced 13-class version of the ReDraw dataset localizes the interface components, a rule-based stage links them into a UI graph of containment and alignment relations, and a template-based generator rebuilds a nested Row/Column hierarchy by recursive projection and writes idiomatic Kotlin. Every decision after detection follows an explicit geometric rule, so a wrong grouping can be traced back to the coordinate comparison that produced it. The release includes the trained weights, a Streamlit demo, and the preprocessing and evaluation tooling.",
+  "upload_type": "software",
+  "license": "MIT",
+  "version": "1.1.0",
+  "creators": [
+    {
+      "name": "Bilgetürk, Göktürk",
+      "affiliation": "Department of Computer Engineering, Çankaya University, Ankara, Türkiye"
+    },
+    {
+      "name": "Saran, Murat",
+      "affiliation": "Department of Computer Engineering, Çankaya University, Ankara, Türkiye"
+    }
+  ],
+  "keywords": [
+    "UI-to-code generation",
+    "object detection",
+    "Jetpack Compose",
+    "YOLO",
+    "class imbalance",
+    "Android"
+  ]
+}
