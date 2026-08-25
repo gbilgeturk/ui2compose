@@ -104,8 +104,15 @@ ui2compose-oversample
 
 # 4. Evaluate a model on the test split
 ui2compose-evaluate \
-    --model runs/oversample_5k/weights/best.pt
+    --model runs/oversample_5k/weights/best.pt --data data/yolo
+
+# 5. (Optional) Render the qualitative case figures
+ui2compose-visualize \
+    --model runs/oversample_5k/weights/best.pt --data data/yolo
 ```
+
+Both evaluation commands default to `--data data/yolo`; point it elsewhere if your
+prepared dataset lives outside the repository.
 
 ## Reproducing the experiments
 

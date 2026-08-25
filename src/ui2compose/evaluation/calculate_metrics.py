@@ -417,6 +417,13 @@ class MetricsCalculator:
         # Calculate metrics
         class_stats, n_images = self.calculate_metrics_for_dataset(data_dir)
 
+        if not n_images:
+            raise SystemExit(
+                f"❌ No test images found under {Path(data_dir) / 'images' / 'test'}.\n"
+                f"💡 Prepare the dataset first (see README, \"Preparing the dataset\"), "
+                f"or point --data at an existing YOLO dataset root."
+            )
+
         print(f"✅ Analyzed {n_images} test images\n")
 
         # Calculate precision, recall, F1

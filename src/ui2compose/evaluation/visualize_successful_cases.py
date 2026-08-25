@@ -14,13 +14,17 @@ import matplotlib.patches as patches
 
 
 class SuccessfulCaseVisualizer:
-    def __init__(self, model_path="runs/oversample_5k/weights/best.pt"):
+    def __init__(self, model_path="runs/oversample_5k/weights/best.pt",
+                 data_dir="data/yolo"):
         """Loads the YOLO model and defines the successful case list and color map.
 
         Input:  model_path — path to the trained YOLO weights file
-        Output: none (side effect of assigning self.model, self.successful_cases, and self.colors)
+                data_dir — root of the YOLO dataset holding images/test
+        Output: none (side effect of assigning self.model, self.test_dir,
+                self.successful_cases, and self.colors)
         """
         self.model = YOLO(model_path)
+        self.test_dir = Path(data_dir) / "images" / "test"
         print(f"✅ Model loaded: {model_path}")
 
         # Successful cases (manual selection)
@@ -45,12 +49,10 @@ class SuccessfulCaseVisualizer:
         """Finds the image matching the given name in the test folder.
 
         Input:  stem — image file name without extension
-        Output: .png/.jpg/.jpeg path under data/yolo/images/test; None if not found
+        Output: .png/.jpg/.jpeg path under the dataset's images/test; None if not found
         """
-        test_dir = Path("data/yolo/images/test")
-
         for ext in ['.png', '.jpg', '.jpeg']:
-            path = test_dir / f"{stem}{ext}"
+            path = self.test_dir / f"{stem}{ext}"
             if path.exists():
                 return path
 
@@ -392,6 +394,18 @@ class SuccessfulCaseVisualizer:
         output_path = Path(output_dir)
         output_path.mkdir(exist_ok=True)
 
+        missing = [c for c in self.successful_cases if self.find_test_image(c) is None]
+        if len(missing) == len(self.successful_cases):
+            raise SystemExit(
+                f"❌ None of the {len(self.successful_cases)} selected cases were found "
+                f"under {self.test_dir}.\n"
+                f"💡 Prepare the dataset first (see README, \"Preparing the dataset\"), "
+                f"or point --data at an existing YOLO dataset root."
+            )
+        if missing:
+            print(f"⚠️  {len(missing)} of {len(self.successful_cases)} cases not found "
+                  f"under {self.test_dir}; continuing with the rest.")
+
         all_metrics = []
 
         # 1. Detailed visualization for each case
@@ -446,12 +460,14 @@ def main():
     parser.add_argument('--model', type=str,
                         default='runs/oversample_5k/weights/best.pt',
                         help='Path to model weights')
+    parser.add_argument('--data', type=str, default='data/yolo',
+                        help='Path to YOLO dataset (its images/test is searched)')
     parser.add_argument('--output', type=str, default='thesis_figures',
                         help='Output directory for figures')
 
     args = parser.parse_args()
 
-    visualizer = SuccessfulCaseVisualizer(model_path=args.model)
+    visualizer = SuccessfulCaseVisualizer(model_path=args.model, data_dir=args.data)
     visualizer.run_full_analysis(output_dir=args.output)
 
 
