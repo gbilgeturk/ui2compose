@@ -165,14 +165,35 @@ input resolution, oversampling level) are part of the accompanying thesis work.
 
 ## Citation
 
-If you use this software in your research, please cite:
+If you use this software in your research, please cite the archived release:
 
 ```bibtex
-@mastersthesis{bilgeturk2026ui2compose,
+@software{bilgeturk2026ui2compose,
+  author    = {Bilget{\"u}rk, G{\"o}kt{\"u}rk and Saran, Murat},
+  title     = {ui2compose: An interpretable pipeline for generating Jetpack Compose
+               code from Android UI screenshots},
+  version   = {1.1.0},
+  publisher = {Zenodo},
+  year      = {2026},
+  doi       = {10.5281/zenodo.22096717},
+  url       = {https://doi.org/10.5281/zenodo.22096717},
+}
+```
+
+`10.5281/zenodo.22096717` is the version DOI of v1.1.0. To cite the software across
+all versions, use the concept DOI [`10.5281/zenodo.21705473`](https://doi.org/10.5281/zenodo.21705473),
+which always resolves to the latest release.
+
+The method, the dataset preparation and the full evaluation are described in the
+accompanying M.Sc. thesis:
+
+```bibtex
+@mastersthesis{bilgeturk2026thesis,
   author = {Bilget{\"u}rk, G{\"o}kt{\"u}rk},
-  title  = {Automatic Generation of Declarative UI Components from Design Mockups
-            Using Machine Learning Techniques},
+  title  = {Automatic Generation of Jetpack Compose Code from UI Screenshots Using
+            Deep Learning-Based Component Detection and Rule-Based Layout Analysis},
   school = {{\c{C}}ankaya University},
+  address = {Ankara, T{\"u}rkiye},
   year   = {2026},
 }
 ```
