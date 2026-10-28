@@ -29,7 +29,13 @@ checkpoint).
 | **`failure_taxonomy.{json,md}`** | cause of every edit on 50 random C4 test screens (seed 42), three traced cases |
 
 Per-screen records, prediction caches, the val layout run, sweep records and logs are in
-`$OUT` (outside the repository; here `data/eval_outputs_appsplit/`, about 0.5 GB).
+`$OUT` (outside the repository; here `data/eval_outputs_appsplit/`, about 0.5 GB). Two
+assets of the [v1.2.0 release](https://github.com/gbilgeturk/ui2compose/releases/tag/v1.2.0)
+hold them and the data: `ui2compose_v1.2.0_eval_outputs_appsplit.zip` (predictions, caches,
+per-screen layout, sweep and taxonomy records, without logs; SHA-256 72fde1fc…66b8cc) and
+`ui2compose_redraw_appsplit_v1.2.0_without_images.zip` (the data package without the 3,828
+val and test images, which are ReDraw screens identified by MD5 in its manifest, and without
+the weights, which are in `runs/`; SHA-256 e059f0f2…f89ef).
 
 ## Data and weights
 
