@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 
 class MetricsCalculator:
-    def __init__(self, model_path="runs/oversample_5k/weights/best.pt"):
+    def __init__(self, model_path="runs/oversample_5k_appsplit/weights/best.pt"):
         """Loads the YOLO model to be evaluated.
 
         Input:  model_path — path to the trained YOLO weights file
@@ -490,7 +490,7 @@ def main():
 
     parser = argparse.ArgumentParser(description='Calculate quantitative metrics')
     parser.add_argument('--model', type=str,
-                        default='runs/oversample_5k/weights/best.pt',
+                        default='runs/oversample_5k_appsplit/weights/best.pt',
                         help='Path to model weights')
     parser.add_argument('--data', type=str, default='data/yolo',
                         help='Path to YOLO dataset')

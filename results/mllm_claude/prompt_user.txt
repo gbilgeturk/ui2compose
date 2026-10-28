@@ -1,0 +1,11 @@
+Write a Jetpack Compose screen that reproduces the layout of this Android screenshot as closely as possible.
+
+Requirements:
+- A single Kotlin file without a package line.
+- One top-level function `@Composable fun GeneratedScreen()` with no parameters that draws the whole screen.
+- Use only androidx.compose.* APIs available in Compose BOM 2024.06.00 (Material3 1.2.1) with Kotlin 2.0.21. Do not use experimental APIs.
+- Do not use resources (no R.drawable or R.string). Use placeholder boxes for images.
+- Include all imports.
+- Reproduce the visible texts as string literals.
+
+Return only the Kotlin code in one ```kotlin block.

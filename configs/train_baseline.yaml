@@ -1,0 +1,97 @@
+# SPDX-FileCopyrightText: 2026 Murat Saran <saran@cankaya.edu.tr>
+# SPDX-FileCopyrightText: 2026 Göktürk Bilgetürk <gbilgeturk@yahoo.com>
+#
+# SPDX-License-Identifier: MIT
+#
+# Training configuration of the no-oversampling baseline (ablation).
+# Usage:  ui2compose-train --config configs/train_baseline.yaml   (see src/ui2compose/train.py)
+#
+# The `train:` section is identical to configs/train_oversample_5k.yaml. The
+# thesis (Sect. 3.2.4) states that the baseline, 2k and 5k runs used identical
+# hyperparameters. KNOWN LIMITATION: this repository archives only the 5k
+# run's train_args (results/train_args_oversample_5k.json); the ablation
+# checkpoints, which store their own train_args, are assets of the v1.0.2
+# GitHub release and were not compared with this file. Results were produced
+# with ultralytics==8.4.24.
+
+ultralytics_version: "8.4.24"
+
+# Initial weights: yolov8s.pt, YOLOv8s pre-trained on COCO (Ultralytics release
+# asset). KNOWN LIMITATION: the released checkpoint does not record its
+# initial weights. Its train_args say model=/content/last_os5k.pt (and
+# resume=/content/last_os5k.pt) because the run was resumed from its own
+# last.pt, and pretrained=True; that the run originally started from
+# yolov8s.pt is an assumption of this configuration, not a verified fact.
+model: yolov8s.pt
+
+# Dataset: the screenshot-level split without oversampling (build_dataset.py,
+# --split-by screenshot), i.e. configs/dataset.yaml -> data/yolo.
+data: configs/dataset.yaml
+
+project: runs
+name: baseline
+
+train:
+  # schedule / data loading
+  epochs: 60
+  patience: 20          # early stopping patience (epochs without fitness improvement)
+  batch: 8
+  nbs: 64               # nominal batch size: gradients accumulated over 64/8 = 8 batches
+  imgsz: 640
+  rect: true            # rectangular batches; Ultralytics then disables train-loader shuffling
+  cache: true           # cache decoded images in RAM
+  workers: 2            # data-loader workers (Colab); worker seeding can affect augmentation draws
+  fraction: 1.0
+  single_cls: false
+  multi_scale: 0.0
+  compile: false
+  freeze: null
+  dropout: 0.0
+  # optimiser (AdamW: momentum is used as beta1)
+  optimizer: AdamW
+  lr0: 0.008
+  lrf: 0.01             # final lr = lr0 * lrf (linear schedule, cos_lr false)
+  cos_lr: false
+  momentum: 0.937
+  weight_decay: 0.0005
+  warmup_epochs: 3.0
+  warmup_momentum: 0.8
+  warmup_bias_lr: 0.1
+  # loss gains (Ultralytics defaults)
+  box: 7.5
+  cls: 0.5
+  dfl: 1.5
+  # augmentation
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+  degrees: 0.0
+  translate: 0.1
+  scale: 0.5
+  shear: 0.0
+  perspective: 0.0
+  flipud: 0.0
+  fliplr: 0.5
+  bgr: 0.0
+  mosaic: 0.0
+  close_mosaic: 10      # no effect while mosaic is 0
+  mixup: 0.0
+  cutmix: 0.0
+  copy_paste: 0.0
+  # reproducibility
+  seed: 42
+  deterministic: true
+  amp: true
+  pretrained: true
+  # validation during training
+  val: true
+  split: val
+  iou: 0.7
+  max_det: 300
+  conf: null
+  # outputs
+  save: true
+  save_period: -1
+  plots: true
+  exist_ok: true
+  verbose: true

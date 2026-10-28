@@ -1,0 +1,1905 @@
+{
+  "meta": {
+    "tool": "ui2compose.evaluation.failure_taxonomy",
+    "ui2compose_version": "1.2.0",
+    "created_utc": "2026-10-27 12:05:44",
+    "data_dir": "../ui2compose-v1.2.0-eval-outputs-appsplit/pkg_view",
+    "split": "test",
+    "pred_cache": "../ui2compose-v1.2.0-eval-outputs-appsplit/pred_cache/test",
+    "prediction_meta": {
+      "file": "../ui2compose-v1.2.0-eval-outputs-appsplit/pred_cache/meta_test.json",
+      "weights": "runs/oversample_5k_appsplit/weights/best.pt",
+      "weights_md5": "4d5763e8a4887215f828a3a92cba2b3c",
+      "settings": {
+        "conf_threshold": 0.3,
+        "iou_threshold": 0.7,
+        "imgsz": null,
+        "agnostic_nms": false,
+        "max_det": 300,
+        "imgsz_effective": 640,
+        "device": "cpu"
+      },
+      "ultralytics_version": "8.4.24"
+    },
+    "condition": "C4",
+    "variant": "o",
+    "params": {
+      "dedup": {
+        "same_class_iou": 0.4,
+        "same_class_iomin": 0.85,
+        "cross_class_iou": 0.5
+      },
+      "containment_ratio": 0.9,
+      "cut_tol_frac": 0.0,
+      "fallback": "y_sorted",
+      "match_iou": 0.5
+    },
+    "sample": {
+      "n": 50,
+      "seed": 42,
+      "method": "numpy default_rng(seed).choice over the sorted stems of the split, without replacement",
+      "n_split": 1900,
+      "stems": [
+        "com.goodbarber.explore419-screens_screenshot_1",
+        "com.jrustonapps.mymoonphase-screens_screenshot_1",
+        "com.hssn.anatomyfree-screens_screenshot_4",
+        "com.app.nl3-screens_screenshot_3",
+        "com.royalapp.loveframes-screens_screenshot_5",
+        "ru.zdevs.zarchiver-screens_screenshot_1",
+        "com.navyfederal.android-screens_screenshot_3",
+        "com.pdr.mobilepdr-screens_screenshot_1",
+        "com.disney.datg.videoplatforms.android.abcf-screens_screenshot_4",
+        "com.humana.myhumana-screens_screenshot_1",
+        "com.fitonomy.health.fitness-screens_screenshot_4",
+        "com.outback.tampa-screens_screenshot_5",
+        "com.hallowenmakeup.easy-screens_screenshot_1",
+        "com.allintheloop.realtor-screens_screenshot_3",
+        "com.rmsgamesforkids.xylophone-screens_screenshot_1",
+        "com.kitchenremodel.sninofox99-screens_screenshot_1",
+        "com.jetradar-screens_screenshot_5",
+        "com.pululustudio.myweatherreporter-screens_screenshot_6",
+        "com.cnn.mobile.android.phone-screens_screenshot_3",
+        "com.spruz.country_singles-screens_screenshot_3",
+        "com.lockandroi.lockscreen.photo.lovekeypad-screens_screenshot_5",
+        "com.siri.budgetdemo-screens_screenshot_2",
+        "com.charlieaffs.lotto-screens_screenshot_2",
+        "com.paktech.password.account.hacker.prank.free-screens_screenshot_1",
+        "com.xyware.scanner-screens_screenshot_1",
+        "horhomun.oliviadrive-screens_screenshot_2",
+        "com.hbo.hbonow-screens_screenshot_2",
+        "com.app.tastycookingrecipes-screens_screenshot_4",
+        "com.tv.remote.controle.tv-screens_screenshot_1",
+        "name.supreeth.android.spoticon-screens_screenshot_1",
+        "com.mylottos.mmpbfree-screens_screenshot_3",
+        "com.nbcuni.nbcots.nbcwashington.android-screens_screenshot_1",
+        "com.picyap.ringtones.wallpapers-screens_screenshot_5",
+        "com.hungerrush.hungryhowies-screens_screenshot_2",
+        "proffesionals.dog.whistle.cat.repelent-screens_screenshot_3",
+        "com.peoplelooker-screens_screenshot_3",
+        "com.alesig.wmb-screens_screenshot_3",
+        "com.powerapps2.picscollage-screens_screenshot_2",
+        "com.hrfy.plus-screens_screenshot_1",
+        "com.vgse.birthdayreminder-screens_screenshot_1",
+        "com.lioncomdev.trichat-screens_screenshot_1",
+        "com.cube.arc.fa-screens_screenshot_3",
+        "com.aonhewitt.ysa.reimburseme-screens_screenshot_1",
+        "com.rhmsoft.pulsar-screens_screenshot_6",
+        "com.pululustudio.myweatherreporter-screens_screenshot_5",
+        "com.clinical.quicklabreference-screens_screenshot_1",
+        "com.freelancer.android.messenger-screens_screenshot_3",
+        "com.axis.mobile.chapters.trans-screens_screenshot_3",
+        "com.appdlab.radarexpress-screens_screenshot_2",
+        "com.softbolt.redkaraoke-screens_screenshot_6"
+      ]
+    },
+    "thresholds": {
+      "window_min_inside": 0.5,
+      "pixel_std_max": 2.0,
+      "shared_min": 0.5,
+      "cover_area_ratio_max": 4.0,
+      "artifact_px": 1.0
+    },
+    "categories": {
+      "detector_fp": "detection without a ground-truth box (IoU < 0.5) inside the dumped window",
+      "detector_fn": "ground-truth box without a detection, not explained by the rules below",
+      "wrong_class": "box found, class differs from the label",
+      "dedup_removed": "box found by the detector but removed by de-duplication",
+      "containment": "composite nesting (Box / LazyColumn) differs from the reference",
+      "xycut_fallback": "no XY-cut existed; the fallback ordering grouped the boxes",
+      "tolerance_cut": "cut accepted only through the tolerance; its children overlap",
+      "reference_overlap": "reference node hidden or stacked (covered by a later sibling, open drawer, pixels shared with other labels, FrameLayout-style overlay)",
+      "reference_flat2d": "reference container lays out its children in 2D without nesting (RelativeLayout style); XY-cut nests them",
+      "reference_artifact": "the dump does not describe the pixels (detection outside the dumped window, uniform pixels, box beyond the screen, invisible container)",
+      "grouping": "residual: both trees hold the boxes, XY-cut groups them differently from the view hierarchy"
+    },
+    "families": {
+      "detector": [
+        "detector_fp",
+        "detector_fn",
+        "wrong_class"
+      ],
+      "layout_rules": [
+        "dedup_removed",
+        "containment",
+        "xycut_fallback",
+        "tolerance_cut",
+        "grouping"
+      ],
+      "reference": [
+        "reference_overlap",
+        "reference_flat2d",
+        "reference_artifact"
+      ]
+    },
+    "run_check": {
+      "run_dir": "../ui2compose-v1.2.0-eval-outputs-appsplit/layout_test",
+      "n_checked": 50,
+      "n_mismatch": 0,
+      "mismatches": []
+    }
+  },
+  "summary": {
+    "n_screens": 50,
+    "n_ok": 50,
+    "status": {
+      "ok": 50
+    },
+    "n_edits": 547,
+    "edits_per_screen": {
+      "n": 50,
+      "mean": 10.94,
+      "median": 7.0,
+      "q1": 2.25,
+      "q3": 14.75,
+      "min": 0.0,
+      "max": 66.0
+    },
+    "edits_per_category": {
+      "detector_fp": {
+        "n": 84,
+        "share": 0.15356489945155394
+      },
+      "detector_fn": {
+        "n": 183,
+        "share": 0.33455210237659966
+      },
+      "wrong_class": {
+        "n": 12,
+        "share": 0.021937842778793418
+      },
+      "dedup_removed": {
+        "n": 11,
+        "share": 0.02010968921389397
+      },
+      "containment": {
+        "n": 35,
+        "share": 0.06398537477148081
+      },
+      "xycut_fallback": {
+        "n": 58,
+        "share": 0.10603290676416818
+      },
+      "tolerance_cut": {
+        "n": 0,
+        "share": 0.0
+      },
+      "reference_overlap": {
+        "n": 11,
+        "share": 0.02010968921389397
+      },
+      "reference_flat2d": {
+        "n": 34,
+        "share": 0.062157221206581355
+      },
+      "reference_artifact": {
+        "n": 92,
+        "share": 0.16819012797074953
+      },
+      "grouping": {
+        "n": 27,
+        "share": 0.04936014625228519
+      }
+    },
+    "dominant": {
+      "detector_fp": 8,
+      "detector_fn": 18,
+      "wrong_class": 0,
+      "dedup_removed": 1,
+      "containment": 1,
+      "xycut_fallback": 8,
+      "tolerance_cut": 0,
+      "reference_overlap": 0,
+      "reference_flat2d": 2,
+      "reference_artifact": 9,
+      "grouping": 0,
+      "none": 3
+    },
+    "screens_with": {
+      "detector_fp": 20,
+      "detector_fn": 28,
+      "wrong_class": 10,
+      "dedup_removed": 6,
+      "containment": 11,
+      "xycut_fallback": 20,
+      "tolerance_cut": 0,
+      "reference_overlap": 5,
+      "reference_flat2d": 2,
+      "reference_artifact": 17,
+      "grouping": 12
+    },
+    "kind_by_category": {
+      "insert": {
+        "detector_fp": 1,
+        "detector_fn": 177,
+        "wrong_class": 0,
+        "dedup_removed": 9,
+        "containment": 21,
+        "xycut_fallback": 13,
+        "tolerance_cut": 0,
+        "reference_overlap": 8,
+        "reference_flat2d": 12,
+        "reference_artifact": 65,
+        "grouping": 15
+      },
+      "delete": {
+        "detector_fp": 64,
+        "detector_fn": 2,
+        "wrong_class": 0,
+        "dedup_removed": 1,
+        "containment": 10,
+        "xycut_fallback": 27,
+        "tolerance_cut": 0,
+        "reference_overlap": 0,
+        "reference_flat2d": 13,
+        "reference_artifact": 21,
+        "grouping": 8
+      },
+      "rename": {
+        "detector_fp": 19,
+        "detector_fn": 4,
+        "wrong_class": 12,
+        "dedup_removed": 1,
+        "containment": 4,
+        "xycut_fallback": 18,
+        "tolerance_cut": 0,
+        "reference_overlap": 3,
+        "reference_flat2d": 9,
+        "reference_artifact": 6,
+        "grouping": 4
+      }
+    },
+    "families": {
+      "detector": {
+        "n": 279,
+        "share": 0.5100548446069469,
+        "categories": [
+          "detector_fp",
+          "detector_fn",
+          "wrong_class"
+        ]
+      },
+      "layout_rules": {
+        "n": 131,
+        "share": 0.23948811700182815,
+        "categories": [
+          "dedup_removed",
+          "containment",
+          "xycut_fallback",
+          "tolerance_cut",
+          "grouping"
+        ]
+      },
+      "reference": {
+        "n": 137,
+        "share": 0.25045703839122485,
+        "categories": [
+          "reference_overlap",
+          "reference_flat2d",
+          "reference_artifact"
+        ]
+      }
+    },
+    "dominant_by_family": {
+      "detector": 26,
+      "layout_rules": 10,
+      "reference": 11
+    },
+    "detector_totals": {
+      "n_gt": 661,
+      "n_raw": 622,
+      "n_kept": 553,
+      "n_matched": 338,
+      "n_fp": 215,
+      "n_fn": 323,
+      "n_class_mismatch": 26,
+      "n_dedup_removed": 69,
+      "n_dedup_removed_matching_gt": 24,
+      "n_fallback": 54
+    }
+  },
+  "cases": [
+    {
+      "family": "detector",
+      "category": "detector_fp",
+      "stem": "com.hrfy.plus-screens_screenshot_1",
+      "share": 1.0,
+      "n_edits": 19,
+      "n_category": 19,
+      "teds": 0.3448275862068966,
+      "explain_id": 0,
+      "edit": {
+        "kind": "delete",
+        "category": "detector_fp",
+        "reason": "ListView#0 matches no ground-truth box",
+        "gen": "ListView#0 (composite) [345,463,849,1416]",
+        "ref": null,
+        "explain_id": 0
+      },
+      "pipeline_command": "ui2compose ../ui2compose-v1.2.0-eval-outputs-appsplit/pkg_view/dataset/images/test/com.hrfy.plus-screens_screenshot_1.png --model runs/oversample_5k_appsplit/weights/best.pt --output ../ui2compose-v1.2.0-eval-outputs-appsplit/failure_taxonomy_test/cases/com.hrfy.plus-screens_screenshot_1 --no-viz --explain 0",
+      "pipeline_returncode": 0,
+      "pipeline_dir": "../ui2compose-v1.2.0-eval-outputs-appsplit/failure_taxonomy_test/cases/com.hrfy.plus-screens_screenshot_1",
+      "explain_lines": [
+        "Explain trace for detection id 0",
+        "[detection] ListView conf=0.74 bbox=[345, 463, 849, 1416]",
+        "[post-processing] kept",
+        "[graph] containment:",
+        "  id 0 ListView conf=0.74 bbox=[345, 463, 849, 1416] area=480014; containment rule: coverage >= 0.9 and higher rank (area, then confidence, then lower id)",
+        "    contained in: none -> top-level node of the containment forest",
+        "    children: 1 ImageView, 2 TextView, 3 ImageView, 4 TextView, 5 ImageView, 6 TextView, 7 ImageView, 8 TextView, 9 ImageView, 10 TextView, 11 ImageView, 12 TextView, 13 ImageView, 14 TextView, 15 ImageView, 16 TextView, 17 ImageView, 18 TextView",
+        "[layout] path in the layout tree:",
+        "  LazyColumn (rule=list, container ListView#0 (conf 0.74) bbox [345.4,463.3,849.4,1415.6]; items split by gap along y, 8 cuts, tolerance 0 px) -> this detection is the list container itself"
+      ],
+      "key_line": "[detection] ListView conf=0.74 bbox=[345, 463, 849, 1416]",
+      "detections_identical_to_cache": true
+    },
+    {
+      "family": "layout_rules",
+      "category": "xycut_fallback",
+      "stem": "com.app.nl3-screens_screenshot_3",
+      "share": 1.0,
+      "n_edits": 1,
+      "n_category": 1,
+      "teds": 0.8571428571428572,
+      "explain_id": 0,
+      "edit": {
+        "kind": "delete",
+        "category": "xycut_fallback",
+        "reason": "container Column:fallback_y_sorted (no cut) holding 3 detections",
+        "gen": "Box(Column:fallback_y_sorted) [524,588,669,974]",
+        "ref": null,
+        "explain_id": 0
+      },
+      "pipeline_command": "ui2compose ../ui2compose-v1.2.0-eval-outputs-appsplit/pkg_view/dataset/images/test/com.app.nl3-screens_screenshot_3.png --model runs/oversample_5k_appsplit/weights/best.pt --output ../ui2compose-v1.2.0-eval-outputs-appsplit/failure_taxonomy_test/cases/com.app.nl3-screens_screenshot_3 --no-viz --explain 0",
+      "pipeline_returncode": 0,
+      "pipeline_dir": "../ui2compose-v1.2.0-eval-outputs-appsplit/failure_taxonomy_test/cases/com.app.nl3-screens_screenshot_3",
+      "explain_lines": [
+        "Explain trace for detection id 0",
+        "[detection] ImageView conf=0.35 bbox=[524, 588, 669, 731]",
+        "[post-processing] kept",
+        "[graph] containment:",
+        "  id 0 ImageView conf=0.35 bbox=[524, 588, 669, 731] area=20883; containment rule: coverage >= 0.9 and higher rank (area, then confidence, then lower id)",
+        "    contained in: none -> top-level node of the containment forest",
+        "[layout] path in the layout tree:",
+        "  Column (rule=gap, axis=y, 2 cuts, tolerance 0 px) -> group 1 of 3, before gap y in [973.8,975.2]",
+        "  Column (rule=fallback_y_sorted: no cut along y (tolerance 0 px) or x (tolerance 0 px); members ordered by y-centre) -> position 1 of 3",
+        "  leaf ImageView#0 (conf 0.35, bbox [523.7,588,669.5,731.2])"
+      ],
+      "key_line": "Column (rule=fallback_y_sorted: no cut along y (tolerance 0 px) or x (tolerance 0 px); members ordered by y-centre) -> position 1 of 3",
+      "detections_identical_to_cache": true
+    },
+    {
+      "family": "reference",
+      "category": "reference_artifact",
+      "stem": "name.supreeth.android.spoticon-screens_screenshot_1",
+      "share": 1.0,
+      "n_edits": 1,
+      "n_category": 1,
+      "teds": 0.75,
+      "explain_id": 2,
+      "edit": {
+        "kind": "delete",
+        "category": "reference_artifact",
+        "reason": "Button#2: 0% inside the dumped window [752, 50, 1176, 178]",
+        "gen": "Button#2 [386,1060,813,1155]",
+        "ref": null,
+        "explain_id": 2
+      },
+      "pipeline_command": "ui2compose ../ui2compose-v1.2.0-eval-outputs-appsplit/pkg_view/dataset/images/test/name.supreeth.android.spoticon-screens_screenshot_1.png --model runs/oversample_5k_appsplit/weights/best.pt --output ../ui2compose-v1.2.0-eval-outputs-appsplit/failure_taxonomy_test/cases/name.supreeth.android.spoticon-screens_screenshot_1 --no-viz --explain 2",
+      "pipeline_returncode": 0,
+      "pipeline_dir": "../ui2compose-v1.2.0-eval-outputs-appsplit/failure_taxonomy_test/cases/name.supreeth.android.spoticon-screens_screenshot_1",
+      "explain_lines": [
+        "Explain trace for detection id 2",
+        "[detection] Button conf=0.53 bbox=[386, 1060, 813, 1155]",
+        "[post-processing] kept",
+        "[graph] containment:",
+        "  id 2 Button conf=0.53 bbox=[386, 1060, 813, 1155] area=40782; containment rule: coverage >= 0.9 and higher rank (area, then confidence, then lower id)",
+        "    contained in: none -> top-level node of the containment forest",
+        "[layout] path in the layout tree:",
+        "  Column (rule=gap, axis=y, 1 cut, tolerance 0 px) -> group 2 of 2, after gap y in [161.3,1059.6]",
+        "  leaf Button#2 (conf 0.53, bbox [386.5,1059.6,812.8,1155.2])"
+      ],
+      "key_line": "[detection] Button conf=0.53 bbox=[386, 1060, 813, 1155]",
+      "detections_identical_to_cache": true
+    }
+  ],
+  "screens": [
+    {
+      "stem": "com.alesig.wmb-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 4,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 3,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 6,
+      "gen_nodes": 4,
+      "ted": 2,
+      "teds": 0.6666666666666667,
+      "ops": {
+        "insert": 2,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "reference_artifact": 2
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.allintheloop.realtor-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 16,
+      "n_raw": 5,
+      "n_kept": 5,
+      "n_matched": 0,
+      "n_fp": 5,
+      "n_fn": 16,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 24,
+      "gen_nodes": 7,
+      "ted": 19,
+      "teds": 0.20833333333333337,
+      "ops": {
+        "insert": 17,
+        "delete": 0,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fn": 12,
+        "reference_artifact": 7
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.631578947368421
+    },
+    {
+      "stem": "com.aonhewitt.ysa.reimburseme-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 3,
+      "n_raw": 4,
+      "n_kept": 4,
+      "n_matched": 3,
+      "n_fp": 1,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 5,
+      "gen_nodes": 7,
+      "ted": 2,
+      "teds": 0.7142857142857143,
+      "ops": {
+        "insert": 0,
+        "delete": 2,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fp": 1,
+        "grouping": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.5
+    },
+    {
+      "stem": "com.app.nl3-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 5,
+      "n_raw": 5,
+      "n_kept": 5,
+      "n_matched": 5,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 6,
+      "gen_nodes": 7,
+      "ted": 1,
+      "teds": 0.8571428571428572,
+      "ops": {
+        "insert": 0,
+        "delete": 1,
+        "rename": 0
+      },
+      "categories": {
+        "xycut_fallback": 1
+      },
+      "dominant": "xycut_fallback",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.app.tastycookingrecipes-screens_screenshot_4",
+      "status": "ok",
+      "n_gt": 2,
+      "n_raw": 1,
+      "n_kept": 1,
+      "n_matched": 1,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 3,
+      "gen_nodes": 2,
+      "ted": 1,
+      "teds": 0.6666666666666667,
+      "ops": {
+        "insert": 1,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.appdlab.radarexpress-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 2,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 2,
+      "n_fp": 1,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 3,
+      "gen_nodes": 5,
+      "ted": 2,
+      "teds": 0.6,
+      "ops": {
+        "insert": 0,
+        "delete": 2,
+        "rename": 0
+      },
+      "categories": {
+        "reference_artifact": 1,
+        "grouping": 1
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.5
+    },
+    {
+      "stem": "com.axis.mobile.chapters.trans-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 4,
+      "n_raw": 4,
+      "n_kept": 4,
+      "n_matched": 4,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 6,
+      "gen_nodes": 6,
+      "ted": 0,
+      "teds": 1.0,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {},
+      "dominant": "none",
+      "dominant_share": null
+    },
+    {
+      "stem": "com.charlieaffs.lotto-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 15,
+      "n_raw": 1,
+      "n_kept": 1,
+      "n_matched": 1,
+      "n_fp": 0,
+      "n_fn": 14,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 21,
+      "gen_nodes": 2,
+      "ted": 20,
+      "teds": 0.04761904761904767,
+      "ops": {
+        "insert": 19,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fn": 17,
+        "containment": 1,
+        "reference_artifact": 2
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.85
+    },
+    {
+      "stem": "com.clinical.quicklabreference-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 4,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 0,
+      "n_fp": 3,
+      "n_fn": 4,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 6,
+      "gen_nodes": 4,
+      "ted": 3,
+      "teds": 0.5,
+      "ops": {
+        "insert": 2,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 1,
+        "detector_fn": 2
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.6666666666666666
+    },
+    {
+      "stem": "com.cnn.mobile.android.phone-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 6,
+      "n_raw": 6,
+      "n_kept": 5,
+      "n_matched": 3,
+      "n_fp": 2,
+      "n_fn": 3,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 1,
+      "n_fallback": 0,
+      "ref_nodes": 10,
+      "gen_nodes": 7,
+      "ted": 4,
+      "teds": 0.6,
+      "ops": {
+        "insert": 3,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fn": 3,
+        "wrong_class": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.75
+    },
+    {
+      "stem": "com.cube.arc.fa-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 10,
+      "n_raw": 9,
+      "n_kept": 9,
+      "n_matched": 9,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 13,
+      "gen_nodes": 12,
+      "ted": 1,
+      "teds": 0.9230769230769231,
+      "ops": {
+        "insert": 1,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.disney.datg.videoplatforms.android.abcf-screens_screenshot_4",
+      "status": "ok",
+      "n_gt": 18,
+      "n_raw": 6,
+      "n_kept": 6,
+      "n_matched": 4,
+      "n_fp": 2,
+      "n_fn": 14,
+      "n_class_mismatch": 2,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 2,
+      "ref_nodes": 22,
+      "gen_nodes": 10,
+      "ted": 15,
+      "teds": 0.31818181818181823,
+      "ops": {
+        "insert": 12,
+        "delete": 0,
+        "rename": 3
+      },
+      "categories": {
+        "wrong_class": 1,
+        "xycut_fallback": 1,
+        "reference_artifact": 13
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.8666666666666667
+    },
+    {
+      "stem": "com.fitonomy.health.fitness-screens_screenshot_4",
+      "status": "ok",
+      "n_gt": 5,
+      "n_raw": 5,
+      "n_kept": 5,
+      "n_matched": 5,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 8,
+      "gen_nodes": 8,
+      "ted": 1,
+      "teds": 0.875,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "xycut_fallback": 1
+      },
+      "dominant": "xycut_fallback",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.freelancer.android.messenger-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 12,
+      "n_raw": 2,
+      "n_kept": 2,
+      "n_matched": 1,
+      "n_fp": 1,
+      "n_fn": 11,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 15,
+      "gen_nodes": 3,
+      "ted": 12,
+      "teds": 0.19999999999999996,
+      "ops": {
+        "insert": 12,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 5,
+        "reference_overlap": 5,
+        "reference_artifact": 2
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.4166666666666667
+    },
+    {
+      "stem": "com.goodbarber.explore419-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 12,
+      "n_raw": 7,
+      "n_kept": 6,
+      "n_matched": 6,
+      "n_fp": 0,
+      "n_fn": 6,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 17,
+      "gen_nodes": 8,
+      "ted": 13,
+      "teds": 0.23529411764705888,
+      "ops": {
+        "insert": 10,
+        "delete": 1,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fn": 9,
+        "containment": 2,
+        "reference_overlap": 2
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.6923076923076923
+    },
+    {
+      "stem": "com.hallowenmakeup.easy-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 18,
+      "n_raw": 20,
+      "n_kept": 20,
+      "n_matched": 17,
+      "n_fp": 3,
+      "n_fn": 1,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 25,
+      "gen_nodes": 28,
+      "ted": 12,
+      "teds": 0.5714285714285714,
+      "ops": {
+        "insert": 3,
+        "delete": 6,
+        "rename": 3
+      },
+      "categories": {
+        "detector_fp": 3,
+        "detector_fn": 1,
+        "wrong_class": 1,
+        "xycut_fallback": 1,
+        "reference_flat2d": 5,
+        "grouping": 1
+      },
+      "dominant": "reference_flat2d",
+      "dominant_share": 0.4166666666666667
+    },
+    {
+      "stem": "com.hbo.hbonow-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 7,
+      "n_raw": 0,
+      "n_kept": 0,
+      "n_matched": 0,
+      "n_fp": 0,
+      "n_fn": 7,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 11,
+      "gen_nodes": 1,
+      "ted": 10,
+      "teds": 0.09090909090909094,
+      "ops": {
+        "insert": 10,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 2,
+        "reference_artifact": 8
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.8
+    },
+    {
+      "stem": "com.hrfy.plus-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 9,
+      "n_raw": 19,
+      "n_kept": 19,
+      "n_matched": 4,
+      "n_fp": 15,
+      "n_fn": 5,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 10,
+      "gen_nodes": 29,
+      "ted": 19,
+      "teds": 0.3448275862068966,
+      "ops": {
+        "insert": 0,
+        "delete": 19,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fp": 19
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.hssn.anatomyfree-screens_screenshot_4",
+      "status": "ok",
+      "n_gt": 19,
+      "n_raw": 15,
+      "n_kept": 15,
+      "n_matched": 14,
+      "n_fp": 1,
+      "n_fn": 5,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 2,
+      "ref_nodes": 29,
+      "gen_nodes": 19,
+      "ted": 14,
+      "teds": 0.5172413793103448,
+      "ops": {
+        "insert": 11,
+        "delete": 1,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fp": 1,
+        "detector_fn": 10,
+        "xycut_fallback": 3
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.7142857142857143
+    },
+    {
+      "stem": "com.humana.myhumana-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 15,
+      "n_raw": 9,
+      "n_kept": 7,
+      "n_matched": 4,
+      "n_fp": 3,
+      "n_fn": 11,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 2,
+      "n_dedup_removed_matching_gt": 1,
+      "n_fallback": 0,
+      "ref_nodes": 19,
+      "gen_nodes": 8,
+      "ted": 12,
+      "teds": 0.368421052631579,
+      "ops": {
+        "insert": 11,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 1,
+        "detector_fn": 10,
+        "grouping": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.8333333333333334
+    },
+    {
+      "stem": "com.hungerrush.hungryhowies-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 4,
+      "n_raw": 4,
+      "n_kept": 4,
+      "n_matched": 4,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 2,
+      "ref_nodes": 5,
+      "gen_nodes": 5,
+      "ted": 3,
+      "teds": 0.4,
+      "ops": {
+        "insert": 1,
+        "delete": 1,
+        "rename": 1
+      },
+      "categories": {
+        "containment": 1,
+        "xycut_fallback": 2
+      },
+      "dominant": "xycut_fallback",
+      "dominant_share": 0.6666666666666666
+    },
+    {
+      "stem": "com.jetradar-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 18,
+      "n_raw": 20,
+      "n_kept": 18,
+      "n_matched": 11,
+      "n_fp": 7,
+      "n_fn": 7,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 2,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 2,
+      "ref_nodes": 29,
+      "gen_nodes": 24,
+      "ted": 11,
+      "teds": 0.6206896551724138,
+      "ops": {
+        "insert": 7,
+        "delete": 2,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fp": 2,
+        "detector_fn": 5,
+        "xycut_fallback": 4
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.45454545454545453
+    },
+    {
+      "stem": "com.jrustonapps.mymoonphase-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 6,
+      "n_raw": 8,
+      "n_kept": 7,
+      "n_matched": 4,
+      "n_fp": 3,
+      "n_fn": 2,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 9,
+      "gen_nodes": 10,
+      "ted": 3,
+      "teds": 0.7,
+      "ops": {
+        "insert": 0,
+        "delete": 1,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fp": 3
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.kitchenremodel.sninofox99-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 1,
+      "n_raw": 1,
+      "n_kept": 1,
+      "n_matched": 1,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 2,
+      "gen_nodes": 2,
+      "ted": 0,
+      "teds": 1.0,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {},
+      "dominant": "none",
+      "dominant_share": null
+    },
+    {
+      "stem": "com.lioncomdev.trichat-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 6,
+      "n_raw": 6,
+      "n_kept": 6,
+      "n_matched": 0,
+      "n_fp": 6,
+      "n_fn": 6,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 10,
+      "gen_nodes": 8,
+      "ted": 4,
+      "teds": 0.6,
+      "ops": {
+        "insert": 3,
+        "delete": 1,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 3,
+        "xycut_fallback": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.75
+    },
+    {
+      "stem": "com.lockandroi.lockscreen.photo.lovekeypad-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 6,
+      "n_raw": 6,
+      "n_kept": 6,
+      "n_matched": 4,
+      "n_fp": 2,
+      "n_fn": 2,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 9,
+      "gen_nodes": 9,
+      "ted": 4,
+      "teds": 0.5555555555555556,
+      "ops": {
+        "insert": 2,
+        "delete": 2,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 2,
+        "reference_artifact": 2
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.5
+    },
+    {
+      "stem": "com.mylottos.mmpbfree-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 66,
+      "n_raw": 86,
+      "n_kept": 71,
+      "n_matched": 36,
+      "n_fp": 35,
+      "n_fn": 30,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 15,
+      "n_dedup_removed_matching_gt": 5,
+      "n_fallback": 15,
+      "ref_nodes": 97,
+      "gen_nodes": 98,
+      "ted": 51,
+      "teds": 0.47959183673469385,
+      "ops": {
+        "insert": 22,
+        "delete": 23,
+        "rename": 6
+      },
+      "categories": {
+        "detector_fp": 11,
+        "detector_fn": 10,
+        "wrong_class": 1,
+        "dedup_removed": 1,
+        "containment": 11,
+        "xycut_fallback": 16,
+        "grouping": 1
+      },
+      "dominant": "xycut_fallback",
+      "dominant_share": 0.3137254901960784
+    },
+    {
+      "stem": "com.navyfederal.android-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 3,
+      "n_raw": 11,
+      "n_kept": 11,
+      "n_matched": 3,
+      "n_fp": 8,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 4,
+      "gen_nodes": 14,
+      "ted": 10,
+      "teds": 0.2857142857142857,
+      "ops": {
+        "insert": 0,
+        "delete": 10,
+        "rename": 0
+      },
+      "categories": {
+        "reference_artifact": 9,
+        "grouping": 1
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.9
+    },
+    {
+      "stem": "com.nbcuni.nbcots.nbcwashington.android-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 33,
+      "n_raw": 33,
+      "n_kept": 31,
+      "n_matched": 29,
+      "n_fp": 2,
+      "n_fn": 4,
+      "n_class_mismatch": 2,
+      "n_dedup_removed": 2,
+      "n_dedup_removed_matching_gt": 1,
+      "n_fallback": 1,
+      "ref_nodes": 52,
+      "gen_nodes": 43,
+      "ted": 32,
+      "teds": 0.3846153846153846,
+      "ops": {
+        "insert": 17,
+        "delete": 8,
+        "rename": 7
+      },
+      "categories": {
+        "detector_fn": 3,
+        "dedup_removed": 3,
+        "containment": 12,
+        "xycut_fallback": 1,
+        "reference_overlap": 2,
+        "grouping": 11
+      },
+      "dominant": "containment",
+      "dominant_share": 0.375
+    },
+    {
+      "stem": "com.outback.tampa-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 29,
+      "n_raw": 4,
+      "n_kept": 4,
+      "n_matched": 3,
+      "n_fp": 1,
+      "n_fn": 26,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 36,
+      "gen_nodes": 6,
+      "ted": 31,
+      "teds": 0.13888888888888884,
+      "ops": {
+        "insert": 30,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 1,
+        "detector_fn": 12,
+        "xycut_fallback": 1,
+        "reference_artifact": 17
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.5483870967741935
+    },
+    {
+      "stem": "com.paktech.password.account.hacker.prank.free-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 2,
+      "n_raw": 2,
+      "n_kept": 2,
+      "n_matched": 1,
+      "n_fp": 1,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 3,
+      "gen_nodes": 3,
+      "ted": 1,
+      "teds": 0.6666666666666667,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.pdr.mobilepdr-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 22,
+      "n_raw": 28,
+      "n_kept": 18,
+      "n_matched": 6,
+      "n_fp": 12,
+      "n_fn": 16,
+      "n_class_mismatch": 2,
+      "n_dedup_removed": 10,
+      "n_dedup_removed_matching_gt": 4,
+      "n_fallback": 0,
+      "ref_nodes": 35,
+      "gen_nodes": 20,
+      "ted": 17,
+      "teds": 0.5142857142857142,
+      "ops": {
+        "insert": 15,
+        "delete": 0,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fn": 12,
+        "wrong_class": 2,
+        "dedup_removed": 2,
+        "containment": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.7058823529411765
+    },
+    {
+      "stem": "com.peoplelooker-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 2,
+      "n_raw": 9,
+      "n_kept": 8,
+      "n_matched": 1,
+      "n_fp": 7,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 3,
+      "gen_nodes": 10,
+      "ted": 7,
+      "teds": 0.30000000000000004,
+      "ops": {
+        "insert": 0,
+        "delete": 7,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fp": 1,
+        "reference_artifact": 6
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.8571428571428571
+    },
+    {
+      "stem": "com.picyap.ringtones.wallpapers-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 43,
+      "n_raw": 51,
+      "n_kept": 43,
+      "n_matched": 25,
+      "n_fp": 18,
+      "n_fn": 18,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 8,
+      "n_dedup_removed_matching_gt": 6,
+      "n_fallback": 4,
+      "ref_nodes": 71,
+      "gen_nodes": 70,
+      "ted": 6,
+      "teds": 0.9154929577464789,
+      "ops": {
+        "insert": 1,
+        "delete": 0,
+        "rename": 5
+      },
+      "categories": {
+        "wrong_class": 1,
+        "xycut_fallback": 4,
+        "grouping": 1
+      },
+      "dominant": "xycut_fallback",
+      "dominant_share": 0.6666666666666666
+    },
+    {
+      "stem": "com.powerapps2.picscollage-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 3,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 3,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 5,
+      "gen_nodes": 5,
+      "ted": 1,
+      "teds": 0.8,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "xycut_fallback": 1
+      },
+      "dominant": "xycut_fallback",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.pululustudio.myweatherreporter-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 65,
+      "n_raw": 63,
+      "n_kept": 56,
+      "n_matched": 35,
+      "n_fp": 21,
+      "n_fn": 30,
+      "n_class_mismatch": 8,
+      "n_dedup_removed": 7,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 6,
+      "ref_nodes": 86,
+      "gen_nodes": 87,
+      "ted": 66,
+      "teds": 0.24137931034482762,
+      "ops": {
+        "insert": 24,
+        "delete": 25,
+        "rename": 17
+      },
+      "categories": {
+        "detector_fp": 16,
+        "detector_fn": 10,
+        "wrong_class": 1,
+        "containment": 3,
+        "xycut_fallback": 7,
+        "reference_flat2d": 29
+      },
+      "dominant": "reference_flat2d",
+      "dominant_share": 0.4393939393939394
+    },
+    {
+      "stem": "com.pululustudio.myweatherreporter-screens_screenshot_6",
+      "status": "ok",
+      "n_gt": 12,
+      "n_raw": 15,
+      "n_kept": 12,
+      "n_matched": 2,
+      "n_fp": 10,
+      "n_fn": 10,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 3,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 18,
+      "gen_nodes": 16,
+      "ted": 11,
+      "teds": 0.38888888888888884,
+      "ops": {
+        "insert": 6,
+        "delete": 4,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 5,
+        "detector_fn": 5,
+        "containment": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.45454545454545453
+    },
+    {
+      "stem": "com.rhmsoft.pulsar-screens_screenshot_6",
+      "status": "ok",
+      "n_gt": 6,
+      "n_raw": 7,
+      "n_kept": 6,
+      "n_matched": 3,
+      "n_fp": 3,
+      "n_fn": 3,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 1,
+      "n_fallback": 1,
+      "ref_nodes": 9,
+      "gen_nodes": 8,
+      "ted": 5,
+      "teds": 0.4444444444444444,
+      "ops": {
+        "insert": 3,
+        "delete": 2,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 1,
+        "dedup_removed": 2,
+        "xycut_fallback": 1,
+        "reference_artifact": 1
+      },
+      "dominant": "dedup_removed",
+      "dominant_share": 0.4
+    },
+    {
+      "stem": "com.rmsgamesforkids.xylophone-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 19,
+      "n_raw": 1,
+      "n_kept": 1,
+      "n_matched": 0,
+      "n_fp": 1,
+      "n_fn": 19,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 25,
+      "gen_nodes": 2,
+      "ted": 24,
+      "teds": 0.040000000000000036,
+      "ops": {
+        "insert": 23,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fn": 7,
+        "reference_overlap": 1,
+        "reference_artifact": 16
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.6666666666666666
+    },
+    {
+      "stem": "com.royalapp.loveframes-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 5,
+      "n_raw": 6,
+      "n_kept": 6,
+      "n_matched": 5,
+      "n_fp": 1,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 7,
+      "gen_nodes": 9,
+      "ted": 3,
+      "teds": 0.6666666666666667,
+      "ops": {
+        "insert": 0,
+        "delete": 2,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 1,
+        "containment": 1,
+        "grouping": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.3333333333333333
+    },
+    {
+      "stem": "com.siri.budgetdemo-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 22,
+      "n_raw": 22,
+      "n_kept": 21,
+      "n_matched": 21,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 4,
+      "ref_nodes": 30,
+      "gen_nodes": 32,
+      "ted": 8,
+      "teds": 0.75,
+      "ops": {
+        "insert": 3,
+        "delete": 5,
+        "rename": 0
+      },
+      "categories": {
+        "xycut_fallback": 4,
+        "reference_artifact": 1,
+        "grouping": 3
+      },
+      "dominant": "xycut_fallback",
+      "dominant_share": 0.5
+    },
+    {
+      "stem": "com.softbolt.redkaraoke-screens_screenshot_6",
+      "status": "ok",
+      "n_gt": 15,
+      "n_raw": 5,
+      "n_kept": 5,
+      "n_matched": 2,
+      "n_fp": 3,
+      "n_fn": 13,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 25,
+      "gen_nodes": 7,
+      "ted": 20,
+      "teds": 0.19999999999999996,
+      "ops": {
+        "insert": 19,
+        "delete": 1,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fp": 2,
+        "detector_fn": 17,
+        "reference_artifact": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.85
+    },
+    {
+      "stem": "com.spruz.country_singles-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 9,
+      "n_raw": 10,
+      "n_kept": 9,
+      "n_matched": 9,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 10,
+      "gen_nodes": 10,
+      "ted": 3,
+      "teds": 0.7,
+      "ops": {
+        "insert": 1,
+        "delete": 1,
+        "rename": 1
+      },
+      "categories": {
+        "containment": 1,
+        "xycut_fallback": 2
+      },
+      "dominant": "xycut_fallback",
+      "dominant_share": 0.6666666666666666
+    },
+    {
+      "stem": "com.tv.remote.controle.tv-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 19,
+      "n_raw": 30,
+      "n_kept": 28,
+      "n_matched": 18,
+      "n_fp": 10,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 2,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 3,
+      "ref_nodes": 20,
+      "gen_nodes": 32,
+      "ted": 15,
+      "teds": 0.53125,
+      "ops": {
+        "insert": 1,
+        "delete": 13,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 10,
+        "detector_fn": 1,
+        "xycut_fallback": 3,
+        "reference_overlap": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.6666666666666666
+    },
+    {
+      "stem": "com.vgse.birthdayreminder-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 4,
+      "n_raw": 7,
+      "n_kept": 6,
+      "n_matched": 4,
+      "n_fp": 2,
+      "n_fn": 0,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 7,
+      "gen_nodes": 7,
+      "ted": 5,
+      "teds": 0.2857142857142857,
+      "ops": {
+        "insert": 1,
+        "delete": 1,
+        "rename": 3
+      },
+      "categories": {
+        "detector_fp": 2,
+        "wrong_class": 1,
+        "xycut_fallback": 2
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.4
+    },
+    {
+      "stem": "com.xyware.scanner-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 8,
+      "n_raw": 7,
+      "n_kept": 6,
+      "n_matched": 1,
+      "n_fp": 5,
+      "n_fn": 7,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 11,
+      "gen_nodes": 8,
+      "ted": 7,
+      "teds": 0.36363636363636365,
+      "ops": {
+        "insert": 4,
+        "delete": 1,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fn": 4,
+        "reference_artifact": 3
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.5714285714285714
+    },
+    {
+      "stem": "horhomun.oliviadrive-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 21,
+      "n_raw": 20,
+      "n_kept": 14,
+      "n_matched": 3,
+      "n_fp": 11,
+      "n_fn": 18,
+      "n_class_mismatch": 2,
+      "n_dedup_removed": 6,
+      "n_dedup_removed_matching_gt": 3,
+      "n_fallback": 1,
+      "ref_nodes": 35,
+      "gen_nodes": 19,
+      "ted": 21,
+      "teds": 0.4,
+      "ops": {
+        "insert": 17,
+        "delete": 1,
+        "rename": 3
+      },
+      "categories": {
+        "detector_fp": 1,
+        "detector_fn": 15,
+        "wrong_class": 2,
+        "dedup_removed": 1,
+        "grouping": 2
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.7142857142857143
+    },
+    {
+      "stem": "name.supreeth.android.spoticon-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 2,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 2,
+      "n_fp": 1,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 3,
+      "gen_nodes": 4,
+      "ted": 1,
+      "teds": 0.75,
+      "ops": {
+        "insert": 0,
+        "delete": 1,
+        "rename": 0
+      },
+      "categories": {
+        "reference_artifact": 1
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "proffesionals.dog.whistle.cat.repelent-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 21,
+      "n_raw": 24,
+      "n_kept": 21,
+      "n_matched": 13,
+      "n_fp": 8,
+      "n_fn": 8,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 3,
+      "n_dedup_removed_matching_gt": 2,
+      "n_fallback": 2,
+      "ref_nodes": 35,
+      "gen_nodes": 30,
+      "ted": 14,
+      "teds": 0.6,
+      "ops": {
+        "insert": 7,
+        "delete": 2,
+        "rename": 5
+      },
+      "categories": {
+        "detector_fp": 2,
+        "detector_fn": 3,
+        "wrong_class": 1,
+        "dedup_removed": 2,
+        "containment": 1,
+        "xycut_fallback": 2,
+        "grouping": 3
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.21428571428571427
+    },
+    {
+      "stem": "ru.zdevs.zarchiver-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 3,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 3,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 4,
+      "gen_nodes": 4,
+      "ted": 0,
+      "teds": 1.0,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {},
+      "dominant": "none",
+      "dominant_share": null
+    }
+  ]
+}

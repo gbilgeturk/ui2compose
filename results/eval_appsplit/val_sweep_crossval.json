@@ -1,0 +1,51 @@
+{
+ "note": "post hoc (added after the review of the revision); nothing is re-selected",
+ "condition": "C4",
+ "objective": "teds_o",
+ "scheme": "package_md5",
+ "n_groups": 640,
+ "n_screens": 1928,
+ "repeats": 200,
+ "seed": 0,
+ "a_priori": "C4|dedup=a_priori|cr=0.95|tol=0.005|fb=y_sorted",
+ "shipped": "C4|dedup=looser|cr=0.9|tol=0|fb=y_sorted",
+ "whole_split": {
+  "selected": "C4|dedup=looser|cr=0.9|tol=0|fb=y_sorted",
+  "gain": 0.006592
+ },
+ "in_fold_gain": {
+  "n": 400,
+  "mean": 0.00643,
+  "median": 0.006456,
+  "q025": 0.003307,
+  "q975": 0.00962,
+  "share_positive": 1.0
+ },
+ "out_of_fold_gain": {
+  "n": 400,
+  "mean": 0.005827,
+  "median": 0.00587,
+  "q025": 0.002217,
+  "q975": 0.009359,
+  "share_positive": 0.9975
+ },
+ "optimism": 0.000603,
+ "n_skipped_halves": 0,
+ "selected_counts": {
+  "C4|dedup=looser|cr=0.9|tol=0|fb=y_sorted": 262,
+  "C4|dedup=a_priori|cr=0.9|tol=0|fb=y_sorted": 92,
+  "C4|dedup=looser|cr=0.95|tol=0|fb=y_sorted": 21,
+  "C4|dedup=looser|cr=0.9|tol=0|fb=least_overlap": 13,
+  "C4|dedup=a_priori|cr=0.95|tol=0|fb=y_sorted": 7,
+  "C4|dedup=looser|cr=0.95|tol=0|fb=least_overlap": 3,
+  "C4|dedup=looser|cr=0.9|tol=0.005|fb=y_sorted": 1,
+  "C4|dedup=looser|cr=0.9|tol=0.01|fb=y_sorted": 1
+ },
+ "shipped_selected_share": 0.655,
+ "grid_edges": {
+  "dedup": "last",
+  "containment_ratio": "last",
+  "cut_tol_frac": "first"
+ },
+ "eligibility": "every de-duplication setting eligible (each raised the detector F1 on the whole val split)"
+}

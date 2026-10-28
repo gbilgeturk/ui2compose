@@ -1,0 +1,19 @@
+path: .
+train: images/train
+val: images/val
+test: images/test
+nc: 13
+names:
+  - Button
+  - CheckBox
+  - EditText
+  - ImageView
+  - ListView
+  - ProgressBar
+  - RadioButton
+  - RecyclerView
+  - SeekBar
+  - Spinner
+  - Switch
+  - TextView
+  - WebView

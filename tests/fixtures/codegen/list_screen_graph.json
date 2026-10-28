@@ -1,0 +1,524 @@
+{
+  "image_size": [
+    1080,
+    1920
+  ],
+  "nodes": [
+    {
+      "id": 0,
+      "class_name": "TextView",
+      "confidence": 0.93,
+      "bbox": [
+        40,
+        40,
+        1040,
+        120
+      ]
+    },
+    {
+      "id": 1,
+      "class_name": "EditText",
+      "confidence": 0.88,
+      "bbox": [
+        40,
+        160,
+        1040,
+        280
+      ]
+    },
+    {
+      "id": 2,
+      "class_name": "Spinner",
+      "confidence": 0.71,
+      "bbox": [
+        40,
+        320,
+        520,
+        420
+      ]
+    },
+    {
+      "id": 3,
+      "class_name": "CheckBox",
+      "confidence": 0.66,
+      "bbox": [
+        600,
+        330,
+        680,
+        410
+      ]
+    },
+    {
+      "id": 4,
+      "class_name": "ListView",
+      "confidence": 0.9,
+      "bbox": [
+        20,
+        460,
+        1060,
+        1060
+      ]
+    },
+    {
+      "id": 5,
+      "class_name": "RadioButton",
+      "confidence": 0.8,
+      "bbox": [
+        40,
+        480,
+        120,
+        560
+      ]
+    },
+    {
+      "id": 6,
+      "class_name": "TextView",
+      "confidence": 0.85,
+      "bbox": [
+        140,
+        490,
+        700,
+        550
+      ]
+    },
+    {
+      "id": 7,
+      "class_name": "Switch",
+      "confidence": 0.77,
+      "bbox": [
+        900,
+        485,
+        1020,
+        555
+      ]
+    },
+    {
+      "id": 8,
+      "class_name": "RadioButton",
+      "confidence": 0.79,
+      "bbox": [
+        40,
+        680,
+        120,
+        760
+      ]
+    },
+    {
+      "id": 9,
+      "class_name": "TextView",
+      "confidence": 0.83,
+      "bbox": [
+        140,
+        690,
+        700,
+        750
+      ]
+    },
+    {
+      "id": 10,
+      "class_name": "Switch",
+      "confidence": 0.75,
+      "bbox": [
+        900,
+        685,
+        1020,
+        755
+      ]
+    },
+    {
+      "id": 11,
+      "class_name": "ImageView",
+      "confidence": 0.6,
+      "bbox": [
+        40,
+        880,
+        200,
+        1040
+      ]
+    },
+    {
+      "id": 12,
+      "class_name": "ProgressBar",
+      "confidence": 0.42,
+      "bbox": [
+        90,
+        930,
+        150,
+        990
+      ]
+    },
+    {
+      "id": 13,
+      "class_name": "TextView",
+      "confidence": 0.81,
+      "bbox": [
+        220,
+        920,
+        800,
+        1000
+      ]
+    },
+    {
+      "id": 14,
+      "class_name": "SeekBar",
+      "confidence": 0.69,
+      "bbox": [
+        40,
+        1100,
+        1040,
+        1160
+      ]
+    },
+    {
+      "id": 15,
+      "class_name": "ProgressBar",
+      "confidence": 0.55,
+      "bbox": [
+        40,
+        1200,
+        1040,
+        1230
+      ]
+    },
+    {
+      "id": 16,
+      "class_name": "Button",
+      "confidence": 0.9,
+      "bbox": [
+        40,
+        1280,
+        520,
+        1380
+      ]
+    },
+    {
+      "id": 17,
+      "class_name": "Button",
+      "confidence": 0.89,
+      "bbox": [
+        560,
+        1280,
+        1040,
+        1380
+      ]
+    },
+    {
+      "id": 18,
+      "class_name": "WebView",
+      "confidence": 0.61,
+      "bbox": [
+        20,
+        1420,
+        1060,
+        1800
+      ]
+    },
+    {
+      "id": 19,
+      "class_name": "FancyWidget",
+      "confidence": 0.5,
+      "bbox": [
+        40,
+        1830,
+        300,
+        1900
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": 4,
+      "target": 5,
+      "relation": "parent_child",
+      "confidence": 1.0
+    }
+  ],
+  "hierarchy": {
+    "roots": [
+      {
+        "id": -1,
+        "class": "SyntheticColumn",
+        "bbox": [
+          20,
+          40,
+          1060,
+          1900
+        ],
+        "children": [
+          {
+            "id": 0,
+            "class": "TextView",
+            "bbox": [
+              40,
+              40,
+              1040,
+              120
+            ],
+            "confidence": 0.93,
+            "children": []
+          },
+          {
+            "id": 1,
+            "class": "EditText",
+            "bbox": [
+              40,
+              160,
+              1040,
+              280
+            ],
+            "confidence": 0.88,
+            "children": []
+          },
+          {
+            "id": -2,
+            "class": "SyntheticRow",
+            "bbox": [
+              40,
+              320,
+              680,
+              420
+            ],
+            "children": [
+              {
+                "id": 2,
+                "class": "Spinner",
+                "bbox": [
+                  40,
+                  320,
+                  520,
+                  420
+                ],
+                "confidence": 0.71,
+                "children": []
+              },
+              {
+                "id": 3,
+                "class": "CheckBox",
+                "bbox": [
+                  600,
+                  330,
+                  680,
+                  410
+                ],
+                "confidence": 0.66,
+                "children": []
+              }
+            ],
+            "synthetic": true,
+            "confidence": null
+          },
+          {
+            "id": 4,
+            "class": "ListView",
+            "bbox": [
+              20,
+              460,
+              1060,
+              1060
+            ],
+            "confidence": 0.9,
+            "children": [
+              {
+                "id": 5,
+                "class": "RadioButton",
+                "bbox": [
+                  40,
+                  480,
+                  120,
+                  560
+                ],
+                "confidence": 0.8,
+                "children": []
+              },
+              {
+                "id": 6,
+                "class": "TextView",
+                "bbox": [
+                  140,
+                  490,
+                  700,
+                  550
+                ],
+                "confidence": 0.85,
+                "children": []
+              },
+              {
+                "id": 7,
+                "class": "Switch",
+                "bbox": [
+                  900,
+                  485,
+                  1020,
+                  555
+                ],
+                "confidence": 0.77,
+                "children": []
+              },
+              {
+                "id": 8,
+                "class": "RadioButton",
+                "bbox": [
+                  40,
+                  680,
+                  120,
+                  760
+                ],
+                "confidence": 0.79,
+                "children": []
+              },
+              {
+                "id": 9,
+                "class": "TextView",
+                "bbox": [
+                  140,
+                  690,
+                  700,
+                  750
+                ],
+                "confidence": 0.83,
+                "children": []
+              },
+              {
+                "id": 10,
+                "class": "Switch",
+                "bbox": [
+                  900,
+                  685,
+                  1020,
+                  755
+                ],
+                "confidence": 0.75,
+                "children": []
+              },
+              {
+                "id": 11,
+                "class": "ImageView",
+                "bbox": [
+                  40,
+                  880,
+                  200,
+                  1040
+                ],
+                "confidence": 0.6,
+                "children": [
+                  {
+                    "id": 12,
+                    "class": "ProgressBar",
+                    "bbox": [
+                      90,
+                      930,
+                      150,
+                      990
+                    ],
+                    "confidence": 0.42,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": 13,
+                "class": "TextView",
+                "bbox": [
+                  220,
+                  920,
+                  800,
+                  1000
+                ],
+                "confidence": 0.81,
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": 14,
+            "class": "SeekBar",
+            "bbox": [
+              40,
+              1100,
+              1040,
+              1160
+            ],
+            "confidence": 0.69,
+            "children": []
+          },
+          {
+            "id": 15,
+            "class": "ProgressBar",
+            "bbox": [
+              40,
+              1200,
+              1040,
+              1230
+            ],
+            "confidence": 0.55,
+            "children": []
+          },
+          {
+            "id": -3,
+            "class": "SyntheticRow",
+            "bbox": [
+              40,
+              1280,
+              1040,
+              1380
+            ],
+            "children": [
+              {
+                "id": 16,
+                "class": "Button",
+                "bbox": [
+                  40,
+                  1280,
+                  520,
+                  1380
+                ],
+                "confidence": 0.9,
+                "children": []
+              },
+              {
+                "id": 17,
+                "class": "Button",
+                "bbox": [
+                  560,
+                  1280,
+                  1040,
+                  1380
+                ],
+                "confidence": 0.89,
+                "children": []
+              }
+            ],
+            "synthetic": true,
+            "confidence": null
+          },
+          {
+            "id": 18,
+            "class": "WebView",
+            "bbox": [
+              20,
+              1420,
+              1060,
+              1800
+            ],
+            "confidence": 0.61,
+            "children": []
+          },
+          {
+            "id": 19,
+            "class": "FancyWidget",
+            "bbox": [
+              40,
+              1830,
+              300,
+              1900
+            ],
+            "confidence": 0.5,
+            "children": []
+          }
+        ],
+        "synthetic": true,
+        "confidence": null
+      }
+    ]
+  }
+}

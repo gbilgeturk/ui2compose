@@ -1,0 +1,11 @@
+Explain trace for detection id 2
+[detection] ImageView conf=0.67 bbox=[4, 193, 503, 1379]
+[post-processing] kept
+[graph] containment:
+  id 2 ImageView conf=0.67 bbox=[4, 193, 503, 1379] area=592261; containment rule: coverage >= 0.9 and higher rank (area, then confidence, then lower id)
+    contained in: none -> top-level node of the containment forest
+    children: 3 CheckBox, 4 TextView, 5 CheckBox, 6 TextView, 7 CheckBox, 8 TextView
+[layout] path in the layout tree:
+  Column (rule=gap, axis=y, 1 cut, tolerance 0 px) -> group 2 of 2, after gap y in [178,192.9]
+  Box (rule=containment, container ImageView#2 (conf 0.67) bbox [3.6,192.9,503.1,1378.6]) -> the container widget itself
+  leaf ImageView#2 (conf 0.67, bbox [3.6,192.9,503.1,1378.6])

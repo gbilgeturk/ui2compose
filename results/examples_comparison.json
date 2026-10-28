@@ -1,0 +1,959 @@
+{
+  "definitions": {
+    "raw_detections": "detector output at the pipeline settings (conf 0.3, NMS IoU 0.7, the checkpoint's imgsz 640)",
+    "dedup_removed": "detections removed by postprocess.deduplicate_detections (v1.1.0 had no de-duplication step: 0)",
+    "emitted": "detections that appear in the generated Kotlin. v1.1.0: the leaves collected by the v1.1.0 generator (containers were dropped, a child of two parents was collected twice); v1.2.0: every leaf template plus every list container emitted as a LazyColumn (cross-checked against the trace comments of the generator)",
+    "emitted_by_class": "the emitted detections counted by detector class",
+    "duplicated_ids": "detection ids emitted more than once (id -> count)",
+    "dropped_ids": "detections that reach code generation but are not emitted",
+    "placeholders": "number of 'Unknown: <class>' placeholder texts in the Kotlin",
+    "xycut_fallback_nodes": "layout nodes where XY-cut found no cut on either axis and the fallback ordered the members (v1.1.0: zero-tolerance cuts; v1.2.0: cuts with the default tolerance cut_tol_frac selected on the validation split, 0.0)",
+    "xycut_fallback_nodes_tol0": "the same count with cut_tol_frac=0 (the zero-tolerance cut rule of v1.1.0), recomputed from the v1.2.0 graph: separates the effect of containment and de-duplication from that of the tolerance (v1.1.0: equal to xycut_fallback_nodes)",
+    "gap_tolerance_nodes": "v1.2.0 layout nodes with at least one cut that needed the tolerance (touching or overlapping by less than cut_tol_frac of the image extent)",
+    "box_composites": "containers with detected children, emitted as Box { container widget; children's layout } (v1.1.0: 'Box(' blocks in the Kotlin that are not 'Unknown' placeholders)",
+    "lazycolumn_composites": "list containers (ListView/RecyclerView) with detected children, emitted as LazyColumn { item { ... } }; a list without children is a leaf template and is not counted (v1.1.0: 'LazyColumn(' occurrences in the Kotlin)",
+    "parent_child_edges": "containment edges of the UI graph",
+    "spatial_edges": "above/below/left_of/right_of edges of the UI graph (inspection export, not read by code generation)",
+    "kotlin_lines": "len(code.splitlines()) of 4_GeneratedScreen.kt"
+  },
+  "settings": {
+    "version": "1.2.0",
+    "model_path": "runs/oversample_5k_appsplit/weights/best.pt",
+    "dataset_yaml": "configs/dataset.yaml",
+    "conf_threshold": 0.3,
+    "iou_threshold": 0.7,
+    "imgsz": null,
+    "imgsz_effective": 640,
+    "agnostic_nms": false,
+    "max_det": 300,
+    "class_conf": null,
+    "dedup": true,
+    "dedup_params": {
+      "same_class_iou": 0.4,
+      "same_class_iomin": 0.85,
+      "cross_class_iou": 0.5
+    },
+    "containment_ratio": 0.9,
+    "align_tol_frac": 0.016666666666666666,
+    "layout": "xycut",
+    "size_from_boxes": false,
+    "cut_tol_frac": 0.0,
+    "fallback": "y_sorted",
+    "layout_tree_meta": {
+      "layout": "xycut",
+      "fallback": "y_sorted",
+      "cut_tol_frac": 0.0
+    }
+  },
+  "screens": {
+    "com.andromo.dev231870.app482676-screens_screenshot_5": {
+      "v1.1.0": {
+        "raw_detections": 16,
+        "raw_by_class": {
+          "ImageView": 5,
+          "ListView": 1,
+          "TextView": 10
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 16,
+        "emitted": 15,
+        "emitted_by_class": {
+          "ImageView": 5,
+          "TextView": 10
+        },
+        "leaf_nodes": 15,
+        "duplicated_ids": {},
+        "dropped_ids": [
+          [
+            0,
+            "ListView",
+            0.98
+          ]
+        ],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 3,
+        "xycut_fallback_nodes_tol0": 3,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 1,
+        "spatial_edges": 6,
+        "kotlin_lines": 174
+      },
+      "v1.2.0": {
+        "raw_detections": 15,
+        "raw_by_class": {
+          "ImageView": 5,
+          "ListView": 1,
+          "TextView": 9
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 15,
+        "emitted": 15,
+        "emitted_by_class": {
+          "ImageView": 5,
+          "ListView": 1,
+          "TextView": 9
+        },
+        "leaf_nodes": 14,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 0,
+        "xycut_fallback_nodes_tol0": 0,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 1,
+        "parent_child_edges": 1,
+        "spatial_edges": 41,
+        "kotlin_lines": 187
+      },
+      "raw_identical": false
+    },
+    "com.foxfi-screens_screenshot_1": {
+      "v1.1.0": {
+        "raw_detections": 24,
+        "raw_by_class": {
+          "CheckBox": 4,
+          "ImageView": 1,
+          "ListView": 1,
+          "TextView": 18
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 24,
+        "emitted": 23,
+        "emitted_by_class": {
+          "CheckBox": 4,
+          "ImageView": 1,
+          "TextView": 18
+        },
+        "leaf_nodes": 23,
+        "duplicated_ids": {},
+        "dropped_ids": [
+          [
+            3,
+            "ListView",
+            0.94
+          ]
+        ],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 6,
+        "xycut_fallback_nodes_tol0": 6,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 19,
+        "spatial_edges": 39,
+        "kotlin_lines": 250
+      },
+      "v1.2.0": {
+        "raw_detections": 27,
+        "raw_by_class": {
+          "CheckBox": 4,
+          "ImageView": 1,
+          "ListView": 1,
+          "TextView": 21
+        },
+        "dedup_removed": 3,
+        "dedup_removals": [
+          [
+            7,
+            "TextView",
+            0.308,
+            "same_class_nested",
+            1.0,
+            8
+          ],
+          [
+            10,
+            "TextView",
+            0.333,
+            "same_class_nested",
+            1.0,
+            11
+          ],
+          [
+            20,
+            "TextView",
+            0.305,
+            "same_class_nested",
+            0.996,
+            19
+          ]
+        ],
+        "kept_detections": 24,
+        "emitted": 24,
+        "emitted_by_class": {
+          "CheckBox": 4,
+          "ImageView": 1,
+          "ListView": 1,
+          "TextView": 18
+        },
+        "leaf_nodes": 23,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 3,
+        "xycut_fallback_nodes_tol0": 3,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 1,
+        "parent_child_edges": 21,
+        "spatial_edges": 39,
+        "kotlin_lines": 277
+      },
+      "raw_identical": false
+    },
+    "com.luigiedeveloper.battlesimulator-screens_screenshot_3": {
+      "v1.1.0": {
+        "raw_detections": 41,
+        "raw_by_class": {
+          "Button": 1,
+          "ImageView": 11,
+          "ListView": 1,
+          "TextView": 28
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 41,
+        "emitted": 32,
+        "emitted_by_class": {
+          "Button": 1,
+          "ImageView": 3,
+          "TextView": 28
+        },
+        "leaf_nodes": 32,
+        "duplicated_ids": {},
+        "dropped_ids": [
+          [
+            3,
+            "ListView",
+            0.94
+          ],
+          [
+            4,
+            "ImageView",
+            0.91
+          ],
+          [
+            8,
+            "ImageView",
+            0.9
+          ],
+          [
+            12,
+            "ImageView",
+            0.92
+          ],
+          [
+            16,
+            "ImageView",
+            0.92
+          ],
+          [
+            20,
+            "ImageView",
+            0.91
+          ],
+          [
+            24,
+            "ImageView",
+            0.92
+          ],
+          [
+            28,
+            "ImageView",
+            0.92
+          ],
+          [
+            33,
+            "ImageView",
+            0.91
+          ]
+        ],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 1,
+        "xycut_fallback_nodes_tol0": 1,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 34,
+        "spatial_edges": 175,
+        "kotlin_lines": 322
+      },
+      "v1.2.0": {
+        "raw_detections": 41,
+        "raw_by_class": {
+          "Button": 1,
+          "ImageView": 9,
+          "ListView": 1,
+          "TextView": 30
+        },
+        "dedup_removed": 3,
+        "dedup_removals": [
+          [
+            6,
+            "TextView",
+            0.478,
+            "same_class_iou",
+            0.642,
+            5
+          ],
+          [
+            21,
+            "TextView",
+            0.301,
+            "same_class_iou",
+            0.628,
+            20
+          ],
+          [
+            37,
+            "TextView",
+            0.544,
+            "same_class_nested",
+            0.93,
+            36
+          ]
+        ],
+        "kept_detections": 38,
+        "emitted": 38,
+        "emitted_by_class": {
+          "Button": 1,
+          "ImageView": 9,
+          "ListView": 1,
+          "TextView": 27
+        },
+        "leaf_nodes": 37,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 1,
+        "xycut_fallback_nodes_tol0": 1,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 8,
+        "lazycolumn_composites": 1,
+        "parent_child_edges": 32,
+        "spatial_edges": 157,
+        "kotlin_lines": 454
+      },
+      "raw_identical": false
+    },
+    "com.mcdeliveryonline.app-screens_screenshot_1": {
+      "v1.1.0": {
+        "raw_detections": 5,
+        "raw_by_class": {
+          "Button": 1,
+          "EditText": 2,
+          "TextView": 1,
+          "WebView": 1
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 5,
+        "emitted": 4,
+        "emitted_by_class": {
+          "Button": 1,
+          "EditText": 2,
+          "TextView": 1
+        },
+        "leaf_nodes": 4,
+        "duplicated_ids": {},
+        "dropped_ids": [
+          [
+            1,
+            "WebView",
+            0.56
+          ]
+        ],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 0,
+        "xycut_fallback_nodes_tol0": 0,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 3,
+        "spatial_edges": 3,
+        "kotlin_lines": 50
+      },
+      "v1.2.0": {
+        "raw_detections": 9,
+        "raw_by_class": {
+          "Button": 1,
+          "EditText": 2,
+          "TextView": 6
+        },
+        "dedup_removed": 2,
+        "dedup_removals": [
+          [
+            6,
+            "TextView",
+            0.449,
+            "cross_class_iou",
+            0.975,
+            5
+          ],
+          [
+            7,
+            "TextView",
+            0.305,
+            "same_class_iou",
+            0.476,
+            8
+          ]
+        ],
+        "kept_detections": 7,
+        "emitted": 7,
+        "emitted_by_class": {
+          "Button": 1,
+          "EditText": 2,
+          "TextView": 4
+        },
+        "leaf_nodes": 7,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 0,
+        "xycut_fallback_nodes_tol0": 0,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 0,
+        "spatial_edges": 6,
+        "kotlin_lines": 73
+      },
+      "raw_identical": false
+    },
+    "com.mineworld.swordsaddon-screens_screenshot_2": {
+      "v1.1.0": {
+        "raw_detections": 11,
+        "raw_by_class": {
+          "Button": 2,
+          "ImageView": 4,
+          "RecyclerView": 1,
+          "TextView": 4
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 11,
+        "emitted": 10,
+        "emitted_by_class": {
+          "Button": 2,
+          "ImageView": 4,
+          "TextView": 4
+        },
+        "leaf_nodes": 10,
+        "duplicated_ids": {},
+        "dropped_ids": [
+          [
+            2,
+            "RecyclerView",
+            0.99
+          ]
+        ],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 3,
+        "xycut_fallback_nodes_tol0": 3,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 6,
+        "spatial_edges": 17,
+        "kotlin_lines": 125
+      },
+      "v1.2.0": {
+        "raw_detections": 12,
+        "raw_by_class": {
+          "Button": 2,
+          "ImageView": 4,
+          "RecyclerView": 1,
+          "TextView": 5
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 12,
+        "emitted": 12,
+        "emitted_by_class": {
+          "Button": 2,
+          "ImageView": 4,
+          "RecyclerView": 1,
+          "TextView": 5
+        },
+        "leaf_nodes": 11,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 0,
+        "xycut_fallback_nodes_tol0": 0,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 4,
+        "lazycolumn_composites": 1,
+        "parent_child_edges": 7,
+        "spatial_edges": 6,
+        "kotlin_lines": 138
+      },
+      "raw_identical": false
+    },
+    "com.mynamecubeapps.ball-screens_screenshot_3": {
+      "v1.1.0": {
+        "raw_detections": 6,
+        "raw_by_class": {
+          "Button": 1,
+          "ListView": 1,
+          "TextView": 4
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 6,
+        "emitted": 6,
+        "emitted_by_class": {
+          "Button": 1,
+          "ListView": 1,
+          "TextView": 4
+        },
+        "leaf_nodes": 6,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 1,
+        "placeholder_classes": [
+          "ListView"
+        ],
+        "xycut_fallback_nodes": 1,
+        "xycut_fallback_nodes_tol0": 1,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 0,
+        "spatial_edges": 7,
+        "kotlin_lines": 64
+      },
+      "v1.2.0": {
+        "raw_detections": 6,
+        "raw_by_class": {
+          "Button": 1,
+          "ListView": 1,
+          "TextView": 4
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 6,
+        "emitted": 6,
+        "emitted_by_class": {
+          "Button": 1,
+          "ListView": 1,
+          "TextView": 4
+        },
+        "leaf_nodes": 5,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 1,
+        "xycut_fallback_nodes_tol0": 1,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 1,
+        "parent_child_edges": 3,
+        "spatial_edges": 6,
+        "kotlin_lines": 76
+      },
+      "raw_identical": false
+    },
+    "com.netbeast.yeti-screens_screenshot_1": {
+      "v1.1.0": {
+        "raw_detections": 5,
+        "raw_by_class": {
+          "Button": 2,
+          "ImageView": 2,
+          "TextView": 1
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 5,
+        "emitted": 5,
+        "emitted_by_class": {
+          "Button": 2,
+          "ImageView": 2,
+          "TextView": 1
+        },
+        "leaf_nodes": 5,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 1,
+        "xycut_fallback_nodes_tol0": 1,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 0,
+        "spatial_edges": 4,
+        "kotlin_lines": 62
+      },
+      "v1.2.0": {
+        "raw_detections": 5,
+        "raw_by_class": {
+          "Button": 2,
+          "ImageView": 1,
+          "TextView": 2
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 5,
+        "emitted": 5,
+        "emitted_by_class": {
+          "Button": 2,
+          "ImageView": 1,
+          "TextView": 2
+        },
+        "leaf_nodes": 5,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 0,
+        "xycut_fallback_nodes_tol0": 0,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 0,
+        "spatial_edges": 10,
+        "kotlin_lines": 59
+      },
+      "raw_identical": false
+    },
+    "com.shazam.android-screens_screenshot_3": {
+      "v1.1.0": {
+        "raw_detections": 19,
+        "raw_by_class": {
+          "Button": 2,
+          "ImageView": 7,
+          "RecyclerView": 1,
+          "TextView": 9
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 19,
+        "emitted": 19,
+        "emitted_by_class": {
+          "Button": 2,
+          "ImageView": 6,
+          "RecyclerView": 1,
+          "TextView": 10
+        },
+        "leaf_nodes": 19,
+        "duplicated_ids": {
+          "10": 2,
+          "11": 2
+        },
+        "dropped_ids": [
+          [
+            8,
+            "ImageView",
+            0.38
+          ],
+          [
+            9,
+            "ImageView",
+            0.31
+          ]
+        ],
+        "placeholders": 1,
+        "placeholder_classes": [
+          "RecyclerView"
+        ],
+        "xycut_fallback_nodes": 4,
+        "xycut_fallback_nodes_tol0": 4,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 4,
+        "spatial_edges": 20,
+        "kotlin_lines": 209
+      },
+      "v1.2.0": {
+        "raw_detections": 11,
+        "raw_by_class": {
+          "Button": 1,
+          "ImageView": 4,
+          "TextView": 6
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 11,
+        "emitted": 11,
+        "emitted_by_class": {
+          "Button": 1,
+          "ImageView": 4,
+          "TextView": 6
+        },
+        "leaf_nodes": 11,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 0,
+        "xycut_fallback_nodes_tol0": 0,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 0,
+        "spatial_edges": 19,
+        "kotlin_lines": 136
+      },
+      "raw_identical": false
+    },
+    "com.sign.language.learn1234-screens_screenshot_2": {
+      "v1.1.0": {
+        "raw_detections": 9,
+        "raw_by_class": {
+          "ImageView": 3,
+          "ListView": 1,
+          "TextView": 5
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 9,
+        "emitted": 8,
+        "emitted_by_class": {
+          "ImageView": 3,
+          "TextView": 5
+        },
+        "leaf_nodes": 8,
+        "duplicated_ids": {},
+        "dropped_ids": [
+          [
+            0,
+            "ListView",
+            0.96
+          ]
+        ],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 0,
+        "xycut_fallback_nodes_tol0": 0,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 2,
+        "spatial_edges": 3,
+        "kotlin_lines": 92
+      },
+      "v1.2.0": {
+        "raw_detections": 6,
+        "raw_by_class": {
+          "ImageView": 3,
+          "ListView": 1,
+          "TextView": 2
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 6,
+        "emitted": 6,
+        "emitted_by_class": {
+          "ImageView": 3,
+          "ListView": 1,
+          "TextView": 2
+        },
+        "leaf_nodes": 5,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 0,
+        "xycut_fallback_nodes_tol0": 0,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 1,
+        "parent_child_edges": 2,
+        "spatial_edges": 4,
+        "kotlin_lines": 69
+      },
+      "raw_identical": false
+    },
+    "westport.andrewirwin.com.drivesafe-screens_screenshot_3": {
+      "v1.1.0": {
+        "raw_detections": 14,
+        "raw_by_class": {
+          "Button": 1,
+          "CheckBox": 3,
+          "ImageView": 1,
+          "ListView": 1,
+          "TextView": 8
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 14,
+        "emitted": 11,
+        "emitted_by_class": {
+          "Button": 1,
+          "CheckBox": 3,
+          "ImageView": 1,
+          "TextView": 6
+        },
+        "leaf_nodes": 11,
+        "duplicated_ids": {
+          "5": 2
+        },
+        "dropped_ids": [
+          [
+            2,
+            "ListView",
+            0.86
+          ],
+          [
+            3,
+            "TextView",
+            0.52
+          ],
+          [
+            7,
+            "TextView",
+            0.64
+          ],
+          [
+            10,
+            "TextView",
+            0.65
+          ]
+        ],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 1,
+        "xycut_fallback_nodes_tol0": 1,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 0,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 9,
+        "spatial_edges": 8,
+        "kotlin_lines": 128
+      },
+      "v1.2.0": {
+        "raw_detections": 9,
+        "raw_by_class": {
+          "Button": 1,
+          "CheckBox": 3,
+          "ImageView": 1,
+          "TextView": 4
+        },
+        "dedup_removed": 0,
+        "dedup_removals": [],
+        "kept_detections": 9,
+        "emitted": 9,
+        "emitted_by_class": {
+          "Button": 1,
+          "CheckBox": 3,
+          "ImageView": 1,
+          "TextView": 4
+        },
+        "leaf_nodes": 9,
+        "duplicated_ids": {},
+        "dropped_ids": [],
+        "placeholders": 0,
+        "placeholder_classes": [],
+        "xycut_fallback_nodes": 0,
+        "xycut_fallback_nodes_tol0": 0,
+        "gap_tolerance_nodes": 0,
+        "box_composites": 1,
+        "lazycolumn_composites": 0,
+        "parent_child_edges": 6,
+        "spatial_edges": 8,
+        "kotlin_lines": 137
+      },
+      "raw_identical": false
+    }
+  },
+  "totals": {
+    "v1.1.0": {
+      "raw_detections": 150,
+      "dedup_removed": 0,
+      "kept_detections": 150,
+      "emitted": 133,
+      "leaf_nodes": 133,
+      "placeholders": 2,
+      "xycut_fallback_nodes": 20,
+      "xycut_fallback_nodes_tol0": 20,
+      "gap_tolerance_nodes": 0,
+      "box_composites": 0,
+      "lazycolumn_composites": 0,
+      "parent_child_edges": 78,
+      "spatial_edges": 282,
+      "kotlin_lines": 1476,
+      "raw_by_class": {
+        "Button": 10,
+        "CheckBox": 7,
+        "EditText": 2,
+        "ImageView": 34,
+        "ListView": 6,
+        "RecyclerView": 2,
+        "TextView": 88,
+        "WebView": 1
+      },
+      "emitted_by_class": {
+        "Button": 10,
+        "CheckBox": 7,
+        "EditText": 2,
+        "ImageView": 25,
+        "ListView": 1,
+        "RecyclerView": 1,
+        "TextView": 87
+      },
+      "duplicated_ids": 3,
+      "dropped_ids": 20,
+      "placeholder_classes": [
+        "ListView",
+        "RecyclerView"
+      ]
+    },
+    "v1.2.0": {
+      "raw_detections": 141,
+      "dedup_removed": 8,
+      "kept_detections": 133,
+      "emitted": 133,
+      "leaf_nodes": 127,
+      "placeholders": 0,
+      "xycut_fallback_nodes": 5,
+      "xycut_fallback_nodes_tol0": 5,
+      "gap_tolerance_nodes": 0,
+      "box_composites": 13,
+      "lazycolumn_composites": 6,
+      "parent_child_edges": 72,
+      "spatial_edges": 296,
+      "kotlin_lines": 1606,
+      "raw_by_class": {
+        "Button": 9,
+        "CheckBox": 7,
+        "EditText": 2,
+        "ImageView": 28,
+        "ListView": 5,
+        "RecyclerView": 1,
+        "TextView": 89
+      },
+      "emitted_by_class": {
+        "Button": 9,
+        "CheckBox": 7,
+        "EditText": 2,
+        "ImageView": 28,
+        "ListView": 5,
+        "RecyclerView": 1,
+        "TextView": 81
+      },
+      "duplicated_ids": 0,
+      "dropped_ids": 0,
+      "placeholder_classes": []
+    }
+  }
+}

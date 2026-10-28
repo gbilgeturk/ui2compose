@@ -1,0 +1,196 @@
+{
+  "note": "selected on validation only (val split of the regenerated ReDraw package, 1869 screens); the test split was not used",
+  "date": "2026-10-20",
+  "ui2compose_version": "1.2.0",
+  "objective": "mean teds_o of C4 (cached predictions + v1.2.0 de-duplication, containment and XY-cut) over the val screens",
+  "tie_break": "max mean teds_o among eligible configurations; within 0.001 of the best: max mean grouping_f1; within 0.001 of that: fewest parameters changed from the a-priori default, then fewest grid steps, then higher mean teds_o",
+  "constraint": "detector operating-point F1 (val, conf > 0.3, IoU 0.5) after de-duplication >= F1 without de-duplication - 0.005",
+  "values": {
+    "dedup": {
+      "setting": "looser",
+      "enabled": true,
+      "same_class_iou": 0.4,
+      "same_class_iomin": 0.85,
+      "cross_class_iou": 0.5
+    },
+    "containment_ratio": 0.9,
+    "cut_tol_frac": 0.0025,
+    "fallback": "y_sorted"
+  },
+  "a_priori": {
+    "dedup": {
+      "setting": "a_priori",
+      "same_class_iou": 0.5,
+      "same_class_iomin": 0.9,
+      "cross_class_iou": 0.6
+    },
+    "containment_ratio": 0.95,
+    "cut_tol_frac": 0.005,
+    "fallback": "y_sorted"
+  },
+  "selected_config": "C4|dedup=looser|cr=0.9|tol=0.0025|fb=y_sorted",
+  "objective_value": {
+    "selected": 0.508637,
+    "a_priori": 0.505288,
+    "best_eligible": 0.509427,
+    "argmax_config": "C4|dedup=looser|cr=0.9|tol=0|fb=y_sorted"
+  },
+  "selected_minus_a_priori": {
+    "full": {
+      "teds_g": {
+        "point": 0.001329,
+        "lo": -0.000127,
+        "hi": 0.004675,
+        "n_valid": 1000,
+        "p_le_0": 0.043,
+        "n_screens_both": 1869
+      },
+      "teds_o": {
+        "point": 0.003348,
+        "lo": 0.001835,
+        "hi": 0.007236,
+        "n_valid": 1000,
+        "p_le_0": 0.0,
+        "n_screens_both": 1869
+      },
+      "grouping_f1": {
+        "point": -2.9e-05,
+        "lo": -0.003895,
+        "hi": 0.008881,
+        "n_valid": 1000,
+        "p_le_0": 0.487,
+        "n_screens_both": 1467
+      },
+      "grouping_micro_f1": {
+        "point": 0.009429,
+        "lo": -0.003299,
+        "hi": 0.042488,
+        "n_valid": 1000,
+        "p_le_0": 0.104,
+        "n_screens_both": 1869
+      }
+    },
+    "package_md5": {
+      "teds_g": {
+        "point": 0.001329,
+        "lo": -0.000462,
+        "hi": 0.003231,
+        "n_valid": 1000,
+        "p_le_0": 0.058,
+        "n_screens_both": 1869
+      },
+      "teds_o": {
+        "point": 0.003348,
+        "lo": 0.001515,
+        "hi": 0.005364,
+        "n_valid": 1000,
+        "p_le_0": 0.0,
+        "n_screens_both": 1869
+      },
+      "grouping_f1": {
+        "point": -2.9e-05,
+        "lo": -0.004987,
+        "hi": 0.004915,
+        "n_valid": 1000,
+        "p_le_0": 0.468,
+        "n_screens_both": 1467
+      },
+      "grouping_micro_f1": {
+        "point": 0.009429,
+        "lo": -0.002145,
+        "hi": 0.02984,
+        "n_valid": 1000,
+        "p_le_0": 0.102,
+        "n_screens_both": 1869
+      }
+    },
+    "screen": {
+      "teds_g": {
+        "point": 0.001329,
+        "lo": -0.000265,
+        "hi": 0.003093,
+        "n_valid": 1000,
+        "p_le_0": 0.065,
+        "n_screens_both": 1869
+      },
+      "teds_o": {
+        "point": 0.003348,
+        "lo": 0.001533,
+        "hi": 0.005132,
+        "n_valid": 1000,
+        "p_le_0": 0.0,
+        "n_screens_both": 1869
+      },
+      "grouping_f1": {
+        "point": -2.9e-05,
+        "lo": -0.00508,
+        "hi": 0.004725,
+        "n_valid": 1000,
+        "p_le_0": 0.5,
+        "n_screens_both": 1467
+      },
+      "grouping_micro_f1": {
+        "point": 0.009429,
+        "lo": -0.00213,
+        "hi": 0.028068,
+        "n_valid": 1000,
+        "p_le_0": 0.1,
+        "n_screens_both": 1869
+      }
+    }
+  },
+  "selected_minus_a_priori_note": "in-sample: measured on the val screens on which the configuration was selected as the best of the grid, so it overstates the gain on new screens; see selection_check",
+  "grid_edges": {
+    "dedup": "last",
+    "containment_ratio": "last"
+  },
+  "detector_f1_check": {
+    "f1_selected_dedup": 0.563846,
+    "f1_without_dedup": 0.561754,
+    "difference": 0.002091,
+    "eligible": true
+  },
+  "gt_boxes_C1": {
+    "selected_config": "C1|cr=0.95|tol=0.0025|fb=y_sorted",
+    "objective_value": 0.80535,
+    "same_layout_thresholds_as_C4": {
+      "C4_selected": "C4|dedup=looser|cr=0.9|tol=0.0025|fb=y_sorted",
+      "C1_selected": "C1|cr=0.95|tol=0.0025|fb=y_sorted",
+      "same": {
+        "containment_ratio": false,
+        "cut_tol_frac": true,
+        "fallback": true
+      },
+      "identical_layout_thresholds": false
+    },
+    "note": "reported only; the shipped default is the C4 (predicted-box) selection"
+  },
+  "files": {
+    "sweep_summary": "results/eval/val_sweep.json",
+    "sweep_table": "results/eval/val_sweep.md",
+    "selection_check": "results/eval/val_sweep_crossval.json"
+  },
+  "selection_check": {
+    "note": "post hoc (added after the review of the revision); nothing is re-selected",
+    "scheme": "package_md5",
+    "repeats": 200,
+    "out_of_fold_gain": {
+      "n": 400,
+      "mean": 0.001881,
+      "median": 0.001909,
+      "q025": -0.000627,
+      "q975": 0.004316,
+      "share_positive": 0.9175
+    },
+    "in_fold_gain": {
+      "n": 400,
+      "mean": 0.004115,
+      "median": 0.004015,
+      "q025": 0.001486,
+      "q975": 0.006879,
+      "share_positive": 1.0
+    },
+    "optimism": 0.002235,
+    "shipped_selected_share": 0.105
+  }
+}

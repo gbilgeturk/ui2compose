@@ -1,0 +1,13 @@
+Explain trace for detection id 3
+[detection] CheckBox conf=0.65 bbox=[424, 199, 479, 254]
+[post-processing] kept
+[graph] containment:
+  id 3 CheckBox conf=0.65 bbox=[424, 199, 479, 254] area=3031; containment rule: coverage >= 0.9 and higher rank (area, then confidence, then lower id)
+    contained in: 2 ImageView (coverage 1.000, area 592261)
+    parent: 2 ImageView — only container
+[layout] path in the layout tree:
+  Column (rule=gap, axis=y, 1 cut, tolerance 0 px) -> group 2 of 2, after gap y in [178,192.9]
+  Box (rule=containment, container ImageView#2 (conf 0.67) bbox [3.6,192.9,503.1,1378.6]) -> the contained children
+  Column (rule=gap, axis=y, 2 cuts, tolerance 0 px) -> group 1 of 3, before gap y in [253.6,298.7]
+  Row (rule=gap, axis=x, 1 cut, tolerance 0 px) -> group 2 of 2, after gap x in [177.8,423.6]
+  leaf CheckBox#3 (conf 0.65, bbox [423.6,199.2,479.3,253.6])

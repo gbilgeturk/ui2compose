@@ -1,0 +1,351 @@
+{
+  "nodes": [
+    {
+      "id": 1,
+      "class_name": "ImageView",
+      "confidence": 0.62,
+      "bbox": [
+        134,
+        62,
+        188,
+        119
+      ]
+    },
+    {
+      "id": 7,
+      "class_name": "TextView",
+      "confidence": 0.62,
+      "bbox": [
+        121,
+        120,
+        203,
+        158
+      ]
+    },
+    {
+      "id": 3,
+      "class_name": "ImageView",
+      "confidence": 0.68,
+      "bbox": [
+        722,
+        65,
+        770,
+        115
+      ]
+    },
+    {
+      "id": 4,
+      "class_name": "TextView",
+      "confidence": 0.76,
+      "bbox": [
+        685,
+        118,
+        806,
+        157
+      ]
+    },
+    {
+      "id": 8,
+      "class_name": "ImageView",
+      "confidence": 0.38,
+      "bbox": [
+        70,
+        482,
+        954,
+        1087
+      ]
+    },
+    {
+      "id": 9,
+      "class_name": "ImageView",
+      "confidence": 0.31,
+      "bbox": [
+        322,
+        538,
+        868,
+        1107
+      ]
+    },
+    {
+      "id": 10,
+      "class_name": "ImageView",
+      "confidence": 0.51,
+      "bbox": [
+        465,
+        562,
+        740,
+        845
+      ]
+    },
+    {
+      "id": 11,
+      "class_name": "TextView",
+      "confidence": 0.48,
+      "bbox": [
+        700,
+        862,
+        774,
+        936
+      ]
+    },
+    {
+      "id": 12,
+      "class_name": "TextView",
+      "confidence": 0.76,
+      "bbox": [
+        313,
+        1165,
+        887,
+        1241
+      ]
+    },
+    {
+      "id": 15,
+      "class_name": "Button",
+      "confidence": 0.77,
+      "bbox": [
+        422,
+        1363,
+        779,
+        1459
+      ]
+    },
+    {
+      "id": 17,
+      "class_name": "RecyclerView",
+      "confidence": 0.74,
+      "bbox": [
+        12,
+        1470,
+        1189,
+        1920
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": 8,
+      "target": 10,
+      "relation": "parent_child",
+      "confidence": 1.0
+    },
+    {
+      "source": 8,
+      "target": 11,
+      "relation": "parent_child",
+      "confidence": 1.0
+    },
+    {
+      "source": 9,
+      "target": 10,
+      "relation": "parent_child",
+      "confidence": 1.0
+    },
+    {
+      "source": 9,
+      "target": 11,
+      "relation": "parent_child",
+      "confidence": 1.0
+    },
+    {
+      "source": 1,
+      "target": 7,
+      "relation": "above",
+      "confidence": 0.9
+    },
+    {
+      "source": 12,
+      "target": 15,
+      "relation": "above",
+      "confidence": 0.9
+    }
+  ],
+  "hierarchy": {
+    "roots": [
+      {
+        "id": -3,
+        "class": "SyntheticColumn",
+        "class_name": "SyntheticColumn",
+        "bbox": [
+          12,
+          62,
+          1189,
+          1920
+        ],
+        "children": [
+          {
+            "id": -1,
+            "class": "SyntheticRow",
+            "class_name": "SyntheticRow",
+            "bbox": [
+              121,
+              62,
+              806,
+              158
+            ],
+            "children": [
+              {
+                "id": 1,
+                "class": "ImageView",
+                "bbox": [
+                  134,
+                  62,
+                  188,
+                  119
+                ],
+                "children": []
+              },
+              {
+                "id": 7,
+                "class": "TextView",
+                "bbox": [
+                  121,
+                  120,
+                  203,
+                  158
+                ],
+                "children": []
+              },
+              {
+                "id": 4,
+                "class": "TextView",
+                "bbox": [
+                  685,
+                  118,
+                  806,
+                  157
+                ],
+                "children": []
+              },
+              {
+                "id": 3,
+                "class": "ImageView",
+                "bbox": [
+                  722,
+                  65,
+                  770,
+                  115
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": -2,
+            "class": "SyntheticRow",
+            "class_name": "SyntheticRow",
+            "bbox": [
+              70,
+              482,
+              954,
+              1107
+            ],
+            "children": [
+              {
+                "id": 8,
+                "class": "ImageView",
+                "bbox": [
+                  70,
+                  482,
+                  954,
+                  1087
+                ],
+                "children": [
+                  {
+                    "id": 10,
+                    "class": "ImageView",
+                    "bbox": [
+                      465,
+                      562,
+                      740,
+                      845
+                    ],
+                    "children": []
+                  },
+                  {
+                    "id": 11,
+                    "class": "TextView",
+                    "bbox": [
+                      700,
+                      862,
+                      774,
+                      936
+                    ],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": 9,
+                "class": "ImageView",
+                "bbox": [
+                  322,
+                  538,
+                  868,
+                  1107
+                ],
+                "children": [
+                  {
+                    "id": 10,
+                    "class": "ImageView",
+                    "bbox": [
+                      465,
+                      562,
+                      740,
+                      845
+                    ],
+                    "children": []
+                  },
+                  {
+                    "id": 11,
+                    "class": "TextView",
+                    "bbox": [
+                      700,
+                      862,
+                      774,
+                      936
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 12,
+            "class": "TextView",
+            "bbox": [
+              313,
+              1165,
+              887,
+              1241
+            ],
+            "children": []
+          },
+          {
+            "id": 15,
+            "class": "Button",
+            "bbox": [
+              422,
+              1363,
+              779,
+              1459
+            ],
+            "children": []
+          },
+          {
+            "id": 17,
+            "class": "RecyclerView",
+            "bbox": [
+              12,
+              1470,
+              1189,
+              1920
+            ],
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}

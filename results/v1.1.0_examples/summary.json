@@ -1,0 +1,996 @@
+{
+ "com.andromo.dev231870.app482676-screens_screenshot_5": {
+  "raw_detections": 16,
+  "raw_by_class": {
+   "ImageView": 5,
+   "ListView": 1,
+   "TextView": 10
+  },
+  "emitted_leaves": 15,
+  "emitted_by_class": {
+   "ImageView": 5,
+   "TextView": 10
+  },
+  "duplicated_leaf_ids": {},
+  "dropped_container_ids": [
+   [
+    0,
+    "ListView",
+    0.98
+   ]
+  ],
+  "placeholders": 0,
+  "placeholder_classes": [],
+  "xycut_fallback_nodes": 3,
+  "edges": 7,
+  "kotlin_lines": 174,
+  "image_size": [
+   null,
+   null
+  ],
+  "confidences": [
+   [
+    "ListView",
+    0.98
+   ],
+   [
+    "TextView",
+    0.89
+   ],
+   [
+    "ImageView",
+    0.87
+   ],
+   [
+    "ImageView",
+    0.84
+   ],
+   [
+    "ImageView",
+    0.83
+   ],
+   [
+    "ImageView",
+    0.79
+   ],
+   [
+    "TextView",
+    0.78
+   ],
+   [
+    "ImageView",
+    0.66
+   ],
+   [
+    "TextView",
+    0.66
+   ],
+   [
+    "TextView",
+    0.65
+   ],
+   [
+    "TextView",
+    0.59
+   ],
+   [
+    "TextView",
+    0.55
+   ],
+   [
+    "TextView",
+    0.54
+   ],
+   [
+    "TextView",
+    0.5
+   ],
+   [
+    "TextView",
+    0.36
+   ],
+   [
+    "TextView",
+    0.32
+   ]
+  ]
+ },
+ "com.foxfi-screens_screenshot_1": {
+  "raw_detections": 24,
+  "raw_by_class": {
+   "CheckBox": 4,
+   "ImageView": 1,
+   "ListView": 1,
+   "TextView": 18
+  },
+  "emitted_leaves": 23,
+  "emitted_by_class": {
+   "CheckBox": 4,
+   "ImageView": 1,
+   "TextView": 18
+  },
+  "duplicated_leaf_ids": {},
+  "dropped_container_ids": [
+   [
+    3,
+    "ListView",
+    0.94
+   ]
+  ],
+  "placeholders": 0,
+  "placeholder_classes": [],
+  "xycut_fallback_nodes": 6,
+  "edges": 58,
+  "kotlin_lines": 250,
+  "image_size": [
+   null,
+   null
+  ],
+  "confidences": [
+   [
+    "ListView",
+    0.94
+   ],
+   [
+    "TextView",
+    0.94
+   ],
+   [
+    "CheckBox",
+    0.93
+   ],
+   [
+    "CheckBox",
+    0.93
+   ],
+   [
+    "TextView",
+    0.93
+   ],
+   [
+    "TextView",
+    0.93
+   ],
+   [
+    "TextView",
+    0.92
+   ],
+   [
+    "TextView",
+    0.92
+   ],
+   [
+    "TextView",
+    0.92
+   ],
+   [
+    "CheckBox",
+    0.92
+   ],
+   [
+    "TextView",
+    0.92
+   ],
+   [
+    "TextView",
+    0.91
+   ],
+   [
+    "TextView",
+    0.91
+   ],
+   [
+    "TextView",
+    0.9
+   ],
+   [
+    "TextView",
+    0.9
+   ],
+   [
+    "TextView",
+    0.9
+   ],
+   [
+    "CheckBox",
+    0.89
+   ],
+   [
+    "TextView",
+    0.89
+   ],
+   [
+    "TextView",
+    0.89
+   ],
+   [
+    "TextView",
+    0.89
+   ],
+   [
+    "TextView",
+    0.88
+   ],
+   [
+    "TextView",
+    0.82
+   ],
+   [
+    "ImageView",
+    0.78
+   ],
+   [
+    "TextView",
+    0.54
+   ]
+  ]
+ },
+ "com.luigiedeveloper.battlesimulator-screens_screenshot_3": {
+  "raw_detections": 41,
+  "raw_by_class": {
+   "Button": 1,
+   "ImageView": 11,
+   "ListView": 1,
+   "TextView": 28
+  },
+  "emitted_leaves": 32,
+  "emitted_by_class": {
+   "Button": 1,
+   "ImageView": 3,
+   "TextView": 28
+  },
+  "duplicated_leaf_ids": {},
+  "dropped_container_ids": [
+   [
+    3,
+    "ListView",
+    0.94
+   ],
+   [
+    4,
+    "ImageView",
+    0.91
+   ],
+   [
+    8,
+    "ImageView",
+    0.9
+   ],
+   [
+    12,
+    "ImageView",
+    0.92
+   ],
+   [
+    16,
+    "ImageView",
+    0.92
+   ],
+   [
+    20,
+    "ImageView",
+    0.91
+   ],
+   [
+    24,
+    "ImageView",
+    0.92
+   ],
+   [
+    28,
+    "ImageView",
+    0.92
+   ],
+   [
+    33,
+    "ImageView",
+    0.91
+   ]
+  ],
+  "placeholders": 0,
+  "placeholder_classes": [],
+  "xycut_fallback_nodes": 1,
+  "edges": 209,
+  "kotlin_lines": 322,
+  "image_size": [
+   null,
+   null
+  ],
+  "confidences": [
+   [
+    "Button",
+    0.94
+   ],
+   [
+    "ListView",
+    0.94
+   ],
+   [
+    "TextView",
+    0.93
+   ],
+   [
+    "TextView",
+    0.92
+   ],
+   [
+    "ImageView",
+    0.92
+   ],
+   [
+    "ImageView",
+    0.92
+   ],
+   [
+    "ImageView",
+    0.92
+   ],
+   [
+    "ImageView",
+    0.92
+   ],
+   [
+    "TextView",
+    0.92
+   ],
+   [
+    "ImageView",
+    0.91
+   ],
+   [
+    "TextView",
+    0.91
+   ],
+   [
+    "ImageView",
+    0.91
+   ],
+   [
+    "ImageView",
+    0.91
+   ],
+   [
+    "ImageView",
+    0.9
+   ],
+   [
+    "TextView",
+    0.89
+   ],
+   [
+    "TextView",
+    0.89
+   ],
+   [
+    "TextView",
+    0.89
+   ],
+   [
+    "TextView",
+    0.88
+   ],
+   [
+    "TextView",
+    0.87
+   ],
+   [
+    "TextView",
+    0.87
+   ],
+   [
+    "TextView",
+    0.87
+   ],
+   [
+    "ImageView",
+    0.87
+   ],
+   [
+    "TextView",
+    0.85
+   ],
+   [
+    "TextView",
+    0.85
+   ],
+   [
+    "TextView",
+    0.84
+   ],
+   [
+    "TextView",
+    0.83
+   ],
+   [
+    "TextView",
+    0.78
+   ],
+   [
+    "TextView",
+    0.77
+   ],
+   [
+    "TextView",
+    0.77
+   ],
+   [
+    "TextView",
+    0.75
+   ],
+   [
+    "TextView",
+    0.74
+   ],
+   [
+    "TextView",
+    0.66
+   ],
+   [
+    "TextView",
+    0.66
+   ],
+   [
+    "TextView",
+    0.65
+   ],
+   [
+    "TextView",
+    0.64
+   ],
+   [
+    "TextView",
+    0.63
+   ],
+   [
+    "ImageView",
+    0.63
+   ],
+   [
+    "TextView",
+    0.6
+   ],
+   [
+    "TextView",
+    0.55
+   ],
+   [
+    "ImageView",
+    0.55
+   ],
+   [
+    "TextView",
+    0.49
+   ]
+  ]
+ },
+ "com.mcdeliveryonline.app-screens_screenshot_1": {
+  "raw_detections": 5,
+  "raw_by_class": {
+   "Button": 1,
+   "EditText": 2,
+   "TextView": 1,
+   "WebView": 1
+  },
+  "emitted_leaves": 4,
+  "emitted_by_class": {
+   "Button": 1,
+   "EditText": 2,
+   "TextView": 1
+  },
+  "duplicated_leaf_ids": {},
+  "dropped_container_ids": [
+   [
+    1,
+    "WebView",
+    0.56
+   ]
+  ],
+  "placeholders": 0,
+  "placeholder_classes": [],
+  "xycut_fallback_nodes": 0,
+  "edges": 6,
+  "kotlin_lines": 50,
+  "image_size": [
+   null,
+   null
+  ],
+  "confidences": [
+   [
+    "TextView",
+    0.66
+   ],
+   [
+    "EditText",
+    0.63
+   ],
+   [
+    "EditText",
+    0.63
+   ],
+   [
+    "Button",
+    0.61
+   ],
+   [
+    "WebView",
+    0.56
+   ]
+  ]
+ },
+ "com.mineworld.swordsaddon-screens_screenshot_2": {
+  "raw_detections": 11,
+  "raw_by_class": {
+   "Button": 2,
+   "ImageView": 4,
+   "RecyclerView": 1,
+   "TextView": 4
+  },
+  "emitted_leaves": 10,
+  "emitted_by_class": {
+   "Button": 2,
+   "ImageView": 4,
+   "TextView": 4
+  },
+  "duplicated_leaf_ids": {},
+  "dropped_container_ids": [
+   [
+    2,
+    "RecyclerView",
+    0.99
+   ]
+  ],
+  "placeholders": 0,
+  "placeholder_classes": [],
+  "xycut_fallback_nodes": 3,
+  "edges": 23,
+  "kotlin_lines": 125,
+  "image_size": [
+   null,
+   null
+  ],
+  "confidences": [
+   [
+    "RecyclerView",
+    0.99
+   ],
+   [
+    "ImageView",
+    0.97
+   ],
+   [
+    "ImageView",
+    0.96
+   ],
+   [
+    "TextView",
+    0.95
+   ],
+   [
+    "ImageView",
+    0.94
+   ],
+   [
+    "Button",
+    0.93
+   ],
+   [
+    "TextView",
+    0.91
+   ],
+   [
+    "TextView",
+    0.91
+   ],
+   [
+    "TextView",
+    0.79
+   ],
+   [
+    "Button",
+    0.72
+   ],
+   [
+    "ImageView",
+    0.41
+   ]
+  ]
+ },
+ "com.mynamecubeapps.ball-screens_screenshot_3": {
+  "raw_detections": 6,
+  "raw_by_class": {
+   "Button": 1,
+   "ListView": 1,
+   "TextView": 4
+  },
+  "emitted_leaves": 6,
+  "emitted_by_class": {
+   "Button": 1,
+   "ListView": 1,
+   "TextView": 4
+  },
+  "duplicated_leaf_ids": {},
+  "dropped_container_ids": [],
+  "placeholders": 1,
+  "placeholder_classes": [
+   "ListView"
+  ],
+  "xycut_fallback_nodes": 1,
+  "edges": 7,
+  "kotlin_lines": 64,
+  "image_size": [
+   null,
+   null
+  ],
+  "confidences": [
+   [
+    "Button",
+    0.96
+   ],
+   [
+    "ListView",
+    0.94
+   ],
+   [
+    "TextView",
+    0.94
+   ],
+   [
+    "TextView",
+    0.92
+   ],
+   [
+    "TextView",
+    0.91
+   ],
+   [
+    "TextView",
+    0.87
+   ]
+  ]
+ },
+ "com.netbeast.yeti-screens_screenshot_1": {
+  "raw_detections": 5,
+  "raw_by_class": {
+   "Button": 2,
+   "ImageView": 2,
+   "TextView": 1
+  },
+  "emitted_leaves": 5,
+  "emitted_by_class": {
+   "Button": 2,
+   "ImageView": 2,
+   "TextView": 1
+  },
+  "duplicated_leaf_ids": {},
+  "dropped_container_ids": [],
+  "placeholders": 0,
+  "placeholder_classes": [],
+  "xycut_fallback_nodes": 1,
+  "edges": 4,
+  "kotlin_lines": 62,
+  "image_size": [
+   null,
+   null
+  ],
+  "confidences": [
+   [
+    "Button",
+    0.76
+   ],
+   [
+    "Button",
+    0.61
+   ],
+   [
+    "ImageView",
+    0.35
+   ],
+   [
+    "TextView",
+    0.35
+   ],
+   [
+    "ImageView",
+    0.33
+   ]
+  ]
+ },
+ "com.shazam.android-screens_screenshot_3": {
+  "raw_detections": 19,
+  "raw_by_class": {
+   "Button": 2,
+   "ImageView": 7,
+   "RecyclerView": 1,
+   "TextView": 9
+  },
+  "emitted_leaves": 19,
+  "emitted_by_class": {
+   "Button": 2,
+   "ImageView": 6,
+   "RecyclerView": 1,
+   "TextView": 10
+  },
+  "duplicated_leaf_ids": {
+   "10": 2,
+   "11": 2
+  },
+  "dropped_container_ids": [
+   [
+    8,
+    "ImageView",
+    0.38
+   ],
+   [
+    9,
+    "ImageView",
+    0.31
+   ]
+  ],
+  "placeholders": 1,
+  "placeholder_classes": [
+   "RecyclerView"
+  ],
+  "xycut_fallback_nodes": 4,
+  "edges": 24,
+  "kotlin_lines": 209,
+  "image_size": [
+   null,
+   null
+  ],
+  "confidences": [
+   [
+    "Button",
+    0.77
+   ],
+   [
+    "TextView",
+    0.76
+   ],
+   [
+    "TextView",
+    0.76
+   ],
+   [
+    "RecyclerView",
+    0.74
+   ],
+   [
+    "TextView",
+    0.71
+   ],
+   [
+    "TextView",
+    0.7
+   ],
+   [
+    "ImageView",
+    0.68
+   ],
+   [
+    "ImageView",
+    0.62
+   ],
+   [
+    "TextView",
+    0.62
+   ],
+   [
+    "ImageView",
+    0.55
+   ],
+   [
+    "TextView",
+    0.55
+   ],
+   [
+    "ImageView",
+    0.54
+   ],
+   [
+    "ImageView",
+    0.51
+   ],
+   [
+    "TextView",
+    0.48
+   ],
+   [
+    "Button",
+    0.46
+   ],
+   [
+    "TextView",
+    0.41
+   ],
+   [
+    "TextView",
+    0.41
+   ],
+   [
+    "ImageView",
+    0.38
+   ],
+   [
+    "ImageView",
+    0.31
+   ]
+  ]
+ },
+ "com.sign.language.learn1234-screens_screenshot_2": {
+  "raw_detections": 9,
+  "raw_by_class": {
+   "ImageView": 3,
+   "ListView": 1,
+   "TextView": 5
+  },
+  "emitted_leaves": 8,
+  "emitted_by_class": {
+   "ImageView": 3,
+   "TextView": 5
+  },
+  "duplicated_leaf_ids": {},
+  "dropped_container_ids": [
+   [
+    0,
+    "ListView",
+    0.96
+   ]
+  ],
+  "placeholders": 0,
+  "placeholder_classes": [],
+  "xycut_fallback_nodes": 0,
+  "edges": 5,
+  "kotlin_lines": 92,
+  "image_size": [
+   null,
+   null
+  ],
+  "confidences": [
+   [
+    "ListView",
+    0.96
+   ],
+   [
+    "TextView",
+    0.89
+   ],
+   [
+    "TextView",
+    0.89
+   ],
+   [
+    "ImageView",
+    0.81
+   ],
+   [
+    "ImageView",
+    0.78
+   ],
+   [
+    "ImageView",
+    0.75
+   ],
+   [
+    "TextView",
+    0.63
+   ],
+   [
+    "TextView",
+    0.61
+   ],
+   [
+    "TextView",
+    0.43
+   ]
+  ]
+ },
+ "westport.andrewirwin.com.drivesafe-screens_screenshot_3": {
+  "raw_detections": 14,
+  "raw_by_class": {
+   "Button": 1,
+   "CheckBox": 3,
+   "ImageView": 1,
+   "ListView": 1,
+   "TextView": 8
+  },
+  "emitted_leaves": 11,
+  "emitted_by_class": {
+   "Button": 1,
+   "CheckBox": 3,
+   "ImageView": 1,
+   "TextView": 6
+  },
+  "duplicated_leaf_ids": {
+   "5": 2
+  },
+  "dropped_container_ids": [
+   [
+    2,
+    "ListView",
+    0.86
+   ],
+   [
+    3,
+    "TextView",
+    0.52
+   ],
+   [
+    7,
+    "TextView",
+    0.64
+   ],
+   [
+    10,
+    "TextView",
+    0.65
+   ]
+  ],
+  "placeholders": 0,
+  "placeholder_classes": [],
+  "xycut_fallback_nodes": 1,
+  "edges": 17,
+  "kotlin_lines": 128,
+  "image_size": [
+   null,
+   null
+  ],
+  "confidences": [
+   [
+    "Button",
+    0.92
+   ],
+   [
+    "TextView",
+    0.89
+   ],
+   [
+    "ListView",
+    0.86
+   ],
+   [
+    "CheckBox",
+    0.86
+   ],
+   [
+    "CheckBox",
+    0.81
+   ],
+   [
+    "CheckBox",
+    0.79
+   ],
+   [
+    "TextView",
+    0.78
+   ],
+   [
+    "TextView",
+    0.71
+   ],
+   [
+    "TextView",
+    0.65
+   ],
+   [
+    "TextView",
+    0.64
+   ],
+   [
+    "TextView",
+    0.52
+   ],
+   [
+    "ImageView",
+    0.48
+   ],
+   [
+    "TextView",
+    0.45
+   ],
+   [
+    "TextView",
+    0.35
+   ]
+  ]
+ }
+}

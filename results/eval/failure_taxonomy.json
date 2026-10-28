@@ -1,0 +1,1918 @@
+{
+  "meta": {
+    "tool": "ui2compose.evaluation.failure_taxonomy",
+    "ui2compose_version": "1.2.0",
+    "created_utc": "2026-10-27 13:59:24",
+    "data_dir": "../ui2compose_redraw_valtest_v1.1.0_UNVERIFIED",
+    "split": "test",
+    "pred_cache": "../ui2compose-v1.2.0-eval-outputs/pred_cache/test",
+    "prediction_meta": {
+      "file": "../ui2compose-v1.2.0-eval-outputs/pred_cache/meta_test.json",
+      "weights": "runs/oversample_5k/weights/best.pt",
+      "weights_md5": "eb6ad943fb29b4593b5d1fbe993b347f",
+      "settings": {
+        "conf_threshold": 0.3,
+        "iou_threshold": 0.7,
+        "imgsz": null,
+        "agnostic_nms": false,
+        "max_det": 300,
+        "imgsz_effective": null,
+        "device": null
+      },
+      "ultralytics_version": "8.4.24"
+    },
+    "condition": "C4",
+    "variant": "o",
+    "params": {
+      "dedup": {
+        "same_class_iou": 0.4,
+        "same_class_iomin": 0.85,
+        "cross_class_iou": 0.5
+      },
+      "containment_ratio": 0.9,
+      "cut_tol_frac": 0.0025,
+      "fallback": "y_sorted",
+      "match_iou": 0.5
+    },
+    "sample": {
+      "n": 50,
+      "seed": 42,
+      "method": "numpy default_rng(seed).choice over the sorted stems of the split, without replacement",
+      "n_split": 1870,
+      "stems": [
+        "com.hearst.android.wtae-screens_screenshot_3",
+        "com.lego.legotv-screens_screenshot_1",
+        "com.ismartcreations.flashlightonclap-screens_screenshot_4",
+        "com.andromo.dev535138.app530249-screens_screenshot_2",
+        "com.sentinelbd.news12-screens_screenshot_3",
+        "si.modula.android.instantheartrate-screens_screenshot_3",
+        "com.nielsen.harris-screens_screenshot_3",
+        "com.portalgroove.babylullaby-screens_screenshot_1",
+        "com.dominos.zeroclick-screens_screenshot_1",
+        "com.issuu.android.app-screens_screenshot_4",
+        "com.gaweestudio.legobatman-screens_screenshot_1",
+        "com.pescapps.kids_paint_free-screens_screenshot_1",
+        "com.ibm.events.android.masters-screens_screenshot_3",
+        "com.allintheloop.realtor-screens_screenshot_5",
+        "com.seamlessweb.android.view-screens_screenshot_4",
+        "com.lifescan.reveal-screens_screenshot_1",
+        "com.knoozapps.boyorgirl-screens_screenshot_6",
+        "com.runtastic.android.results.lite-screens_screenshot_2",
+        "com.cibiru.craftmanisas-screens_screenshot_2",
+        "com.todoapps.lawsofpower-screens_screenshot_2",
+        "com.matchlatam.usa.matchlatamapp-screens_screenshot_1",
+        "com.superdeve.pokemondrawing-screens_screenshot_2",
+        "com.bottegasol.com.migym.InShape-screens_screenshot_6",
+        "com.pikasapps.lockscreen.wallpapers-screens_screenshot_1",
+        "forminecraft.school-screens_screenshot_1",
+        "jp.co.pointblur.android.app.quick-screens_screenshot_2",
+        "com.iduoadez.drawpoke-screens_screenshot_5",
+        "com.andujardev.jcprankbutton-screens_screenshot_2",
+        "com.tuxera.streambels-screens_screenshot_1",
+        "music.equalizer.volumebooster-screens_screenshot_6",
+        "com.netspend.mobileapp.brinks-screens_screenshot_3",
+        "com.nithra.nithraresume-screens_screenshot_1",
+        "com.quvideo.slideplus-screens_screenshot_1",
+        "com.ist.babypic-screens_screenshot_5",
+        "riddle.me.that.riddles.logo.quiz.icomania-screens_screenshot_2",
+        "com.pro.nighmcpena-screens_screenshot_1",
+        "com.alesig.wmb-screens_screenshot_6",
+        "com.rinrada.android.mustang-screens_screenshot_5",
+        "com.instantbits.cast.webvideo-screens_screenshot_2",
+        "com.wageworks.ezreceipts-screens_screenshot_3",
+        "com.manboker.headportrait-screens_screenshot_3",
+        "com.cotanak.surprise-screens_screenshot_4",
+        "com.andromo.dev442382.app431230-screens_screenshot_2",
+        "com.sdt1.bright.light-screens_screenshot_3",
+        "com.rubisoft.lesbianradar-screens_screenshot_3",
+        "com.calm.android-screens_screenshot_5",
+        "com.goodbarber.cibercuba-screens_screenshot_2",
+        "com.aries.software.texas_dmv_test-screens_screenshot_4",
+        "com.animoto.android.videoslideshow-screens_screenshot_4",
+        "com.tinymission.dailyworkoutsfree-screens_screenshot_1"
+      ]
+    },
+    "thresholds": {
+      "window_min_inside": 0.5,
+      "pixel_std_max": 2.0,
+      "shared_min": 0.5,
+      "cover_area_ratio_max": 4.0,
+      "artifact_px": 1.0
+    },
+    "categories": {
+      "detector_fp": "detection without a ground-truth box (IoU < 0.5) inside the dumped window",
+      "detector_fn": "ground-truth box without a detection, not explained by the rules below",
+      "wrong_class": "box found, class differs from the label",
+      "dedup_removed": "box found by the detector but removed by de-duplication",
+      "containment": "composite nesting (Box / LazyColumn) differs from the reference",
+      "xycut_fallback": "no XY-cut existed; the fallback ordering grouped the boxes",
+      "tolerance_cut": "cut accepted only through the tolerance; its children overlap",
+      "reference_overlap": "reference node hidden or stacked (covered by a later sibling, open drawer, pixels shared with other labels, FrameLayout-style overlay)",
+      "reference_flat2d": "reference container lays out its children in 2D without nesting (RelativeLayout style); XY-cut nests them",
+      "reference_artifact": "the dump does not describe the pixels (detection outside the dumped window, uniform pixels, box beyond the screen, invisible container)",
+      "grouping": "residual: both trees hold the boxes, XY-cut groups them differently from the view hierarchy"
+    },
+    "families": {
+      "detector": [
+        "detector_fp",
+        "detector_fn",
+        "wrong_class"
+      ],
+      "layout_rules": [
+        "dedup_removed",
+        "containment",
+        "xycut_fallback",
+        "tolerance_cut",
+        "grouping"
+      ],
+      "reference": [
+        "reference_overlap",
+        "reference_flat2d",
+        "reference_artifact"
+      ]
+    },
+    "run_check": {
+      "run_dir": "../ui2compose-v1.2.0-eval-outputs/layout_test",
+      "n_checked": 50,
+      "n_mismatch": 0,
+      "mismatches": []
+    }
+  },
+  "summary": {
+    "n_screens": 50,
+    "n_ok": 50,
+    "status": {
+      "ok": 50
+    },
+    "n_edits": 457,
+    "edits_per_screen": {
+      "n": 50,
+      "mean": 9.14,
+      "median": 6.0,
+      "q1": 2.0,
+      "q3": 13.75,
+      "min": 0.0,
+      "max": 61.0
+    },
+    "edits_per_category": {
+      "detector_fp": {
+        "n": 97,
+        "share": 0.212253829321663
+      },
+      "detector_fn": {
+        "n": 157,
+        "share": 0.3435448577680525
+      },
+      "wrong_class": {
+        "n": 9,
+        "share": 0.019693654266958426
+      },
+      "dedup_removed": {
+        "n": 2,
+        "share": 0.00437636761487965
+      },
+      "containment": {
+        "n": 15,
+        "share": 0.03282275711159737
+      },
+      "xycut_fallback": {
+        "n": 38,
+        "share": 0.08315098468271334
+      },
+      "tolerance_cut": {
+        "n": 25,
+        "share": 0.05470459518599562
+      },
+      "reference_overlap": {
+        "n": 26,
+        "share": 0.05689277899343545
+      },
+      "reference_flat2d": {
+        "n": 15,
+        "share": 0.03282275711159737
+      },
+      "reference_artifact": {
+        "n": 39,
+        "share": 0.08533916849015317
+      },
+      "grouping": {
+        "n": 34,
+        "share": 0.07439824945295405
+      }
+    },
+    "dominant": {
+      "detector_fp": 11,
+      "detector_fn": 20,
+      "wrong_class": 0,
+      "dedup_removed": 0,
+      "containment": 0,
+      "xycut_fallback": 2,
+      "tolerance_cut": 2,
+      "reference_overlap": 1,
+      "reference_flat2d": 1,
+      "reference_artifact": 7,
+      "grouping": 3,
+      "none": 3
+    },
+    "screens_with": {
+      "detector_fp": 26,
+      "detector_fn": 32,
+      "wrong_class": 7,
+      "dedup_removed": 2,
+      "containment": 9,
+      "xycut_fallback": 16,
+      "tolerance_cut": 11,
+      "reference_overlap": 8,
+      "reference_flat2d": 5,
+      "reference_artifact": 12,
+      "grouping": 14
+    },
+    "kind_by_category": {
+      "insert": {
+        "detector_fp": 4,
+        "detector_fn": 153,
+        "wrong_class": 0,
+        "dedup_removed": 2,
+        "containment": 6,
+        "xycut_fallback": 13,
+        "tolerance_cut": 8,
+        "reference_overlap": 15,
+        "reference_flat2d": 1,
+        "reference_artifact": 32,
+        "grouping": 23
+      },
+      "delete": {
+        "detector_fp": 73,
+        "detector_fn": 1,
+        "wrong_class": 0,
+        "dedup_removed": 0,
+        "containment": 2,
+        "xycut_fallback": 19,
+        "tolerance_cut": 5,
+        "reference_overlap": 2,
+        "reference_flat2d": 5,
+        "reference_artifact": 4,
+        "grouping": 3
+      },
+      "rename": {
+        "detector_fp": 20,
+        "detector_fn": 3,
+        "wrong_class": 9,
+        "dedup_removed": 0,
+        "containment": 7,
+        "xycut_fallback": 6,
+        "tolerance_cut": 12,
+        "reference_overlap": 9,
+        "reference_flat2d": 9,
+        "reference_artifact": 3,
+        "grouping": 8
+      }
+    },
+    "families": {
+      "detector": {
+        "n": 263,
+        "share": 0.5754923413566739,
+        "categories": [
+          "detector_fp",
+          "detector_fn",
+          "wrong_class"
+        ]
+      },
+      "layout_rules": {
+        "n": 114,
+        "share": 0.24945295404814005,
+        "categories": [
+          "dedup_removed",
+          "containment",
+          "xycut_fallback",
+          "tolerance_cut",
+          "grouping"
+        ]
+      },
+      "reference": {
+        "n": 80,
+        "share": 0.175054704595186,
+        "categories": [
+          "reference_overlap",
+          "reference_flat2d",
+          "reference_artifact"
+        ]
+      }
+    },
+    "dominant_by_family": {
+      "detector": 31,
+      "layout_rules": 7,
+      "reference": 9
+    },
+    "detector_totals": {
+      "n_gt": 530,
+      "n_raw": 495,
+      "n_kept": 450,
+      "n_matched": 331,
+      "n_fp": 119,
+      "n_fn": 199,
+      "n_class_mismatch": 26,
+      "n_dedup_removed": 45,
+      "n_dedup_removed_matching_gt": 7,
+      "n_fallback": 32
+    }
+  },
+  "cases": [
+    {
+      "family": "detector",
+      "category": "detector_fp",
+      "stem": "si.modula.android.instantheartrate-screens_screenshot_3",
+      "share": 1.0,
+      "n_edits": 3,
+      "n_category": 3,
+      "teds": 0.625,
+      "explain_id": 2,
+      "edit": {
+        "kind": "delete",
+        "category": "detector_fp",
+        "reason": "2 of 2 unmatched: ImageView#2 matches no ground-truth box",
+        "gen": "Row(Row:gap) [226,784,975,992]",
+        "ref": null,
+        "explain_id": 2
+      },
+      "pipeline_command": "ui2compose ../ui2compose_redraw_valtest_v1.1.0_UNVERIFIED/dataset/images/test/si.modula.android.instantheartrate-screens_screenshot_3.png --model runs/oversample_5k/weights/best.pt --output ../ui2compose-v1.2.0-eval-outputs/failure_taxonomy_test/cases/si.modula.android.instantheartrate-screens_screenshot_3 --no-viz --config ../ui2compose-v1.2.0-eval-outputs/pipeline_config_split.yaml --explain 2",
+      "pipeline_returncode": 0,
+      "pipeline_dir": "../ui2compose-v1.2.0-eval-outputs/failure_taxonomy_test/cases/si.modula.android.instantheartrate-screens_screenshot_3",
+      "explain_lines": [
+        "Explain trace for detection id 2",
+        "[detection] ImageView conf=0.77 bbox=[226, 785, 427, 992]",
+        "[post-processing] kept",
+        "[graph] containment:",
+        "  id 2 ImageView conf=0.77 bbox=[226, 785, 427, 992] area=41787; containment rule: coverage >= 0.9 and higher rank (area, then confidence, then lower id)",
+        "    contained in: none -> top-level node of the containment forest",
+        "[layout] path in the layout tree:",
+        "  Column (rule=gap, axis=y, 2 cuts, tolerance 4.8 px) -> group 2 of 3, between gaps y in [676,784.3] and [991.9,1006.8]",
+        "  Row (rule=gap, axis=x, 1 cut, tolerance 3 px) -> group 1 of 2, before gap x in [427.4,777.6]",
+        "  leaf ImageView#2 (conf 0.77, bbox [225.8,784.6,427.4,991.9])"
+      ],
+      "key_line": "[detection] ImageView conf=0.77 bbox=[226, 785, 427, 992]",
+      "detections_identical_to_cache": true
+    },
+    {
+      "family": "layout_rules",
+      "category": "grouping",
+      "stem": "com.andromo.dev535138.app530249-screens_screenshot_2",
+      "share": 0.6666666666666666,
+      "n_edits": 3,
+      "n_category": 2,
+      "teds": 0.7,
+      "explain_id": 4,
+      "edit": {
+        "kind": "delete",
+        "category": "grouping",
+        "reason": "container Column:gap not in the reference",
+        "gen": "Column(Column:gap) [0,50,1200,1506]",
+        "ref": null,
+        "explain_id": 4
+      },
+      "pipeline_command": "ui2compose ../ui2compose_redraw_valtest_v1.1.0_UNVERIFIED/dataset/images/test/com.andromo.dev535138.app530249-screens_screenshot_2.png --model runs/oversample_5k/weights/best.pt --output ../ui2compose-v1.2.0-eval-outputs/failure_taxonomy_test/cases/com.andromo.dev535138.app530249-screens_screenshot_2 --no-viz --config ../ui2compose-v1.2.0-eval-outputs/pipeline_config_split.yaml --explain 4",
+      "pipeline_returncode": 0,
+      "pipeline_dir": "../ui2compose-v1.2.0-eval-outputs/failure_taxonomy_test/cases/com.andromo.dev535138.app530249-screens_screenshot_2",
+      "explain_lines": [
+        "Explain trace for detection id 4",
+        "[detection] ImageView conf=0.91 bbox=[27, 60, 120, 154]",
+        "[post-processing] kept",
+        "[graph] containment:",
+        "  id 4 ImageView conf=0.91 bbox=[27, 60, 120, 154] area=8717; containment rule: coverage >= 0.9 and higher rank (area, then confidence, then lower id)",
+        "    contained in: none -> top-level node of the containment forest",
+        "[layout] path in the layout tree:",
+        "  Column (rule=gap, axis=y, 1 cut, tolerance 4.8 px) -> group 1 of 2, before gap y in [162.7,1117.7]",
+        "  Row (rule=gap, axis=x, 3 cuts, tolerance 3 px) -> group 1 of 4, before gap x in [120,129.9]",
+        "  Column (rule=fallback_y_sorted: no cut along y (tolerance 4.8 px) or x (tolerance 3 px); members ordered by y-centre) -> position 1 of 2",
+        "  leaf ImageView#4 (conf 0.91, bbox [27.3,59.5,120,153.5])"
+      ],
+      "key_line": "Column (rule=gap, axis=y, 1 cut, tolerance 4.8 px) -> group 1 of 2, before gap y in [162.7,1117.7]",
+      "detections_identical_to_cache": true
+    },
+    {
+      "family": "reference",
+      "category": "reference_artifact",
+      "stem": "com.andromo.dev442382.app431230-screens_screenshot_2",
+      "share": 1.0,
+      "n_edits": 1,
+      "n_category": 1,
+      "teds": 0.75,
+      "explain_id": 0,
+      "edit": {
+        "kind": "delete",
+        "category": "reference_artifact",
+        "reason": "TextView#0: 0% inside the dumped window [776, 146, 1200, 274]",
+        "gen": "TextView#0 [834,83,947,131]",
+        "ref": null,
+        "explain_id": 0
+      },
+      "pipeline_command": "ui2compose ../ui2compose_redraw_valtest_v1.1.0_UNVERIFIED/dataset/images/test/com.andromo.dev442382.app431230-screens_screenshot_2.png --model runs/oversample_5k/weights/best.pt --output ../ui2compose-v1.2.0-eval-outputs/failure_taxonomy_test/cases/com.andromo.dev442382.app431230-screens_screenshot_2 --no-viz --config ../ui2compose-v1.2.0-eval-outputs/pipeline_config_split.yaml --explain 0",
+      "pipeline_returncode": 0,
+      "pipeline_dir": "../ui2compose-v1.2.0-eval-outputs/failure_taxonomy_test/cases/com.andromo.dev442382.app431230-screens_screenshot_2",
+      "explain_lines": [
+        "Explain trace for detection id 0",
+        "[detection] TextView conf=0.38 bbox=[834, 83, 947, 131]",
+        "[post-processing] kept",
+        "[graph] containment:",
+        "  id 0 TextView conf=0.38 bbox=[834, 83, 947, 131] area=5476; containment rule: coverage >= 0.9 and higher rank (area, then confidence, then lower id)",
+        "    contained in: none -> top-level node of the containment forest",
+        "[layout] path in the layout tree:",
+        "  Column (rule=gap, axis=y, 1 cut, tolerance 4.8 px) -> group 1 of 2, before gap y in [131.2,157.6]",
+        "  leaf TextView#0 (conf 0.38, bbox [833.7,82.7,946.8,131.2])"
+      ],
+      "key_line": "[detection] TextView conf=0.38 bbox=[834, 83, 947, 131]",
+      "detections_identical_to_cache": true
+    }
+  ],
+  "screens": [
+    {
+      "stem": "com.alesig.wmb-screens_screenshot_6",
+      "status": "ok",
+      "n_gt": 11,
+      "n_raw": 8,
+      "n_kept": 7,
+      "n_matched": 6,
+      "n_fp": 1,
+      "n_fn": 5,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 19,
+      "gen_nodes": 9,
+      "ted": 13,
+      "teds": 0.3157894736842105,
+      "ops": {
+        "insert": 11,
+        "delete": 1,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 2,
+        "detector_fn": 4,
+        "containment": 1,
+        "tolerance_cut": 3,
+        "reference_overlap": 3
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.3076923076923077
+    },
+    {
+      "stem": "com.allintheloop.realtor-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 5,
+      "n_raw": 5,
+      "n_kept": 5,
+      "n_matched": 1,
+      "n_fp": 4,
+      "n_fn": 4,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 7,
+      "gen_nodes": 7,
+      "ted": 8,
+      "teds": -0.1428571428571428,
+      "ops": {
+        "insert": 2,
+        "delete": 2,
+        "rename": 4
+      },
+      "categories": {
+        "detector_fp": 3,
+        "detector_fn": 2,
+        "xycut_fallback": 1,
+        "reference_artifact": 1,
+        "grouping": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.375
+    },
+    {
+      "stem": "com.andromo.dev442382.app431230-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 2,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 2,
+      "n_fp": 1,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 3,
+      "gen_nodes": 4,
+      "ted": 1,
+      "teds": 0.75,
+      "ops": {
+        "insert": 0,
+        "delete": 1,
+        "rename": 0
+      },
+      "categories": {
+        "reference_artifact": 1
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.andromo.dev535138.app530249-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 6,
+      "n_raw": 7,
+      "n_kept": 7,
+      "n_matched": 6,
+      "n_fp": 1,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 9,
+      "gen_nodes": 10,
+      "ted": 3,
+      "teds": 0.7,
+      "ops": {
+        "insert": 1,
+        "delete": 2,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fp": 1,
+        "grouping": 2
+      },
+      "dominant": "grouping",
+      "dominant_share": 0.6666666666666666
+    },
+    {
+      "stem": "com.andujardev.jcprankbutton-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 5,
+      "n_raw": 4,
+      "n_kept": 4,
+      "n_matched": 1,
+      "n_fp": 3,
+      "n_fn": 4,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 9,
+      "gen_nodes": 6,
+      "ted": 7,
+      "teds": 0.2222222222222222,
+      "ops": {
+        "insert": 3,
+        "delete": 0,
+        "rename": 4
+      },
+      "categories": {
+        "detector_fp": 3,
+        "detector_fn": 3,
+        "wrong_class": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.42857142857142855
+    },
+    {
+      "stem": "com.animoto.android.videoslideshow-screens_screenshot_4",
+      "status": "ok",
+      "n_gt": 6,
+      "n_raw": 8,
+      "n_kept": 8,
+      "n_matched": 4,
+      "n_fp": 4,
+      "n_fn": 2,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 11,
+      "gen_nodes": 10,
+      "ted": 5,
+      "teds": 0.5454545454545454,
+      "ops": {
+        "insert": 2,
+        "delete": 1,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fp": 3,
+        "grouping": 2
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.6
+    },
+    {
+      "stem": "com.aries.software.texas_dmv_test-screens_screenshot_4",
+      "status": "ok",
+      "n_gt": 47,
+      "n_raw": 65,
+      "n_kept": 48,
+      "n_matched": 40,
+      "n_fp": 8,
+      "n_fn": 7,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 17,
+      "n_dedup_removed_matching_gt": 3,
+      "n_fallback": 3,
+      "ref_nodes": 71,
+      "gen_nodes": 65,
+      "ted": 23,
+      "teds": 0.676056338028169,
+      "ops": {
+        "insert": 11,
+        "delete": 5,
+        "rename": 7
+      },
+      "categories": {
+        "detector_fp": 2,
+        "dedup_removed": 1,
+        "containment": 1,
+        "xycut_fallback": 3,
+        "tolerance_cut": 6,
+        "reference_artifact": 2,
+        "grouping": 8
+      },
+      "dominant": "grouping",
+      "dominant_share": 0.34782608695652173
+    },
+    {
+      "stem": "com.bottegasol.com.migym.InShape-screens_screenshot_6",
+      "status": "ok",
+      "n_gt": 10,
+      "n_raw": 10,
+      "n_kept": 8,
+      "n_matched": 7,
+      "n_fp": 1,
+      "n_fn": 3,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 2,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 15,
+      "gen_nodes": 10,
+      "ted": 6,
+      "teds": 0.6,
+      "ops": {
+        "insert": 5,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fn": 3,
+        "wrong_class": 1,
+        "grouping": 2
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.5
+    },
+    {
+      "stem": "com.calm.android-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 7,
+      "n_raw": 5,
+      "n_kept": 5,
+      "n_matched": 3,
+      "n_fp": 2,
+      "n_fn": 4,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 10,
+      "gen_nodes": 7,
+      "ted": 6,
+      "teds": 0.4,
+      "ops": {
+        "insert": 4,
+        "delete": 1,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 2,
+        "detector_fn": 3,
+        "containment": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.5
+    },
+    {
+      "stem": "com.cibiru.craftmanisas-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 10,
+      "n_raw": 9,
+      "n_kept": 9,
+      "n_matched": 9,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 13,
+      "gen_nodes": 12,
+      "ted": 1,
+      "teds": 0.9230769230769231,
+      "ops": {
+        "insert": 1,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.cotanak.surprise-screens_screenshot_4",
+      "status": "ok",
+      "n_gt": 8,
+      "n_raw": 8,
+      "n_kept": 6,
+      "n_matched": 5,
+      "n_fp": 1,
+      "n_fn": 3,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 2,
+      "n_dedup_removed_matching_gt": 1,
+      "n_fallback": 1,
+      "ref_nodes": 14,
+      "gen_nodes": 9,
+      "ted": 5,
+      "teds": 0.6428571428571428,
+      "ops": {
+        "insert": 5,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 3,
+        "reference_artifact": 1,
+        "grouping": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.6
+    },
+    {
+      "stem": "com.dominos.zeroclick-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 5,
+      "n_raw": 6,
+      "n_kept": 5,
+      "n_matched": 3,
+      "n_fp": 2,
+      "n_fn": 2,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 7,
+      "gen_nodes": 6,
+      "ted": 1,
+      "teds": 0.8571428571428572,
+      "ops": {
+        "insert": 1,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.gaweestudio.legobatman-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 3,
+      "n_raw": 2,
+      "n_kept": 2,
+      "n_matched": 2,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 5,
+      "gen_nodes": 3,
+      "ted": 2,
+      "teds": 0.6,
+      "ops": {
+        "insert": 2,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 2
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.goodbarber.cibercuba-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 4,
+      "n_raw": 4,
+      "n_kept": 4,
+      "n_matched": 4,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 6,
+      "gen_nodes": 6,
+      "ted": 1,
+      "teds": 0.8333333333333334,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "tolerance_cut": 1
+      },
+      "dominant": "tolerance_cut",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.hearst.android.wtae-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 21,
+      "n_raw": 20,
+      "n_kept": 17,
+      "n_matched": 14,
+      "n_fp": 3,
+      "n_fn": 7,
+      "n_class_mismatch": 2,
+      "n_dedup_removed": 3,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 34,
+      "gen_nodes": 23,
+      "ted": 17,
+      "teds": 0.5,
+      "ops": {
+        "insert": 12,
+        "delete": 1,
+        "rename": 4
+      },
+      "categories": {
+        "detector_fp": 2,
+        "detector_fn": 3,
+        "wrong_class": 2,
+        "containment": 1,
+        "reference_overlap": 3,
+        "reference_artifact": 4,
+        "grouping": 2
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.23529411764705882
+    },
+    {
+      "stem": "com.ibm.events.android.masters-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 10,
+      "n_raw": 9,
+      "n_kept": 9,
+      "n_matched": 9,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 13,
+      "gen_nodes": 12,
+      "ted": 1,
+      "teds": 0.9230769230769231,
+      "ops": {
+        "insert": 1,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.iduoadez.drawpoke-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 2,
+      "n_raw": 2,
+      "n_kept": 2,
+      "n_matched": 2,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 3,
+      "gen_nodes": 3,
+      "ted": 1,
+      "teds": 0.6666666666666667,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "xycut_fallback": 1
+      },
+      "dominant": "xycut_fallback",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.instantbits.cast.webvideo-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 4,
+      "n_raw": 6,
+      "n_kept": 4,
+      "n_matched": 4,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 2,
+      "n_dedup_removed": 2,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 5,
+      "gen_nodes": 6,
+      "ted": 4,
+      "teds": 0.33333333333333337,
+      "ops": {
+        "insert": 0,
+        "delete": 1,
+        "rename": 3
+      },
+      "categories": {
+        "tolerance_cut": 3,
+        "reference_flat2d": 1
+      },
+      "dominant": "tolerance_cut",
+      "dominant_share": 0.75
+    },
+    {
+      "stem": "com.ismartcreations.flashlightonclap-screens_screenshot_4",
+      "status": "ok",
+      "n_gt": 13,
+      "n_raw": 21,
+      "n_kept": 21,
+      "n_matched": 11,
+      "n_fp": 10,
+      "n_fn": 2,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 2,
+      "ref_nodes": 18,
+      "gen_nodes": 35,
+      "ted": 18,
+      "teds": 0.48571428571428577,
+      "ops": {
+        "insert": 0,
+        "delete": 17,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 16,
+        "xycut_fallback": 2
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.8888888888888888
+    },
+    {
+      "stem": "com.issuu.android.app-screens_screenshot_4",
+      "status": "ok",
+      "n_gt": 1,
+      "n_raw": 2,
+      "n_kept": 2,
+      "n_matched": 1,
+      "n_fp": 1,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 2,
+      "gen_nodes": 3,
+      "ted": 1,
+      "teds": 0.6666666666666667,
+      "ops": {
+        "insert": 0,
+        "delete": 1,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fp": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.ist.babypic-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 2,
+      "n_raw": 4,
+      "n_kept": 2,
+      "n_matched": 1,
+      "n_fp": 1,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 2,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 3,
+      "gen_nodes": 3,
+      "ted": 0,
+      "teds": 1.0,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {},
+      "dominant": "none",
+      "dominant_share": null
+    },
+    {
+      "stem": "com.knoozapps.boyorgirl-screens_screenshot_6",
+      "status": "ok",
+      "n_gt": 16,
+      "n_raw": 18,
+      "n_kept": 18,
+      "n_matched": 16,
+      "n_fp": 2,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 3,
+      "ref_nodes": 25,
+      "gen_nodes": 29,
+      "ted": 11,
+      "teds": 0.6206896551724138,
+      "ops": {
+        "insert": 2,
+        "delete": 6,
+        "rename": 3
+      },
+      "categories": {
+        "detector_fp": 3,
+        "containment": 1,
+        "reference_overlap": 5,
+        "grouping": 2
+      },
+      "dominant": "reference_overlap",
+      "dominant_share": 0.45454545454545453
+    },
+    {
+      "stem": "com.lego.legotv-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 9,
+      "n_raw": 0,
+      "n_kept": 0,
+      "n_matched": 0,
+      "n_fp": 0,
+      "n_fn": 9,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 13,
+      "gen_nodes": 1,
+      "ted": 13,
+      "teds": 0.0,
+      "ops": {
+        "insert": 12,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fn": 1,
+        "reference_artifact": 12
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.9230769230769231
+    },
+    {
+      "stem": "com.lifescan.reveal-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 3,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 3,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 5,
+      "gen_nodes": 5,
+      "ted": 0,
+      "teds": 1.0,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {},
+      "dominant": "none",
+      "dominant_share": null
+    },
+    {
+      "stem": "com.manboker.headportrait-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 3,
+      "n_raw": 7,
+      "n_kept": 7,
+      "n_matched": 1,
+      "n_fp": 6,
+      "n_fn": 2,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 4,
+      "gen_nodes": 8,
+      "ted": 6,
+      "teds": 0.25,
+      "ops": {
+        "insert": 0,
+        "delete": 4,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fp": 4,
+        "detector_fn": 1,
+        "xycut_fallback": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.6666666666666666
+    },
+    {
+      "stem": "com.matchlatam.usa.matchlatamapp-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 11,
+      "n_raw": 10,
+      "n_kept": 10,
+      "n_matched": 10,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 12,
+      "gen_nodes": 11,
+      "ted": 1,
+      "teds": 0.9166666666666666,
+      "ops": {
+        "insert": 1,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.netspend.mobileapp.brinks-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 5,
+      "n_raw": 2,
+      "n_kept": 2,
+      "n_matched": 0,
+      "n_fp": 2,
+      "n_fn": 5,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 8,
+      "gen_nodes": 3,
+      "ted": 6,
+      "teds": 0.25,
+      "ops": {
+        "insert": 5,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fn": 2,
+        "reference_artifact": 4
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.6666666666666666
+    },
+    {
+      "stem": "com.nielsen.harris-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 13,
+      "n_raw": 14,
+      "n_kept": 14,
+      "n_matched": 9,
+      "n_fp": 5,
+      "n_fn": 4,
+      "n_class_mismatch": 3,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 19,
+      "gen_nodes": 19,
+      "ted": 17,
+      "teds": 0.10526315789473684,
+      "ops": {
+        "insert": 7,
+        "delete": 7,
+        "rename": 3
+      },
+      "categories": {
+        "detector_fp": 7,
+        "detector_fn": 7,
+        "wrong_class": 1,
+        "tolerance_cut": 2
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.4117647058823529
+    },
+    {
+      "stem": "com.nithra.nithraresume-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 10,
+      "n_raw": 6,
+      "n_kept": 5,
+      "n_matched": 4,
+      "n_fp": 1,
+      "n_fn": 6,
+      "n_class_mismatch": 4,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 2,
+      "ref_nodes": 17,
+      "gen_nodes": 8,
+      "ted": 15,
+      "teds": 0.11764705882352944,
+      "ops": {
+        "insert": 10,
+        "delete": 1,
+        "rename": 4
+      },
+      "categories": {
+        "detector_fp": 3,
+        "detector_fn": 7,
+        "wrong_class": 2,
+        "xycut_fallback": 3
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.4666666666666667
+    },
+    {
+      "stem": "com.pescapps.kids_paint_free-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 1,
+      "n_raw": 4,
+      "n_kept": 3,
+      "n_matched": 0,
+      "n_fp": 3,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 2,
+      "gen_nodes": 4,
+      "ted": 4,
+      "teds": 0.0,
+      "ops": {
+        "insert": 0,
+        "delete": 2,
+        "rename": 2
+      },
+      "categories": {
+        "xycut_fallback": 1,
+        "reference_artifact": 3
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.75
+    },
+    {
+      "stem": "com.pikasapps.lockscreen.wallpapers-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 19,
+      "n_raw": 18,
+      "n_kept": 18,
+      "n_matched": 18,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 24,
+      "gen_nodes": 24,
+      "ted": 4,
+      "teds": 0.8333333333333334,
+      "ops": {
+        "insert": 2,
+        "delete": 2,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 1,
+        "tolerance_cut": 1,
+        "reference_flat2d": 2
+      },
+      "dominant": "reference_flat2d",
+      "dominant_share": 0.5
+    },
+    {
+      "stem": "com.portalgroove.babylullaby-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 19,
+      "n_raw": 31,
+      "n_kept": 30,
+      "n_matched": 19,
+      "n_fp": 11,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 3,
+      "ref_nodes": 21,
+      "gen_nodes": 35,
+      "ted": 15,
+      "teds": 0.5714285714285714,
+      "ops": {
+        "insert": 0,
+        "delete": 14,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 11,
+        "xycut_fallback": 3,
+        "tolerance_cut": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.7333333333333333
+    },
+    {
+      "stem": "com.pro.nighmcpena-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 12,
+      "n_raw": 11,
+      "n_kept": 11,
+      "n_matched": 9,
+      "n_fp": 2,
+      "n_fn": 3,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 17,
+      "gen_nodes": 15,
+      "ted": 10,
+      "teds": 0.4117647058823529,
+      "ops": {
+        "insert": 6,
+        "delete": 4,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fp": 2,
+        "detector_fn": 3,
+        "containment": 1,
+        "xycut_fallback": 2,
+        "tolerance_cut": 1,
+        "reference_overlap": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.3
+    },
+    {
+      "stem": "com.quvideo.slideplus-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 51,
+      "n_raw": 22,
+      "n_kept": 22,
+      "n_matched": 19,
+      "n_fp": 3,
+      "n_fn": 32,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 2,
+      "ref_nodes": 84,
+      "gen_nodes": 30,
+      "ted": 61,
+      "teds": 0.27380952380952384,
+      "ops": {
+        "insert": 55,
+        "delete": 1,
+        "rename": 5
+      },
+      "categories": {
+        "detector_fn": 45,
+        "containment": 5,
+        "xycut_fallback": 2,
+        "reference_overlap": 6,
+        "reference_artifact": 1,
+        "grouping": 2
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.7377049180327869
+    },
+    {
+      "stem": "com.rinrada.android.mustang-screens_screenshot_5",
+      "status": "ok",
+      "n_gt": 2,
+      "n_raw": 2,
+      "n_kept": 2,
+      "n_matched": 1,
+      "n_fp": 1,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 3,
+      "gen_nodes": 3,
+      "ted": 1,
+      "teds": 0.6666666666666667,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fp": 1
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.rubisoft.lesbianradar-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 2,
+      "n_raw": 2,
+      "n_kept": 2,
+      "n_matched": 2,
+      "n_fp": 0,
+      "n_fn": 0,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 3,
+      "gen_nodes": 3,
+      "ted": 0,
+      "teds": 1.0,
+      "ops": {
+        "insert": 0,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {},
+      "dominant": "none",
+      "dominant_share": null
+    },
+    {
+      "stem": "com.runtastic.android.results.lite-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 12,
+      "n_raw": 6,
+      "n_kept": 6,
+      "n_matched": 4,
+      "n_fp": 2,
+      "n_fn": 8,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 19,
+      "gen_nodes": 8,
+      "ted": 14,
+      "teds": 0.26315789473684215,
+      "ops": {
+        "insert": 11,
+        "delete": 0,
+        "rename": 3
+      },
+      "categories": {
+        "detector_fp": 2,
+        "detector_fn": 2,
+        "containment": 1,
+        "reference_overlap": 2,
+        "reference_artifact": 7
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 0.5
+    },
+    {
+      "stem": "com.sdt1.bright.light-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 13,
+      "n_raw": 11,
+      "n_kept": 11,
+      "n_matched": 5,
+      "n_fp": 6,
+      "n_fn": 8,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 21,
+      "gen_nodes": 15,
+      "ted": 15,
+      "teds": 0.2857142857142857,
+      "ops": {
+        "insert": 9,
+        "delete": 3,
+        "rename": 3
+      },
+      "categories": {
+        "detector_fp": 3,
+        "detector_fn": 8,
+        "xycut_fallback": 1,
+        "reference_overlap": 2,
+        "grouping": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.5333333333333333
+    },
+    {
+      "stem": "com.seamlessweb.android.view-screens_screenshot_4",
+      "status": "ok",
+      "n_gt": 14,
+      "n_raw": 6,
+      "n_kept": 6,
+      "n_matched": 6,
+      "n_fp": 0,
+      "n_fn": 8,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 18,
+      "gen_nodes": 8,
+      "ted": 10,
+      "teds": 0.4444444444444444,
+      "ops": {
+        "insert": 10,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 8,
+        "reference_artifact": 1,
+        "grouping": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.8
+    },
+    {
+      "stem": "com.sentinelbd.news12-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 3,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 2,
+      "n_fp": 1,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 5,
+      "gen_nodes": 4,
+      "ted": 3,
+      "teds": 0.4,
+      "ops": {
+        "insert": 2,
+        "delete": 1,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fp": 1,
+        "detector_fn": 2
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.6666666666666666
+    },
+    {
+      "stem": "com.superdeve.pokemondrawing-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 30,
+      "n_raw": 26,
+      "n_kept": 23,
+      "n_matched": 17,
+      "n_fp": 6,
+      "n_fn": 13,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 3,
+      "n_dedup_removed_matching_gt": 1,
+      "n_fallback": 1,
+      "ref_nodes": 38,
+      "gen_nodes": 38,
+      "ted": 23,
+      "teds": 0.39473684210526316,
+      "ops": {
+        "insert": 9,
+        "delete": 9,
+        "rename": 5
+      },
+      "categories": {
+        "detector_fp": 5,
+        "detector_fn": 8,
+        "xycut_fallback": 1,
+        "tolerance_cut": 1,
+        "reference_flat2d": 8
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.34782608695652173
+    },
+    {
+      "stem": "com.tinymission.dailyworkoutsfree-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 19,
+      "n_raw": 31,
+      "n_kept": 24,
+      "n_matched": 9,
+      "n_fp": 15,
+      "n_fn": 10,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 7,
+      "n_dedup_removed_matching_gt": 1,
+      "n_fallback": 2,
+      "ref_nodes": 22,
+      "gen_nodes": 36,
+      "ted": 23,
+      "teds": 0.36111111111111116,
+      "ops": {
+        "insert": 3,
+        "delete": 17,
+        "rename": 3
+      },
+      "categories": {
+        "detector_fp": 14,
+        "detector_fn": 2,
+        "xycut_fallback": 2,
+        "reference_flat2d": 3,
+        "grouping": 2
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 0.6086956521739131
+    },
+    {
+      "stem": "com.todoapps.lawsofpower-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 11,
+      "n_raw": 10,
+      "n_kept": 10,
+      "n_matched": 10,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 17,
+      "gen_nodes": 14,
+      "ted": 11,
+      "teds": 0.3529411764705882,
+      "ops": {
+        "insert": 3,
+        "delete": 0,
+        "rename": 8
+      },
+      "categories": {
+        "detector_fn": 1,
+        "tolerance_cut": 3,
+        "grouping": 7
+      },
+      "dominant": "grouping",
+      "dominant_share": 0.6363636363636364
+    },
+    {
+      "stem": "com.tuxera.streambels-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 4,
+      "n_raw": 0,
+      "n_kept": 0,
+      "n_matched": 0,
+      "n_fp": 0,
+      "n_fn": 4,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 6,
+      "gen_nodes": 1,
+      "ted": 5,
+      "teds": 0.16666666666666663,
+      "ops": {
+        "insert": 5,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fn": 5
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "com.wageworks.ezreceipts-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 5,
+      "n_raw": 4,
+      "n_kept": 4,
+      "n_matched": 4,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 8,
+      "gen_nodes": 6,
+      "ted": 2,
+      "teds": 0.75,
+      "ops": {
+        "insert": 2,
+        "delete": 0,
+        "rename": 0
+      },
+      "categories": {
+        "reference_artifact": 2
+      },
+      "dominant": "reference_artifact",
+      "dominant_share": 1.0
+    },
+    {
+      "stem": "forminecraft.school-screens_screenshot_1",
+      "status": "ok",
+      "n_gt": 4,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 3,
+      "n_fp": 0,
+      "n_fn": 1,
+      "n_class_mismatch": 1,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 6,
+      "gen_nodes": 4,
+      "ted": 3,
+      "teds": 0.5,
+      "ops": {
+        "insert": 2,
+        "delete": 0,
+        "rename": 1
+      },
+      "categories": {
+        "detector_fn": 1,
+        "wrong_class": 1,
+        "grouping": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.3333333333333333
+    },
+    {
+      "stem": "jp.co.pointblur.android.app.quick-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 24,
+      "n_raw": 10,
+      "n_kept": 9,
+      "n_matched": 6,
+      "n_fp": 3,
+      "n_fn": 18,
+      "n_class_mismatch": 3,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 1,
+      "n_fallback": 1,
+      "ref_nodes": 28,
+      "gen_nodes": 12,
+      "ted": 20,
+      "teds": 0.2857142857142857,
+      "ops": {
+        "insert": 17,
+        "delete": 1,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fp": 1,
+        "detector_fn": 11,
+        "dedup_removed": 1,
+        "xycut_fallback": 3,
+        "tolerance_cut": 3,
+        "reference_flat2d": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.55
+    },
+    {
+      "stem": "music.equalizer.volumebooster-screens_screenshot_6",
+      "status": "ok",
+      "n_gt": 22,
+      "n_raw": 19,
+      "n_kept": 18,
+      "n_matched": 15,
+      "n_fp": 3,
+      "n_fn": 7,
+      "n_class_mismatch": 4,
+      "n_dedup_removed": 1,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 2,
+      "ref_nodes": 35,
+      "gen_nodes": 27,
+      "ted": 26,
+      "teds": 0.2571428571428571,
+      "ops": {
+        "insert": 14,
+        "delete": 6,
+        "rename": 6
+      },
+      "categories": {
+        "detector_fp": 1,
+        "detector_fn": 6,
+        "wrong_class": 1,
+        "containment": 3,
+        "xycut_fallback": 11,
+        "reference_overlap": 4
+      },
+      "dominant": "xycut_fallback",
+      "dominant_share": 0.4230769230769231
+    },
+    {
+      "stem": "riddle.me.that.riddles.logo.quiz.icomania-screens_screenshot_2",
+      "status": "ok",
+      "n_gt": 8,
+      "n_raw": 3,
+      "n_kept": 3,
+      "n_matched": 2,
+      "n_fp": 1,
+      "n_fn": 6,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 1,
+      "ref_nodes": 13,
+      "gen_nodes": 4,
+      "ted": 11,
+      "teds": 0.15384615384615385,
+      "ops": {
+        "insert": 9,
+        "delete": 0,
+        "rename": 2
+      },
+      "categories": {
+        "detector_fp": 1,
+        "detector_fn": 9,
+        "xycut_fallback": 1
+      },
+      "dominant": "detector_fn",
+      "dominant_share": 0.8181818181818182
+    },
+    {
+      "stem": "si.modula.android.instantheartrate-screens_screenshot_3",
+      "status": "ok",
+      "n_gt": 3,
+      "n_raw": 5,
+      "n_kept": 5,
+      "n_matched": 2,
+      "n_fp": 3,
+      "n_fn": 1,
+      "n_class_mismatch": 0,
+      "n_dedup_removed": 0,
+      "n_dedup_removed_matching_gt": 0,
+      "n_fallback": 0,
+      "ref_nodes": 5,
+      "gen_nodes": 8,
+      "ted": 3,
+      "teds": 0.625,
+      "ops": {
+        "insert": 0,
+        "delete": 3,
+        "rename": 0
+      },
+      "categories": {
+        "detector_fp": 3
+      },
+      "dominant": "detector_fp",
+      "dominant_share": 1.0
+    }
+  ]
+}

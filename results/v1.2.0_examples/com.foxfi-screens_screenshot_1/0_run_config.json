@@ -1,0 +1,28 @@
+{
+  "version": "1.2.0",
+  "image_path": "examples/com.foxfi-screens_screenshot_1.png",
+  "model_path": "runs/oversample_5k_appsplit/weights/best.pt",
+  "dataset_yaml": "configs/dataset.yaml",
+  "output_dir": "results/v1.2.0_examples/com.foxfi-screens_screenshot_1",
+  "conf_threshold": 0.3,
+  "visualize": false,
+  "iou_threshold": 0.7,
+  "imgsz": null,
+  "imgsz_effective": 640,
+  "agnostic_nms": false,
+  "max_det": 300,
+  "class_conf": null,
+  "dedup": true,
+  "dedup_params": {
+    "same_class_iou": 0.4,
+    "same_class_iomin": 0.85,
+    "cross_class_iou": 0.5
+  },
+  "containment_ratio": 0.9,
+  "align_tol_frac": 0.016666666666666666,
+  "layout": "xycut",
+  "size_from_boxes": false,
+  "cut_tol_frac": 0.0,
+  "fallback": "y_sorted",
+  "explain_id": null
+}

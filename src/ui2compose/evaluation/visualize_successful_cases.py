@@ -14,7 +14,7 @@ import matplotlib.patches as patches
 
 
 class SuccessfulCaseVisualizer:
-    def __init__(self, model_path="runs/oversample_5k/weights/best.pt",
+    def __init__(self, model_path="runs/oversample_5k_appsplit/weights/best.pt",
                  data_dir="data/yolo"):
         """Loads the YOLO model and defines the successful case list and color map.
 
@@ -458,7 +458,7 @@ def main():
 
     parser = argparse.ArgumentParser(description='Visualize successful detection cases')
     parser.add_argument('--model', type=str,
-                        default='runs/oversample_5k/weights/best.pt',
+                        default='runs/oversample_5k_appsplit/weights/best.pt',
                         help='Path to model weights')
     parser.add_argument('--data', type=str, default='data/yolo',
                         help='Path to YOLO dataset (its images/test is searched)')

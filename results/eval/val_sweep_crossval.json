@@ -1,0 +1,62 @@
+{
+ "note": "post hoc (added after the review of the revision); nothing is re-selected",
+ "condition": "C4",
+ "objective": "teds_o",
+ "scheme": "package_md5",
+ "n_groups": 1590,
+ "n_screens": 1869,
+ "repeats": 200,
+ "seed": 0,
+ "a_priori": "C4|dedup=a_priori|cr=0.95|tol=0.005|fb=y_sorted",
+ "shipped": "C4|dedup=looser|cr=0.9|tol=0.0025|fb=y_sorted",
+ "whole_split": {
+  "selected": "C4|dedup=looser|cr=0.9|tol=0.0025|fb=y_sorted",
+  "gain": 0.003348
+ },
+ "in_fold_gain": {
+  "n": 400,
+  "mean": 0.004115,
+  "median": 0.004015,
+  "q025": 0.001486,
+  "q975": 0.006879,
+  "share_positive": 1.0
+ },
+ "out_of_fold_gain": {
+  "n": 400,
+  "mean": 0.001881,
+  "median": 0.001909,
+  "q025": -0.000627,
+  "q975": 0.004316,
+  "share_positive": 0.9175
+ },
+ "optimism": 0.002235,
+ "n_skipped_halves": 0,
+ "selected_counts": {
+  "C4|dedup=looser|cr=0.9|tol=0.0025|fb=least_overlap": 62,
+  "C4|dedup=a_priori|cr=0.9|tol=0|fb=least_overlap": 59,
+  "C4|dedup=looser|cr=0.95|tol=0|fb=y_sorted": 50,
+  "C4|dedup=looser|cr=0.9|tol=0.0025|fb=y_sorted": 42,
+  "C4|dedup=a_priori|cr=0.9|tol=0|fb=y_sorted": 40,
+  "C4|dedup=a_priori|cr=0.9|tol=0.0025|fb=y_sorted": 27,
+  "C4|dedup=looser|cr=0.95|tol=0|fb=least_overlap": 20,
+  "C4|dedup=looser|cr=0.95|tol=0.0025|fb=y_sorted": 19,
+  "C4|dedup=looser|cr=0.9|tol=0|fb=least_overlap": 19,
+  "C4|dedup=a_priori|cr=0.9|tol=0.0025|fb=least_overlap": 16,
+  "C4|dedup=a_priori|cr=0.95|tol=0|fb=y_sorted": 12,
+  "C4|dedup=looser|cr=0.9|tol=0|fb=y_sorted": 11,
+  "C4|dedup=looser|cr=0.9|tol=0.005|fb=y_sorted": 10,
+  "C4|dedup=looser|cr=0.9|tol=0.005|fb=least_overlap": 3,
+  "C4|dedup=looser|cr=0.95|tol=0.0025|fb=least_overlap": 3,
+  "C4|dedup=looser|cr=0.95|tol=0.005|fb=y_sorted": 3,
+  "C4|dedup=a_priori|cr=0.95|tol=0|fb=least_overlap": 2,
+  "C4|dedup=a_priori|cr=0.9|tol=0.005|fb=y_sorted": 1,
+  "C4|dedup=a_priori|cr=0.95|tol=0.0025|fb=y_sorted": 1
+ },
+ "shipped_selected_share": 0.105,
+ "grid_edges": {
+  "dedup": "last",
+  "containment_ratio": "last",
+  "cut_tol_frac": null
+ },
+ "eligibility": "every de-duplication setting eligible (each raised the detector F1 on the whole val split)"
+}

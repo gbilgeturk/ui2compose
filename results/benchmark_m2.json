@@ -1,0 +1,217 @@
+{
+  "host": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "system": "Darwin",
+    "machine": "arm64",
+    "cpu_model": "Apple M2",
+    "logical_cores": 8,
+    "physical_cores": 8,
+    "ram_bytes": 17179869184,
+    "python": "3.13.3",
+    "torch": "2.10.0",
+    "ultralytics": "8.4.24",
+    "numpy": "2.4.3",
+    "opencv": "4.13.0.92",
+    "device": "cpu",
+    "load_average_1_5_15min": {
+      "start": [
+        4.1,
+        7.29,
+        8.58
+      ],
+      "end": [
+        4.02,
+        7.17,
+        8.52
+      ]
+    }
+  },
+  "settings": {
+    "images": [
+      "com.andromo.dev231870.app482676-screens_screenshot_5.png",
+      "com.foxfi-screens_screenshot_1.png",
+      "com.luigiedeveloper.battlesimulator-screens_screenshot_3.png",
+      "com.mcdeliveryonline.app-screens_screenshot_1.png",
+      "com.mineworld.swordsaddon-screens_screenshot_2.png",
+      "com.mynamecubeapps.ball-screens_screenshot_3.png",
+      "com.netbeast.yeti-screens_screenshot_1.png",
+      "com.shazam.android-screens_screenshot_3.png",
+      "com.sign.language.learn1234-screens_screenshot_2.png",
+      "westport.andrewirwin.com.drivesafe-screens_screenshot_3.png"
+    ],
+    "n_images": 10,
+    "model": "runs/oversample_5k_appsplit/weights/best.pt",
+    "repeats": 5,
+    "conf": 0.3,
+    "timer": "time.perf_counter",
+    "unit": "seconds"
+  },
+  "stages": {
+    "import_subprocess": {
+      "first": 0.6296532090054825,
+      "all": {
+        "n": 5,
+        "median": 0.6296532090054825,
+        "q1": 0.6290765829980955,
+        "q3": 0.6296703749976587,
+        "iqr": 0.0005937919995631091,
+        "min": 0.6281979580016923,
+        "max": 0.6323458749975543,
+        "mean": 0.6297888000000966
+      }
+    },
+    "import_in_process": 0.5882917090057163,
+    "model_load": {
+      "first": 0.45950233299663523,
+      "warm": {
+        "n": 4,
+        "median": 0.015237999497912824,
+        "q1": 0.014779155746509787,
+        "q3": 0.015779489249325707,
+        "iqr": 0.00100033350281592,
+        "min": 0.014653499994892627,
+        "max": 0.0161530830009724,
+        "mean": 0.01532064549792267
+      }
+    },
+    "detect": {
+      "first": 0.1367332920053741,
+      "warm": {
+        "n": 49,
+        "median": 0.10529400000086753,
+        "q1": 0.10086025000055088,
+        "q3": 0.11462804100301582,
+        "iqr": 0.013767791002464946,
+        "min": 0.09789233400078956,
+        "max": 0.1346813749987632,
+        "mean": 0.10968301783681714
+      }
+    },
+    "dedup": {
+      "first": 0.00011870799789903685,
+      "warm": {
+        "n": 49,
+        "median": 5.533299554372206e-05,
+        "q1": 2.4417000531684607e-05,
+        "q3": 8.874999912222847e-05,
+        "iqr": 6.433299859054387e-05,
+        "min": 1.912500010803342e-05,
+        "max": 0.0006960840037208982,
+        "mean": 0.00013565563235066032
+      }
+    },
+    "graph": {
+      "first": 0.00027224999939789996,
+      "warm": {
+        "n": 49,
+        "median": 9.491699893260375e-05,
+        "q1": 6.437500269385055e-05,
+        "q3": 0.0002025419962592423,
+        "iqr": 0.00013816699356539175,
+        "min": 5.50419936189428e-05,
+        "max": 0.001025500001560431,
+        "mean": 0.00021213859204459478
+      }
+    },
+    "codegen": {
+      "first": 0.0002717910028877668,
+      "warm": {
+        "n": 49,
+        "median": 0.00015025000175228342,
+        "q1": 0.0001000829943222925,
+        "q3": 0.0001965000046766363,
+        "iqr": 9.64170103543438e-05,
+        "min": 7.92499995441176e-05,
+        "max": 0.0009739159941091202,
+        "mean": 0.00019260040797383467
+      }
+    },
+    "end_to_end": {
+      "first": 0.1373960410055588,
+      "warm": {
+        "n": 49,
+        "median": 0.10557037500984734,
+        "q1": 0.10112683400075184,
+        "q3": 0.11512441500235582,
+        "iqr": 0.013997581001603976,
+        "min": 0.09807904301123926,
+        "max": 0.1350379579962464,
+        "mean": 0.11022341246918622
+      }
+    }
+  },
+  "per_image": {
+    "com.andromo.dev231870.app482676-screens_screenshot_5": {
+      "detect": 0.11527341700275429,
+      "dedup": 8.874999912222847e-05,
+      "graph": 0.0002060410042759031,
+      "codegen": 0.0001965000046766363,
+      "end_to_end": 0.11575987600372173
+    },
+    "com.foxfi-screens_screenshot_1": {
+      "detect": 0.10362779199931538,
+      "dedup": 0.00030433399660978466,
+      "graph": 0.0003754170029424131,
+      "codegen": 0.0002667500011739321,
+      "end_to_end": 0.10458987599122338
+    },
+    "com.luigiedeveloper.battlesimulator-screens_screenshot_3": {
+      "detect": 0.1229701250049402,
+      "dedup": 0.0006604159934795462,
+      "graph": 0.0007924159945105202,
+      "codegen": 0.0004425829974934459,
+      "end_to_end": 0.12532658298732713
+    },
+    "com.mcdeliveryonline.app-screens_screenshot_1": {
+      "detect": 0.10080783299781615,
+      "dedup": 6.09580019954592e-05,
+      "graph": 6.879200373077765e-05,
+      "codegen": 0.0001105839983210899,
+      "end_to_end": 0.10105099999782396
+    },
+    "com.mineworld.swordsaddon-screens_screenshot_2": {
+      "detect": 0.13261541599786142,
+      "dedup": 5.633300315821543e-05,
+      "graph": 0.00013449999823933467,
+      "codegen": 0.00016845900245243683,
+      "end_to_end": 0.13306941699556774
+    },
+    "com.mynamecubeapps.ball-screens_screenshot_3": {
+      "detect": 0.09930945799715118,
+      "dedup": 2.4125001800712198e-05,
+      "graph": 6.104200292611495e-05,
+      "codegen": 0.00010170900350203738,
+      "end_to_end": 0.09950137400301173
+    },
+    "com.netbeast.yeti-screens_screenshot_1": {
+      "detect": 0.10017129200423369,
+      "dedup": 1.9291997887194157e-05,
+      "graph": 5.570799839915708e-05,
+      "codegen": 8.083300053840503e-05,
+      "end_to_end": 0.10032541699911235
+    },
+    "com.shazam.android-screens_screenshot_3": {
+      "detect": 0.1013101659991662,
+      "dedup": 5.200000305194408e-05,
+      "graph": 0.00013216700608609244,
+      "codegen": 0.00016099999629659578,
+      "end_to_end": 0.10170145699521527
+    },
+    "com.sign.language.learn1234-screens_screenshot_2": {
+      "detect": 0.113803457999893,
+      "dedup": 2.154200046788901e-05,
+      "graph": 6.195799505803734e-05,
+      "codegen": 9.795799996936694e-05,
+      "end_to_end": 0.11400145900552161
+    },
+    "westport.andrewirwin.com.drivesafe-screens_screenshot_3": {
+      "detect": 0.10695387499436038,
+      "dedup": 3.795800148509443e-05,
+      "graph": 9.154100553132594e-05,
+      "codegen": 0.0001453340009902604,
+      "end_to_end": 0.10722729099506978
+    }
+  },
+  "api_notes": [],
+  "created": "2026-10-27T12:06:29+00:00"
+}

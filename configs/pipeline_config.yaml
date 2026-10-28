@@ -1,31 +1,86 @@
 # pipeline_config.yaml
 # =====================
-# Pipeline configuration file
-# You can change the pipeline settings by editing this file
+# Pipeline configuration file, read by `python app/run_pipeline.py` and by
+# `ui2compose IMAGE --config configs/pipeline_config.yaml` (explicit command-line
+# flags override the values in this file). Every key maps to one keyword of
+# ui2compose.infer.pipeline.run_pipeline; unknown keys are rejected.
+# The values below are the code defaults (a test checks that they match). The
+# de-duplication, containment, cut-tolerance and fallback defaults were selected on the
+# validation split of the app-level split (results/eval_appsplit/selected_thresholds.json;
+# the earlier screenshot-split selection, results/eval/, differed only in cut_tol_frac),
+# never on test screens.
 
 # INPUT SETTINGS
 input:
   image: "examples/com.shazam.android-screens_screenshot_3.png"
-  model: "runs/oversample_5k/weights/best.pt"
+  model: "runs/oversample_5k_appsplit/weights/best.pt"
   dataset_yaml: "configs/dataset.yaml"
 
 # OUTPUT SETTINGS
 output:
-  directory: "output"
+  directory: "output"        # app/run_pipeline.py adds a timestamped subfolder
 
-# DETECTION SETTINGS
+# DETECTION SETTINGS (passed to ComponentDetector.detect)
 detection:
   confidence_threshold: 0.3  # Pipeline/demo inference threshold
-  iou_threshold: 0.5         # NMS IoU threshold
-  imgsz: 640                 # Input resolution (same as training)
+  iou_threshold: 0.7         # NMS IoU threshold. v1.1.0 listed 0.5 here but never
+                             # passed it to the detector, so Ultralytics' default 0.7
+                             # is what actually ran (and what the reported results used).
+  imgsz: null                # Input resolution; null = the checkpoint's training size (640 for
+                             # both bundled weights), as in v1.1.0. The value used is
+                             # recorded as imgsz_effective in 0_run_config.json.
+  agnostic_nms: false        # Class-aware NMS, as in v1.1.0 (Ultralytics default)
+  max_det: 300               # Maximum detections per image (Ultralytics default)
+  class_conf: null           # Optional per-class minimum confidence, e.g. {RecyclerView: 0.5};
+                             # null = no per-class filtering. Class names must be detector
+                             # classes (configs/dataset.yaml), otherwise the run stops with
+                             # an error. Values must be chosen on the validation split.
+
+# DE-DUPLICATION (ui2compose.infer.postprocess.deduplicate_detections)
+# Defaults selected on the validation split (results/eval_appsplit/selected_thresholds.json;
+# a-priori values 0.5 / 0.9 / 0.6). Setting a threshold to null disables that rule.
+dedup:
+  enabled: true
+  same_class_iou: 0.4        # same class, IoU >= 0.4 -> lower-confidence box removed
+  same_class_iomin: 0.85     # same non-nesting class, intersection / smaller area >= 0.85
+  cross_class_iou: 0.5       # different classes, IoU >= 0.5 -> lower-confidence box removed
+
+# UI GRAPH (ui2compose.infer.build_ui_graph.UIGraphBuilder)
+graph:
+  containment_ratio: 0.9     # box B is inside box A if >= 90% of B's area lies in A
+                             # (selected on the validation split, a-priori value 0.95;
+                             # 1.0 = the strict containment test of v1.1.0)
+  align_tol_frac: 0.016666666666666666  # = 20/1200: spatial-edge alignment tolerance as a
+                                        # fraction of the image width (v1.1.0's 20 px at the
+                                        # 1200 px ReDraw width). Edges are an inspection
+                                        # export only; they do not affect the generated code.
+
+# LAYOUT / CODE GENERATION (ComposeCodeGenerator.generate)
+layout:
+  mode: "xycut"              # "xycut" (recursive XY-cut) or "flat" (baseline: one Column of
+                             # all detections ordered by y-centre; containment ignored)
+  size_from_boxes: false     # false = v1.1.0 fixed sizes; true = sizes from the detected boxes
+  cut_tol_frac: null         # XY-cut tolerance as a fraction of the image extent;
+                             # null = the generator's default (DEFAULT_CUT_TOL_FRAC = 0.0,
+                             # selected on the app-split validation split, a-priori
+                             # value 0.005; 0.0025 on the earlier screenshot split)
+  fallback: "y_sorted"       # when no XY cut exists: "y_sorted" (v1.1.0: Column ordered by
+                             # y-centre; kept by the validation selection) or "least_overlap"
 
 # FEATURE FLAGS
 features:
   visualization: true      # Produce visual output
 
 # NOTES:
-# - model: oversample_5k is the model that gives the best result (test mAP@50=48.70%, validation mAP@50=51.82%)
-# - confidence_threshold: 0.3 is used for the pipeline (practical use, fewer false positives)
-#   Evaluation scripts use 0.15 (standard for computing the precision-recall curve)
-# - imgsz: 640 was used in training, it must be the same at inference
+# - model: the default weights (runs/oversample_5k_appsplit) are YOLOv8s retrained on the
+#   app-level split with the hyperparameters of the v1.1.0 release (oversampled to 5k, COCO
+#   yolov8s.pt init): test mAP@50=44.2%, validation mAP@50=42.1% on apps never seen in
+#   training (results/eval_appsplit). runs/oversample_5k is the v1.1.0 checkpoint, kept to
+#   reproduce the submitted numbers (test mAP@50=48.70%, validation 51.82%, screenshot-level
+#   split, which shares apps between train and test; see README "Evaluation")
+# - confidence_threshold: 0.3 is used for the pipeline (practical use, fewer false positives).
+#   ui2compose-evaluate-detector predicts at conf 0.001 (the Ultralytics validation default) to
+#   compute AP; the v1.1.0 script ui2compose-evaluate used 0.15
+# - imgsz: 640 was used in training; null uses the checkpoint's own value, so it matches
+#   the training size for any checkpoint
 # - visualization: setting it to false runs faster (no visuals are produced)

@@ -1,0 +1,304 @@
+{
+  "generated_by": "harness/compile_and_render.sh",
+  "toolchain": {
+    "gradle": "8.9",
+    "agp": "8.5.2",
+    "kotlin": "2.0.21",
+    "compose_bom": "2024.06.00",
+    "paparazzi": "1.3.4",
+    "compile_sdk": 34,
+    "min_sdk": 24,
+    "jdk": "17.0.13",
+    "resolved": {
+      "androidx.compose.foundation:foundation": "1.6.8",
+      "androidx.compose.material3:material3": "1.2.1",
+      "androidx.compose.runtime:runtime": "1.6.8",
+      "androidx.compose.ui:ui": "1.6.8"
+    }
+  },
+  "snapshot": {
+    "device_config": "DeviceConfig.NEXUS_7",
+    "wrapper": "MaterialTheme { Surface(Modifier.fillMaxSize()) { GeneratedScreen() } }",
+    "render_dir": "harness/renders"
+  },
+  "summary": {
+    "files": 16,
+    "compiled": 16,
+    "with_screen_function": 16,
+    "rendered": 16
+  },
+  "files": [
+    {
+      "source": "results/v1.2.0_examples/com.andromo.dev231870.app482676-screens_screenshot_5/4_GeneratedScreen.kt",
+      "sha256": "801ca5a5f038ba7cf0ecf052ea140a2ef57d9cc351de33457b0fa608bd97c958",
+      "package": "generated.s01",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "results/v1.2.0_examples/com.andromo.dev231870.app482676-screens_screenshot_5/render.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "results/v1.2.0_examples/com.foxfi-screens_screenshot_1/4_GeneratedScreen.kt",
+      "sha256": "0dc0bc6df74666d1c437ac6053fbef97882a39163cd2755a7c8c13b4c1fb42ee",
+      "package": "generated.s02",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "results/v1.2.0_examples/com.foxfi-screens_screenshot_1/render.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "results/v1.2.0_examples/com.luigiedeveloper.battlesimulator-screens_screenshot_3/4_GeneratedScreen.kt",
+      "sha256": "4133cba557f67a7ff723ab4f73e0969d6335d070bef8847c34ceb4d735082c9e",
+      "package": "generated.s03",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "results/v1.2.0_examples/com.luigiedeveloper.battlesimulator-screens_screenshot_3/render.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "results/v1.2.0_examples/com.mcdeliveryonline.app-screens_screenshot_1/4_GeneratedScreen.kt",
+      "sha256": "ee020223eb501b9ac13ad8844d7ccb50affa0c6cf14cb329de284b5596f6af47",
+      "package": "generated.s04",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "results/v1.2.0_examples/com.mcdeliveryonline.app-screens_screenshot_1/render.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "results/v1.2.0_examples/com.mineworld.swordsaddon-screens_screenshot_2/4_GeneratedScreen.kt",
+      "sha256": "04d59f7053cf40f978649f6b286a980c079fee12cc7acf763575d341b8fc9f62",
+      "package": "generated.s05",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "results/v1.2.0_examples/com.mineworld.swordsaddon-screens_screenshot_2/render.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "results/v1.2.0_examples/com.mynamecubeapps.ball-screens_screenshot_3/4_GeneratedScreen.kt",
+      "sha256": "f80a97b2a9d0123c4299e92b9736c5fb6903e52bc33e1129f3b5f52af724148f",
+      "package": "generated.s06",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "results/v1.2.0_examples/com.mynamecubeapps.ball-screens_screenshot_3/render.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "results/v1.2.0_examples/com.netbeast.yeti-screens_screenshot_1/4_GeneratedScreen.kt",
+      "sha256": "3a3f381e94078b5374fdd0f1553b81686f647f876b05150d5a85760a3e248a9b",
+      "package": "generated.s07",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "results/v1.2.0_examples/com.netbeast.yeti-screens_screenshot_1/render.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "results/v1.2.0_examples/com.shazam.android-screens_screenshot_3/4_GeneratedScreen.kt",
+      "sha256": "928684eacbc0f48e563323cdbed7448f3c8e9ce1fa182d89a8154ea5465f900c",
+      "package": "generated.s08",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "results/v1.2.0_examples/com.shazam.android-screens_screenshot_3/render.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "results/v1.2.0_examples/com.sign.language.learn1234-screens_screenshot_2/4_GeneratedScreen.kt",
+      "sha256": "a615ad6738ae1fa9ce037faeea666f0ad4e65da2d139fb909a2f61534e43a62b",
+      "package": "generated.s09",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "results/v1.2.0_examples/com.sign.language.learn1234-screens_screenshot_2/render.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "results/v1.2.0_examples/westport.andrewirwin.com.drivesafe-screens_screenshot_3/4_GeneratedScreen.kt",
+      "sha256": "5873bff525eef115bf73340c1a3af30591d3d216ac918c95fb12b0eb50bcc3d0",
+      "package": "generated.s10",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "results/v1.2.0_examples/westport.andrewirwin.com.drivesafe-screens_screenshot_3/render.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "tests/fixtures/codegen/all_templates_flat.kt",
+      "sha256": "25f64e296bcef0703fac2a75ebc9024c41ef07447249e8404471f037ad1b32f1",
+      "package": "generated.s11",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "harness/renders/codegen__all_templates_flat.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "tests/fixtures/codegen/all_templates_sized.kt",
+      "sha256": "15ea17218e88b591d0a82f72310b6f3a4b520984f98665a1e9712b323abc8362",
+      "package": "generated.s12",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "harness/renders/codegen__all_templates_sized.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "tests/fixtures/codegen/all_templates_xycut.kt",
+      "sha256": "ed9437271315674eb5b1152133b44f808828a490fc23478202761cfe88a51c71",
+      "package": "generated.s13",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "harness/renders/codegen__all_templates_xycut.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "tests/fixtures/codegen/list_screen_sized.kt",
+      "sha256": "024d0fa070d2a942636a784a1c1bcfa592f59b5044ead1d1be44d4c380e0b1c6",
+      "package": "generated.s14",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "harness/renders/codegen__list_screen_sized.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "tests/fixtures/codegen/shazam_like_flat.kt",
+      "sha256": "511bedc48029a2a89919ca867abc4c1dc20863a0ed9a9eebdd9628dfeb9d9f20",
+      "package": "generated.s15",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "harness/renders/codegen__shazam_like_flat.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    },
+    {
+      "source": "tests/fixtures/codegen/shazam_like_xycut.kt",
+      "sha256": "010a06e462b9d5fccbe6b24cc6b7d77ab649507a7e8d6adc3800bed00b429933",
+      "package": "generated.s16",
+      "compiled": true,
+      "compile_errors": [],
+      "compile_warnings": [],
+      "compile_note": null,
+      "has_screen_function": true,
+      "rendered": true,
+      "render_error": null,
+      "render": "harness/renders/codegen__shazam_like_xycut.png",
+      "render_size_px": [
+        625,
+        1000
+      ]
+    }
+  ]
+}

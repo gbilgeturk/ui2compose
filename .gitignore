@@ -7,6 +7,7 @@ dist/
 .venv/
 .venv*/
 venv/
+.pytest_cache/
 
 # OS / IDE
 .DS_Store
@@ -16,13 +17,43 @@ venv/
 # Pipeline outputs
 output/
 
+# Kotlin compile + render harness (harness/README.md): Gradle state, build
+# output (also covered by build/ above), the machine-specific SDK path and the
+# screens/tests that harness/compile_and_render.py writes on every run
+harness/android/.gradle/
+harness/android/.kotlin/
+harness/android/build/
+harness/android/screens/build/
+harness/android/screens/src/
+harness/android/local.properties
+
+# Machine-specific image lists written by ui2compose-app-split (absolute paths;
+# results/splits/manifest.csv is the file to publish)
+results/splits/unseen_*.txt
+
 # Dataset (prepared locally from ReDraw — not redistributed)
 data/
 
-# Experiment artifacts (keep only the released model weights)
+# Experiment artifacts (keep only the released model weights: the default app-split
+# checkpoint with its training record, and the v1.1.0 checkpoint for reproducing the
+# submitted screenshot-split numbers)
 runs/*
 !runs/oversample_5k/
 runs/oversample_5k/*
 !runs/oversample_5k/weights/
 runs/oversample_5k/weights/*
 !runs/oversample_5k/weights/best.pt
+!runs/oversample_5k_appsplit/
+runs/oversample_5k_appsplit/*
+!runs/oversample_5k_appsplit/args.yaml
+!runs/oversample_5k_appsplit/results.csv
+!runs/oversample_5k_appsplit/weights/
+runs/oversample_5k_appsplit/weights/*
+!runs/oversample_5k_appsplit/weights/best.pt
+!runs/baseline_appsplit/
+runs/baseline_appsplit/*
+!runs/baseline_appsplit/args.yaml
+!runs/baseline_appsplit/results.csv
+!runs/baseline_appsplit/weights/
+runs/baseline_appsplit/weights/*
+!runs/baseline_appsplit/weights/best.pt

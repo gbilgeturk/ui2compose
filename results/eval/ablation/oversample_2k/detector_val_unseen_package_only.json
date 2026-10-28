@@ -1,0 +1,682 @@
+{
+  "images": {
+    "spec": "../ui2compose_redraw_valtest_v1.1.0_UNVERIFIED/dataset/unseen_val_package_only.txt",
+    "listed": 241,
+    "evaluated": 241,
+    "expected_listed": 241,
+    "labels_dir": "../ui2compose_redraw_valtest_v1.1.0_UNVERIFIED/dataset/labels/val",
+    "labels": {
+      "missing": 0,
+      "empty": 0,
+      "duplicate_rows_removed": 0,
+      "corrupt": []
+    }
+  },
+  "settings": {
+    "conf": 0.001,
+    "iou": 0.7,
+    "imgsz": null,
+    "max_det": 300,
+    "pred_source": "val",
+    "multi_label": true,
+    "conf_op": 0.3,
+    "bootstrap": 1000,
+    "seed": 0,
+    "groups": "../ui2compose_redraw_valtest_v1.1.0_UNVERIFIED/splits/full/manifest.csv"
+  },
+  "numpy_version": "2.4.3",
+  "models": [
+    {
+      "name": "oversample_2k",
+      "meta": {
+        "weights": "../ui2compose-v1.0.2-ablation-weights/oversample_2k.pt",
+        "weights_md5": "144754dd3f0c8e74bc651ace6e4803d1",
+        "ultralytics_version": "8.4.24",
+        "source": "val",
+        "settings": {
+          "split": "test",
+          "conf": 0.001,
+          "iou": 0.7,
+          "max_det": 300,
+          "batch": 16,
+          "plots": false,
+          "verbose": false,
+          "save_json": false,
+          "imgsz": 640
+        },
+        "n_images": 241
+      },
+      "predictions_file": "../ui2compose-v1.2.0-eval-outputs/preds/detector_val_unseen_package_only_preds_oversample_2k.json",
+      "metrics": {
+        "n_images": 241,
+        "n_instances": 1694,
+        "mAP50": 0.3845927788747089,
+        "mAP50_95": 0.2644266089795722,
+        "precision": 0.392557048721363,
+        "recall": 0.38882791040101683,
+        "f1": 0.3720567964844851,
+        "max_f1_conf": 0.3063063063063063,
+        "per_class": {
+          "Button": {
+            "ap50": 0.4754367806789041,
+            "ap50_95": 0.37552453617092363,
+            "precision": 0.46624280451868977,
+            "recall": 0.46551724137931033,
+            "support": 232,
+            "n_images": 107,
+            "n_pred": 7013
+          },
+          "CheckBox": {
+            "ap50": 0.4556878306878307,
+            "ap50_95": 0.2155335097001764,
+            "precision": 0.6509140122897068,
+            "recall": 0.4763710184345602,
+            "support": 4,
+            "n_images": 4,
+            "n_pred": 567
+          },
+          "EditText": {
+            "ap50": 0.5845180740967092,
+            "ap50_95": 0.4136783775499694,
+            "precision": 0.6779143236563809,
+            "recall": 0.5712953500391996,
+            "support": 70,
+            "n_images": 48,
+            "n_pred": 1503
+          },
+          "ImageView": {
+            "ap50": 0.340671270667877,
+            "ap50_95": 0.24291614068055964,
+            "precision": 0.5172251482342641,
+            "recall": 0.3308714918759232,
+            "support": 677,
+            "n_images": 128,
+            "n_pred": 17178
+          },
+          "ListView": {
+            "ap50": 0.2655663546200879,
+            "ap50_95": 0.2393868127396174,
+            "precision": 0.5553640594203639,
+            "recall": 0.2692307692307692,
+            "support": 26,
+            "n_images": 17,
+            "n_pred": 1143
+          },
+          "ProgressBar": {
+            "ap50": 0.6633333333333333,
+            "ap50_95": 0.48058838821490457,
+            "precision": 0.6221408137239623,
+            "recall": 0.866422441171887,
+            "support": 2,
+            "n_images": 2,
+            "n_pred": 577
+          },
+          "RadioButton": {
+            "ap50": 0.0,
+            "ap50_95": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "support": 3,
+            "n_images": 1,
+            "n_pred": 849
+          },
+          "RecyclerView": {
+            "ap50": 0.2602600536497771,
+            "ap50_95": 0.23635710021908457,
+            "precision": 0.1591188045394082,
+            "recall": 0.2,
+            "support": 10,
+            "n_images": 8,
+            "n_pred": 529
+          },
+          "SeekBar": {
+            "ap50": 0.0,
+            "ap50_95": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "support": 2,
+            "n_images": 2,
+            "n_pred": 458
+          },
+          "Spinner": {
+            "ap50": 0.0,
+            "ap50_95": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "support": 2,
+            "n_images": 2,
+            "n_pred": 394
+          },
+          "Switch": {
+            "ap50": 0.995,
+            "ap50_95": 0.40053503184713374,
+            "precision": 0.416051416740848,
+            "recall": 1.0,
+            "support": 1,
+            "n_images": 1,
+            "n_pred": 193
+          },
+          "TextView": {
+            "ap50": 0.46198838377895546,
+            "ap50_95": 0.3647056937777734,
+            "precision": 0.4867474834986126,
+            "recall": 0.46964911767616446,
+            "support": 628,
+            "n_images": 158,
+            "n_pred": 21906
+          },
+          "WebView": {
+            "ap50": 0.49724404385774035,
+            "ap50_95": 0.46832032583429645,
+            "precision": 0.5515227667554827,
+            "recall": 0.40540540540540543,
+            "support": 37,
+            "n_images": 37,
+            "n_pred": 341
+          }
+        },
+        "operating_point": {
+          "conf": 0.3,
+          "iou": 0.5,
+          "tp": 702,
+          "fp": 726,
+          "fn": 992,
+          "precision": 0.49159663865546216,
+          "recall": 0.41440377804014167,
+          "f1": 0.4497117232543241,
+          "per_class": {
+            "Button": {
+              "tp": 108,
+              "fp": 127,
+              "fn": 124,
+              "precision": 0.4595744680851064,
+              "recall": 0.46551724137931033
+            },
+            "CheckBox": {
+              "tp": 1,
+              "fp": 1,
+              "fn": 3,
+              "precision": 0.5,
+              "recall": 0.25
+            },
+            "EditText": {
+              "tp": 40,
+              "fp": 19,
+              "fn": 30,
+              "precision": 0.6779661016949152,
+              "recall": 0.5714285714285714
+            },
+            "ImageView": {
+              "tp": 228,
+              "fp": 215,
+              "fn": 449,
+              "precision": 0.5146726862302483,
+              "recall": 0.33677991137370755
+            },
+            "ListView": {
+              "tp": 7,
+              "fp": 5,
+              "fn": 19,
+              "precision": 0.5833333333333334,
+              "recall": 0.2692307692307692
+            },
+            "ProgressBar": {
+              "tp": 1,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.5,
+              "recall": 0.5
+            },
+            "RadioButton": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 3,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "RecyclerView": {
+              "tp": 2,
+              "fp": 10,
+              "fn": 8,
+              "precision": 0.16666666666666666,
+              "recall": 0.2
+            },
+            "SeekBar": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 2,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "Spinner": {
+              "tp": 0,
+              "fp": 4,
+              "fn": 2,
+              "precision": 0.0,
+              "recall": 0.0
+            },
+            "Switch": {
+              "tp": 1,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0.5,
+              "recall": 1.0
+            },
+            "TextView": {
+              "tp": 299,
+              "fp": 329,
+              "fn": 329,
+              "precision": 0.47611464968152867,
+              "recall": 0.47611464968152867
+            },
+            "WebView": {
+              "tp": 15,
+              "fp": 12,
+              "fn": 22,
+              "precision": 0.5555555555555556,
+              "recall": 0.40540540540540543
+            }
+          }
+        }
+      },
+      "operating_point_pipeline": {
+        "conf": 0.3,
+        "iou": 0.5,
+        "tp": 703,
+        "fp": 754,
+        "fn": 991,
+        "precision": 0.48249828414550444,
+        "recall": 0.4149940968122786,
+        "f1": 0.4462075531577277,
+        "per_class": {
+          "Button": {
+            "tp": 108,
+            "fp": 137,
+            "fn": 124,
+            "precision": 0.44081632653061226,
+            "recall": 0.46551724137931033
+          },
+          "CheckBox": {
+            "tp": 2,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.6666666666666666,
+            "recall": 0.5
+          },
+          "EditText": {
+            "tp": 37,
+            "fp": 18,
+            "fn": 33,
+            "precision": 0.6727272727272727,
+            "recall": 0.5285714285714286
+          },
+          "ImageView": {
+            "tp": 232,
+            "fp": 217,
+            "fn": 445,
+            "precision": 0.5167037861915368,
+            "recall": 0.34268833087149186
+          },
+          "ListView": {
+            "tp": 6,
+            "fp": 8,
+            "fn": 20,
+            "precision": 0.42857142857142855,
+            "recall": 0.23076923076923078
+          },
+          "ProgressBar": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.5,
+            "recall": 0.5
+          },
+          "RadioButton": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 3,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          "RecyclerView": {
+            "tp": 3,
+            "fp": 12,
+            "fn": 7,
+            "precision": 0.2,
+            "recall": 0.3
+          },
+          "SeekBar": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          "Spinner": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 2,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          "Switch": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 0,
+            "precision": 0.5,
+            "recall": 1.0
+          },
+          "TextView": {
+            "tp": 298,
+            "fp": 336,
+            "fn": 330,
+            "precision": 0.47003154574132494,
+            "recall": 0.4745222929936306
+          },
+          "WebView": {
+            "tp": 15,
+            "fp": 15,
+            "fn": 22,
+            "precision": 0.5,
+            "recall": 0.40540540540540543
+          }
+        },
+        "predictions": "YOLO.predict(), best-class-only NMS, conf > 0.3 (as ui2compose.infer.pipeline); ../ui2compose-v1.2.0-eval-outputs/preds/detector_val_unseen_package_only_preds_oversample_2k_pipeline.json"
+      },
+      "bootstrap": {
+        "n": 1000,
+        "seed": 0,
+        "alpha": 0.05,
+        "n_images": 241,
+        "resample_unit": "image",
+        "n_units": 241,
+        "mAP50": {
+          "point": 0.3845927788747089,
+          "lo": 0.2954306082926943,
+          "hi": 0.5125194693647468,
+          "n_valid": 1000
+        },
+        "mAP50_95": {
+          "point": 0.2644266089795722,
+          "lo": 0.22197268770117137,
+          "hi": 0.365413450869655,
+          "n_valid": 1000
+        },
+        "per_class_ap50": {
+          "Button": {
+            "point": 0.4754367806789041,
+            "lo": 0.3752666351213466,
+            "hi": 0.5900314906357165,
+            "n_valid": 1000
+          },
+          "CheckBox": {
+            "point": 0.4556878306878307,
+            "lo": 0.0,
+            "hi": 0.995,
+            "n_valid": 981
+          },
+          "EditText": {
+            "point": 0.5845180740967092,
+            "lo": 0.37594523950516806,
+            "hi": 0.8058020933376705,
+            "n_valid": 1000
+          },
+          "ImageView": {
+            "point": 0.340671270667877,
+            "lo": 0.1842860436967515,
+            "hi": 0.5561346234029777,
+            "n_valid": 1000
+          },
+          "ListView": {
+            "point": 0.2655663546200879,
+            "lo": 0.09095300037858682,
+            "hi": 0.552154139527229,
+            "n_valid": 1000
+          },
+          "ProgressBar": {
+            "point": 0.6633333333333333,
+            "lo": 0.24875,
+            "hi": 0.995,
+            "n_valid": 865
+          },
+          "RadioButton": {
+            "point": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n_valid": 610
+          },
+          "RecyclerView": {
+            "point": 0.2602600536497771,
+            "lo": 0.033301755656032606,
+            "hi": 0.5961380586314716,
+            "n_valid": 997
+          },
+          "SeekBar": {
+            "point": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n_valid": 882
+          },
+          "Spinner": {
+            "point": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n_valid": 863
+          },
+          "Switch": {
+            "point": 0.995,
+            "lo": 0.995,
+            "hi": 0.995,
+            "n_valid": 639
+          },
+          "TextView": {
+            "point": 0.46198838377895546,
+            "lo": 0.36958585944466243,
+            "hi": 0.5563524688749448,
+            "n_valid": 1000
+          },
+          "WebView": {
+            "point": 0.49724404385774035,
+            "lo": 0.3415384324483311,
+            "hi": 0.6487088634416617,
+            "n_valid": 1000
+          }
+        }
+      },
+      "bootstrap_by_group": {
+        "n": 1000,
+        "seed": 0,
+        "alpha": 0.05,
+        "n_images": 241,
+        "resample_unit": "group",
+        "n_units": 201,
+        "mAP50": {
+          "point": 0.3845927788747089,
+          "lo": 0.2976744877916107,
+          "hi": 0.5051850750364432,
+          "n_valid": 1000
+        },
+        "mAP50_95": {
+          "point": 0.2644266089795722,
+          "lo": 0.2270145871465225,
+          "hi": 0.35210997453151255,
+          "n_valid": 1000
+        },
+        "per_class_ap50": {
+          "Button": {
+            "point": 0.4754367806789041,
+            "lo": 0.38494114250495953,
+            "hi": 0.5924478254961095,
+            "n_valid": 1000
+          },
+          "CheckBox": {
+            "point": 0.4556878306878307,
+            "lo": 0.0,
+            "hi": 0.995,
+            "n_valid": 984
+          },
+          "EditText": {
+            "point": 0.5845180740967092,
+            "lo": 0.35057427730842894,
+            "hi": 0.8125369320541375,
+            "n_valid": 1000
+          },
+          "ImageView": {
+            "point": 0.340671270667877,
+            "lo": 0.17666915752940288,
+            "hi": 0.5487702040757697,
+            "n_valid": 1000
+          },
+          "ListView": {
+            "point": 0.2655663546200879,
+            "lo": 0.08966282432314227,
+            "hi": 0.7259450427580134,
+            "n_valid": 1000
+          },
+          "ProgressBar": {
+            "point": 0.6633333333333333,
+            "lo": 0.4975,
+            "hi": 0.995,
+            "n_valid": 855
+          },
+          "RadioButton": {
+            "point": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n_valid": 678
+          },
+          "RecyclerView": {
+            "point": 0.2602600536497771,
+            "lo": 0.005471250571231944,
+            "hi": 0.5115760437739801,
+            "n_valid": 996
+          },
+          "SeekBar": {
+            "point": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n_valid": 890
+          },
+          "Spinner": {
+            "point": 0.0,
+            "lo": 0.0,
+            "hi": 0.0,
+            "n_valid": 874
+          },
+          "Switch": {
+            "point": 0.995,
+            "lo": 0.995,
+            "hi": 0.995,
+            "n_valid": 626
+          },
+          "TextView": {
+            "point": 0.46198838377895546,
+            "lo": 0.36448450229193896,
+            "hi": 0.5401387130058641,
+            "n_valid": 1000
+          },
+          "WebView": {
+            "point": 0.49724404385774035,
+            "lo": 0.3360330723696151,
+            "hi": 0.6796565672846239,
+            "n_valid": 1000
+          }
+        }
+      },
+      "val_cross_check": {
+        "ultralytics_val": {
+          "mAP50": 0.3845927788747089,
+          "mAP50_95": 0.264426608555291,
+          "precision": 0.392557048721363,
+          "recall": 0.38882791040101683,
+          "per_class": {
+            "Button": {
+              "ap50": 0.4754367806789041,
+              "ap50_95": 0.37552453065526714
+            },
+            "CheckBox": {
+              "ap50": 0.4556878306878307,
+              "ap50_95": 0.2155335097001764
+            },
+            "EditText": {
+              "ap50": 0.5845180740967092,
+              "ap50_95": 0.4136783775499694
+            },
+            "ImageView": {
+              "ap50": 0.340671270667877,
+              "ap50_95": 0.24291614068055964
+            },
+            "ListView": {
+              "ap50": 0.2655663546200879,
+              "ap50_95": 0.2393868127396174
+            },
+            "ProgressBar": {
+              "ap50": 0.6633333333333333,
+              "ap50_95": 0.48058838821490457
+            },
+            "RadioButton": {
+              "ap50": 0.0,
+              "ap50_95": 0.0
+            },
+            "RecyclerView": {
+              "ap50": 0.2602600536497771,
+              "ap50_95": 0.23635710021908457
+            },
+            "SeekBar": {
+              "ap50": 0.0,
+              "ap50_95": 0.0
+            },
+            "Spinner": {
+              "ap50": 0.0,
+              "ap50_95": 0.0
+            },
+            "Switch": {
+              "ap50": 0.995,
+              "ap50_95": 0.40053503184713374
+            },
+            "TextView": {
+              "ap50": 0.46198838377895546,
+              "ap50_95": 0.3647056937777734
+            },
+            "WebView": {
+              "ap50": 0.49724404385774035,
+              "ap50_95": 0.46832032583429645
+            }
+          },
+          "settings": {
+            "split": "test",
+            "conf": 0.001,
+            "iou": 0.7,
+            "max_det": 300,
+            "batch": 16,
+            "plots": false,
+            "verbose": false,
+            "save_json": false,
+            "imgsz": 640
+          }
+        },
+        "ap_py_on_val_predictions": {
+          "mAP50": 0.3845927788747089,
+          "mAP50_95": 0.2644266089795722,
+          "precision": 0.392557048721363,
+          "recall": 0.38882791040101683
+        },
+        "abs_diff_metric_port": {
+          "mAP50": 0.0,
+          "mAP50_95": 4.242812212673641e-10,
+          "precision": 0.0,
+          "recall": 0.0,
+          "max_abs_class_ap50": 0.0
+        },
+        "abs_diff": {
+          "mAP50": 0.0,
+          "mAP50_95": 4.242812212673641e-10,
+          "precision": 0.0,
+          "recall": 0.0,
+          "max_abs_class_ap50": 0.0
+        }
+      }
+    }
+  ],
+  "paired": []
+}

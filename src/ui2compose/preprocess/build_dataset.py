@@ -3,21 +3,41 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""Builds the YOLO dataset (images/labels per train/val/test) from parse_redraw outputs.
+
+Two split modes (--split-by):
+  screenshot  (default) the v1.1.0 split, reproduced exactly: all matched
+              (label, image) pairs, in sorted app-folder / label-file order,
+              are shuffled with random.seed(SEED) and cut 80/10/10. Screens of
+              one app can land in different subsets.
+  app         group-level split (app_split.split_by_group): screens linked by
+              package, identical MD5 or near-identical dHash form one group
+              and every group lands in one subset; groups are distributed with
+              greedy multi-label stratification over their class counts. The
+              split is audited (app_split.audit_split) and written to
+              <yolo-root>/split_manifest.csv.
+
+Output file names are "<app folder>_<label stem>", e.g.
+"com.shazam.android-screens_screenshot_3.png".
+"""
+
 from pathlib import Path
 import argparse, shutil, random, json
 import sys
 import yaml
-from typing import Optional
+from typing import Dict, List, Optional, Tuple
+
+from ui2compose.preprocess import app_split
 
 
 SEED = 42
 SPLIT = (0.80, 0.10, 0.10)  # train, val, test
 IMG_EXTS = (".png", ".jpg", ".jpeg")
 
-def parse_args():
+def parse_args(argv: Optional[List[str]] = None):
     """Defines and reads the command-line arguments.
 
-    Input:  none (takes values from the command line)
+    Input:  argv — argument list (default: the command line)
     Output: args object — settings such as args.labels_root, args.yolo_root
     """
     ap = argparse.ArgumentParser()
@@ -37,7 +57,17 @@ def parse_args():
                     help="Create symlinks instead of copying images")
     ap.add_argument("--names-json", default=None, type=str,
                     help="(opt) Optionally provide the class list as JSON: \"['Button', ...]\"")
-    return ap.parse_args()
+    ap.add_argument("--split-by", choices=("screenshot", "app"), default="screenshot",
+                    help="screenshot: v1.1.0 random split of screens (default); "
+                         "app: group-level split, no app/clone in two subsets")
+    ap.add_argument("--near-dup-dist", type=int, default=app_split.DEFAULT_NEAR_DUP_MAX_DIST,
+                    help="(--split-by app) max dHash distance for near-duplicates "
+                         "(provisional default 4; negative disables)")
+    ap.add_argument("--builder-prefix", action="store_true",
+                    help="(--split-by app) also group apps of one builder family")
+    ap.add_argument("--workers", type=int, default=1,
+                    help="(--split-by app) processes for dHash computation")
+    return ap.parse_args(argv)
 
 # ---------- helpers ----------
 
@@ -154,14 +184,71 @@ def write_dataset_yaml(out_yaml: Path, yolo_root: Path, names: list[str]):
 
 # ---------- main flow ----------
 
-def main():
+def split_pairs_screenshot(pairs: list) -> Tuple[list, list, list]:
+    """The v1.1.0 screenshot-level split (unchanged): seeded shuffle, 80/10/10 cut.
+
+    Input:  pairs — [(label_file, image, app, stem), ...] in discovery order
+    Output: (train, val, test) lists of pairs; pairs is shuffled in place
+    """
+    n = len(pairs)
+    random.seed(SEED)
+    random.shuffle(pairs)
+    t = int(n * SPLIT[0]); v = int(n * SPLIT[1])
+    return pairs[:t], pairs[t:t+v], pairs[t+v:]
+
+
+def _package_of(app: str, stem: str) -> str:
+    """Returns the package of a ReDraw screen from its app folder and label stem.
+
+    Input:  app — app folder name, e.g. "com.shazam.android-screens";
+            stem — label stem, e.g. "screenshot_3"
+    Output: package name (parsed from the dataset file name; the folder name
+            itself if it does not follow the "<package>-screens" convention)
+    """
+    try:
+        return app_split.parse_package(unique_name(app, stem))
+    except ValueError:
+        return app
+
+
+def split_pairs_by_app(pairs: list,
+                       near_dup_max_dist: Optional[int] = app_split.DEFAULT_NEAR_DUP_MAX_DIST,
+                       builder_prefix: bool = False,
+                       workers: int = 1) -> Tuple[list, list, list, List[Dict[str, object]]]:
+    """Group-level split of the pairs (no app or clone in two subsets), audited.
+
+    Input:  pairs — [(label_file, image, app, stem), ...];
+            near_dup_max_dist — dHash radius k (None disables near-dup links);
+            builder_prefix — also group builder families; workers — dHash processes
+    Output: (train, val, test, manifest rows); each subset sorted by output
+            name; raises app_split.SplitLeakageError if the audit fails
+    """
+    records = [app_split.ScreenRecord(
+                   stem=unique_name(app, stem), path=str(img), package=_package_of(app, stem),
+                   class_counts=app_split.read_class_counts(lf))
+               for lf, img, app, stem in pairs]
+    app_split.hash_records(records, workers=workers)
+    gids = app_split.group_screens(records, near_dup_max_dist, builder_prefix)
+    splits = app_split.split_by_group(records, SPLIT, SEED, True, gids)
+    app_split.audit_split(records, splits, near_dup_max_dist, builder_prefix, gids)
+    out: Dict[str, list] = {"train": [], "val": [], "test": []}
+    rows: List[Dict[str, object]] = []
+    for pair, rec, g, s in sorted(zip(pairs, records, gids, splits), key=lambda t: t[1].stem):
+        out[s].append(pair)
+        rows.append({"stem": rec.stem, "package": rec.package, "group_id": g, "split": s,
+                     "md5": rec.md5, "dhash": f"{rec.dhash:016x}"})
+    return out["train"], out["val"], out["test"], rows
+
+
+def main(argv: Optional[List[str]] = None):
     """Matches label-image pairs and builds the YOLO dataset with an 80/10/10 split.
 
-    Input:  none (takes settings from the command line via parse_args)
+    Input:  argv — argument list (default: the command line; see parse_args)
     Output: none (side effects of copying images/labels under data/yolo,
-            optionally writing dataset.yaml, and printing a summary)
+            optionally writing dataset.yaml and, for --split-by app,
+            split_manifest.csv, and printing a summary)
     """
-    args = parse_args()
+    args = parse_args(argv)
     labels_root = Path(args.labels_root)
     images_root = Path(args.images_root)
     yolo_root   = Path(args.yolo_root)
@@ -218,10 +305,13 @@ def main():
         return
 
     # Deterministic split
-    random.seed(SEED)
-    random.shuffle(pairs)
-    t = int(n * SPLIT[0]); v = int(n * SPLIT[1])
-    train, val, test = pairs[:t], pairs[t:t+v], pairs[t+v:]
+    manifest_rows = None
+    if args.split_by == "screenshot":
+        train, val, test = split_pairs_screenshot(pairs)
+    else:
+        k = args.near_dup_dist if args.near_dup_dist >= 0 else None
+        train, val, test, manifest_rows = split_pairs_by_app(
+            pairs, k, args.builder_prefix, args.workers)
 
     # Copy/link
     for subset, items in (("train", train), ("val", val), ("test", test)):
@@ -232,6 +322,11 @@ def main():
             link_or_copy(img, out_img, symlink=args.symlink)
             shutil.copy2(lf, out_lab)
 
+    # Split manifest (app mode): which screen went where, with its group
+    if manifest_rows is not None:
+        app_split.write_manifest(yolo_root / "split_manifest.csv", manifest_rows,
+                                 ("stem", "package", "group_id", "split", "md5", "dhash"))
+
     # Write YAML (if requested)
     if args.write_yaml:
         # produce the file even if no name list was found (nc=0)
@@ -239,6 +334,7 @@ def main():
 
     # Summary
     print("✅ YOLO dataset prepared.")
+    print(f"Split by: {args.split_by}")
     print(f"Total pairs: {n}  | train:{len(train)} val:{len(val)} test:{len(test)}")
     print(f"Unmatched image count (label exists but image missing): {len(missing_images)}")
     print(f"YAML: {yaml_path.resolve()}")

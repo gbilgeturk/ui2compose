@@ -1,0 +1,57 @@
+{
+ "tool": "scripts/appsplit_checks.py colab",
+ "tolerances": {
+  "map": 0.005,
+  "class_ap50": 0.02,
+  "ci": 0.01
+ },
+ "entries": [
+  {
+   "model": "baseline",
+   "split": "val",
+   "weights_md5_equal": true,
+   "mAP50": 3.5729384082527904e-05,
+   "mAP50_95": 2.606030917640112e-05,
+   "class_ap50": 0.0004503890215624695,
+   "ci_bound": 0.00019977322198244662,
+   "ok": true
+  },
+  {
+   "model": "oversample_5k",
+   "split": "val",
+   "weights_md5_equal": true,
+   "mAP50": 3.452533424419535e-05,
+   "mAP50_95": 4.7556608975540815e-05,
+   "class_ap50": 0.0006491210201289843,
+   "ci_bound": 0.00015964701494119993,
+   "ok": true
+  },
+  {
+   "model": "baseline",
+   "split": "test",
+   "weights_md5_equal": true,
+   "mAP50": 0.0001269465622392163,
+   "mAP50_95": 3.3900158279975834e-06,
+   "class_ap50": 0.0017688658828211579,
+   "ci_bound": 0.00022886853581299826,
+   "ok": true
+  },
+  {
+   "model": "oversample_5k",
+   "split": "test",
+   "weights_md5_equal": true,
+   "mAP50": 0.00021062079846395632,
+   "mAP50_95": 8.554502206836734e-05,
+   "class_ap50": 0.003403123019056542,
+   "ci_bound": 0.00015215643431160109,
+   "ok": true
+  }
+ ],
+ "max_abs_diff": {
+  "mAP50": 0.00021062079846395632,
+  "mAP50_95": 8.554502206836734e-05,
+  "class_ap50": 0.003403123019056542,
+  "ci_bound": 0.00022886853581299826
+ },
+ "ok": true
+}

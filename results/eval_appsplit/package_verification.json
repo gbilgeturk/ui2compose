@@ -1,0 +1,134 @@
+{
+ "tool": "scripts/appsplit_checks.py package",
+ "ok": true,
+ "package": "ui2compose_redraw_appsplit_v1.2.0",
+ "manifest_rows": 18694,
+ "by_stem_unique": true,
+ "checks": {
+  "counts": {
+   "manifest": {
+    "train": 14866,
+    "test": 1900,
+    "val": 1928
+   },
+   "summary": {
+    "train": 14866,
+    "val": 1928,
+    "test": 1900
+   },
+   "fingerprints": {
+    "train": 14866,
+    "val": 1928,
+    "test": 1900
+   },
+   "stem_lists": {
+    "train": 14866,
+    "val": 1928,
+    "test": 1900
+   },
+   "ok": true
+  },
+  "fingerprints": {
+   "assignment": {
+    "computed": "e7ee1a119e66a2927202704706c88f9f994c10a033cdf36bb567251e7c0e8967",
+    "recorded": "e7ee1a119e66a2927202704706c88f9f994c10a033cdf36bb567251e7c0e8967"
+   },
+   "train": {
+    "computed": "b1d13c9cf668c1a26c036526146faf42566802201181826802e3b9ed4574cc97",
+    "recorded": "b1d13c9cf668c1a26c036526146faf42566802201181826802e3b9ed4574cc97"
+   },
+   "val": {
+    "computed": "3a7221ded75c80936fee8eaa83ac3d69eefe735dc6720151d227bac36d72f14f",
+    "recorded": "3a7221ded75c80936fee8eaa83ac3d69eefe735dc6720151d227bac36d72f14f"
+   },
+   "test": {
+    "computed": "e991bfc33f5327c7bebc8c65db199b02ff80b48194ff927485f2d1ff64b437d6",
+    "recorded": "e991bfc33f5327c7bebc8c65db199b02ff80b48194ff927485f2d1ff64b437d6"
+   },
+   "ok": true
+  },
+  "manifest_file_sha256": "c38d75e022a122eb1cd4ac8c1ef51d23df7f4caf529911f66f93e0688851d747",
+  "stem_lists_equal_manifest": {
+   "ok": true
+  },
+  "leakage": {
+   "package": {
+    "values": 5628,
+    "in_two_splits": 0,
+    "examples": [],
+    "case_insensitive": true
+   },
+   "group_id": {
+    "values": 3394,
+    "in_two_splits": 0,
+    "examples": []
+   },
+   "md5": {
+    "values": 18635,
+    "in_two_splits": 0,
+    "examples": []
+   },
+   "dhash": {
+    "values": 17675,
+    "in_two_splits": 0,
+    "examples": []
+   },
+   "near_dup": {
+    "max_hamming": 4,
+    "pairs_across_splits": 0,
+    "pairs_within_splits": 56677
+   },
+   "ok": true
+  },
+  "grouping_recomputed": {
+   "rule": "connected components of same package (case-insensitive) OR same MD5 OR dHash <= 4",
+   "groups_recomputed": 3394,
+   "groups_in_manifest": 3394,
+   "ok": true
+  },
+  "val_test_files": {
+   "images": 3828,
+   "md5_mismatch": [],
+   "dhash_mismatch": [],
+   "missing": [],
+   "xml": 3828,
+   "xml_sha256_mismatch": [],
+   "image_md5_vs_mapping_mismatch": [],
+   "ok": true
+  },
+  "xml_mapping": {
+   "rows": 3828,
+   "covers_exactly_val_test": true,
+   "split_and_group_equal_manifest": true,
+   "ok": true
+  },
+  "labels": {
+   "train": {
+    "files": 14866,
+    "missing": 0,
+    "extra": 0
+   },
+   "val": {
+    "files": 1928,
+    "missing": 0,
+    "extra": 0
+   },
+   "test": {
+    "files": 1900,
+    "missing": 0,
+    "extra": 0
+   },
+   "ok": true
+  },
+  "package_audit": {
+   "ok": true,
+   "n_records": 18694,
+   "checks": {
+    "package": 0,
+    "md5": 0,
+    "near_dup": 0,
+    "group": 0
+   }
+  }
+ }
+}

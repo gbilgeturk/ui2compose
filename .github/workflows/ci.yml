@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Murat Saran <saran@cankaya.edu.tr>
+# SPDX-FileCopyrightText: 2026 Göktürk Bilgetürk <gbilgeturk@yahoo.com>
+#
+# SPDX-License-Identifier: MIT
+#
+# Runs the test suite without torch, ultralytics, OpenCV, matplotlib or
+# streamlit: the pipeline after detection, the golden replays of the bundled
+# examples, the evaluation/split tooling (including the layout evaluation,
+# which needs the small 'eval' extra: apted, zss, scipy) and the demo helpers
+# are tested on saved detections and synthetic data. Tests that need the
+# detector or the other optional packages skip themselves (the pytest header
+# lists what is available).
+# UI2COMPOSE_REQUIRE_REFERENCE_DATA=1 makes a test that reads reference data of
+# the repository (results/v1.1.0_examples, results/v1.2.0_examples,
+# results/compile_report.json, the released weights, ...) fail instead of skip
+# when the data is missing, so CI cannot pass without it being committed.
+
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install the package without its heavy dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy pillow pyyaml pytest
+          pip install apted==1.0.3 zss==1.2.0 scipy
+          pip install -e . --no-deps
+      - name: Byte-compile every source file (also modules the tests cannot import)
+        run: python -m compileall -q src app scripts tests
+      - name: Run the tests
+        env:
+          UI2COMPOSE_REQUIRE_REFERENCE_DATA: "1"
+        run: pytest -q
