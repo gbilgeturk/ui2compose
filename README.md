@@ -602,7 +602,8 @@ If you use this software in your research, please cite the archived release:
 ```
 
 `10.5281/zenodo.21705473` is the concept DOI, which always resolves to the latest release;
-Zenodo assigns each release its own version DOI (v1.1.0:
+Zenodo assigns each release its own version DOI (v1.2.0:
+[`10.5281/zenodo.23720606`](https://doi.org/10.5281/zenodo.23720606); v1.1.0:
 [`10.5281/zenodo.22096717`](https://doi.org/10.5281/zenodo.22096717)).
 
 The method, the dataset preparation and the full evaluation are described in the
