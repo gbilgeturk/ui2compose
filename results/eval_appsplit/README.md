@@ -40,8 +40,8 @@ the weights, which are in `runs/`; SHA-256 e059f0f2…f89ef).
 ## Data and weights
 
 * **Package** `ui2compose_redraw_appsplit_v1.2.0` (Colab, 2026-10-21; zip SHA-256
-  d33c6b75…fd28; corrected archive `ui2compose_redraw_appsplit_v1.2.0_r1.zip`, SHA-256
-  3f8e5b3f…d4c8, see "Discrepancies and caveats"): the 18,694 labelled screens of the v1.1.0 preprocessing re-split with
+  d33c6b75…fd28; published without its images as a release asset, see above and
+  "Discrepancies and caveats"): the 18,694 labelled screens of the v1.1.0 preprocessing re-split with
   `app_split --resplit` (groups = connected components of "same package OR identical MD5 OR
   dHash ≤ 4", greedy multi-label stratification, seed 42). Train / val / test **14,866 /
   1,928 / 1,900** screens; 4,354 / 642 / 632 packages; 2,199 / 609 / 586 groups (largest
@@ -261,12 +261,10 @@ processes), layout_test 1 min, taxonomy 18 s, detector_ablation 15 min.
   a rewritten file: the Colab notebook (`notebooks/retrain_app_split_colab.ipynb`) hashes the
   text of one `<stem>,<split>` line per screen, stems sorted, not the CSV bytes. Recomputed
   that way from the shipped manifest it is exactly e7ee1a11…, and the three stem fingerprints
-  still equal `split_<split>_stems.txt`, so no split assignment changed. The corrected
-  archive `ui2compose_redraw_appsplit_v1.2.0_r1.zip` (SHA-256
-  3f8e5b3f764c329521d5809a170ec77a4e59553a94bc7589f5faa34d2ab1d4c8) keeps the value and adds
-  `manifest_sha256_definition`, `manifest_file_sha256` (c38d75e0…) and a `note` to
-  `split_fingerprints.json`, and a revision note to `README_PACKAGE.txt`; its other 26,450
-  files are byte-identical to the first archive (CRC-32 and size checked).
+  still equal `split_<split>_stems.txt`, so no split assignment changed
+  (`scripts/appsplit_checks.py package` recomputes both). A corrected archive that wrote this
+  definition into `split_fingerprints.json` was made but not kept; the release asset is the
+  first archive without its images, and this paragraph is the record of the definition.
 * The package's `table1_app_split` is the detector table, i.e. Table 2 here.
 * The thresholds were selected with the app-split weights, which are now also the pipeline's
   default weights (`runs/oversample_5k_appsplit/weights/best.pt`); the original release

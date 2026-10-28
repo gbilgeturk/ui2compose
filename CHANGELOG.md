@@ -24,10 +24,11 @@ R2.x = reviewer 2). Every entry below is implemented and covered by the test sui
   a4cb282dd1d6e0233c3b451945ee96d8; with its `args.yaml` and `results.csv`), copied from
   `weights/baseline_app/` of the data package (hash checked against its `train_summary.json`),
   so both checkpoints of the app-split evaluation are in the repository.
-- The app-split data package is re-issued as `ui2compose_redraw_appsplit_v1.2.0_r1.zip`:
-  `splits/split_fingerprints.json` now states that its `manifest_sha256` hashes the sorted
-  `<stem>,<split>` lines, not the CSV bytes, and adds the file hash; no split assignment
-  changed (`results/eval_appsplit/README.md`).
+- The app-split data package (without its 3,828 val and test images, which are ReDraw
+  screens identified by MD5) and the per-screen outputs of its evaluation are assets of the
+  v1.2.0 release. The `manifest_sha256` of its `splits/split_fingerprints.json` hashes the
+  sorted `<stem>,<split>` lines, not the CSV bytes; no split assignment changed
+  (`results/eval_appsplit/README.md`, `scripts/appsplit_checks.py`).
 - `runs/oversample_5k/weights/best.pt`, the v1.1.0 weights, stays in the repository to
   reproduce the v1.1.0 numbers and the screenshot-split evaluation of `results/eval/`
   (pass `--model runs/oversample_5k/weights/best.pt`). It must not be evaluated on the
